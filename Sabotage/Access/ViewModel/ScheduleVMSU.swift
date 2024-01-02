@@ -94,8 +94,8 @@ extension ScheduleVM {
     func saveSchedule(selectedApps: FamilyActivitySelection) {
         selection = selectedApps
         print("selection === \(selection)")
-        let startTime = Calendar.current.dateComponents([.hour, .minute], from: scheduleStartTime)
-        let endTime = Calendar.current.dateComponents([.hour, .minute], from: scheduleEndTime)
+        let startTime = DateComponents(hour: 0, minute: 0)
+        let endTime = DateComponents(hour: 23, minute: 59)
         
         DeviceActivityManager.shared.handleStartDeviceActivityMonitoring(
             startTime: startTime,

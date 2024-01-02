@@ -33,6 +33,7 @@
 		214CC4832B3C4782003B74EB /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214CC4822B3C4782003B74EB /* ContentView.swift */; };
 		214CC4852B3C4784003B74EB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 214CC4842B3C4784003B74EB /* Assets.xcassets */; };
 		214CC4882B3C4784003B74EB /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 214CC4872B3C4784003B74EB /* Preview Assets.xcassets */; };
+		2167F4D02B44B7040025F842 /* notiTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2167F4CF2B44B7040025F842 /* notiTest.swift */; };
 		2169E7D92B3D750C00A8DC07 /* DeviceActivity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2169E7D82B3D750C00A8DC07 /* DeviceActivity.framework */; };
 		2169E7DC2B3D750C00A8DC07 /* DeviceActivityMonitorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2169E7DB2B3D750C00A8DC07 /* DeviceActivityMonitorExtension.swift */; };
 		2169E7EC2B3D752A00A8DC07 /* ManagedSettings.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2169E7EB2B3D752A00A8DC07 /* ManagedSettings.framework */; };
@@ -174,6 +175,7 @@
 		214CC4822B3C4782003B74EB /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		214CC4842B3C4784003B74EB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		214CC4872B3C4784003B74EB /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		2167F4CF2B44B7040025F842 /* notiTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = notiTest.swift; sourceTree = "<group>"; };
 		2169E7D22B3D74D300A8DC07 /* Sabotage.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Sabotage.entitlements; sourceTree = "<group>"; };
 		2169E7D72B3D750C00A8DC07 /* DeviceActivityMonitor.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = DeviceActivityMonitor.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		2169E7D82B3D750C00A8DC07 /* DeviceActivity.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DeviceActivity.framework; path = System/Library/Frameworks/DeviceActivity.framework; sourceTree = SDKROOT; };
@@ -330,6 +332,7 @@
 		214CC47F2B3C4782003B74EB /* Sabotage */ = {
 			isa = PBXGroup;
 			children = (
+				2167F4CE2B44B6FB0025F842 /* notificationTest */,
 				21E4587D2B42006800AFC7F4 /* Common */,
 				8800F0A52B421A0C005CB6D2 /* Design System */,
 				21741A1C2B417CE50062B0D7 /* monitor */,
@@ -356,6 +359,14 @@
 				214CC4872B3C4784003B74EB /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		2167F4CE2B44B6FB0025F842 /* notificationTest */ = {
+			isa = PBXGroup;
+			children = (
+				2167F4CF2B44B7040025F842 /* notiTest.swift */,
+			);
+			path = notificationTest;
 			sourceTree = "<group>";
 		};
 		2169E7DA2B3D750C00A8DC07 /* DeviceActivityMonitor */ = {
@@ -862,6 +873,7 @@
 				2169E8302B3D79F400A8DC07 /* Bundle_Extension.swift in Sources */,
 				210B7B322B3FFF1800D4105D /* (null) in Sources */,
 				8852C0652B3C4AB300219714 /* MainVC.swift in Sources */,
+				2167F4D02B44B7040025F842 /* notiTest.swift in Sources */,
 				2169E8392B3DD42C00A8DC07 /* AppStorageManager.swift in Sources */,
 				21741A0B2B416A250062B0D7 /* DeviceActivityMonitorExtension.swift in Sources */,
 				2D1BD4D12B42A28F00EE8374 /* ProfileTableViewCell.swift in Sources */,

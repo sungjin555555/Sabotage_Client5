@@ -30,8 +30,8 @@ class DeviceActivityMonitorExtension: DeviceActivityMonitor {
         } else {
             store.shield.applications = appTokens
         }
-        
         store.shield.applicationCategories = ShieldSettings.ActivityCategoryPolicy.specific(categoryTokens)
+        print("🔥 DeviceActivityMonitorExtension worked")
     }
     
     // MARK: - 스케줄의 종료 시점 이후 처음으로 기기가 사용될 때 or 모니터링 중단 시에 호출되는 메서드

@@ -42,7 +42,7 @@ struct TotalActivityReport: DeviceActivityReportScene {
         var totalActivityDuration: Double = 0 /// 총 스크린 타임 시간
         var list: [AppDeviceActivity] = [] /// 사용 앱 리스트
             let limitTime: Double = 6
-            let specificLimitTime: Double = 360
+            let specificLimitTime: Double = 300
             
         /// DeviceActivityResults 데이터에서 화면에 보여주기 위해 필요한 내용을 추출해줍니다.
         for await eachData in data {
@@ -53,6 +53,7 @@ struct TotalActivityReport: DeviceActivityReportScene {
                 for await categoryActivity in activitySegment.categories {
                     /// 이 카테고리의 totalActivityDuration에 기여한 사용자의 application Activity
                     for await applicationActivity in categoryActivity.applications {
+                        print("🔥 TotalActivityReport worked")
                         let appName = (applicationActivity.application.localizedDisplayName ?? "nil") /// 앱 이름
                         let bundle = (applicationActivity.application.bundleIdentifier ?? "nil") /// 앱 번들id
                         let duration = applicationActivity.totalActivityDuration /// 앱의 total activity 기간
