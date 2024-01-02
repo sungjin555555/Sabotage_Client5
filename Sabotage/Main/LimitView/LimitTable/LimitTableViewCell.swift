@@ -1,15 +1,8 @@
-//
-//  LimitTableViewCell.swift
-//  Sabotage
-//
-//  Created by 김하람 on 12/30/23.
-//
-
 import UIKit
 
 class LimitTableViewCell: UITableViewCell {
     let titleLabel = UILabel()
-    let descriptionLabel = UILabel()
+    let cellImageView = UIImageView()
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -26,16 +19,28 @@ class LimitTableViewCell: UITableViewCell {
         titleLabel.font = UIFont.systemFont(ofSize: 16)
         titleLabel.textColor = .black
         contentView.addSubview(titleLabel)
+        contentView.backgroundColor = .base50 
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
+
+        // cellImageView 설정
+        cellImageView.contentMode = .scaleAspectFit
+        contentView.addSubview(cellImageView)
+        cellImageView.translatesAutoresizingMaskIntoConstraints = false
 
         // Auto Layout 제약 조건 설정
         NSLayoutConstraint.activate([
-            titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-            titleLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            cellImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
+            cellImageView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            cellImageView.widthAnchor.constraint(equalToConstant: 370),
+            cellImageView.heightAnchor.constraint(equalToConstant: 150),
+
+//            titleLabel.leadingAnchor.constraint(equalTo: cellImageView.trailingAnchor, constant: 16),
+//            titleLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor)
         ])
     }
 
-    func configure(title: String) {
+    func configure(with imageName: String, title: String) {
+        cellImageView.image = UIImage(named: imageName)
         titleLabel.text = title
     }
 }
