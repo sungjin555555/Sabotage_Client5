@@ -393,7 +393,7 @@ class MainVC: UIViewController, LimitItemDelegate{
         limitButton.isHidden = true
         NSLayoutConstraint.activate([
             limitButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            limitButton.topAnchor.constraint(equalTo: limitTableView.bottomAnchor, constant: 600),
+            limitButton.topAnchor.constraint(equalTo: limitTableView.bottomAnchor, constant: 450),
             limitButton.widthAnchor.constraint(equalToConstant: 350), // Adjust the width and height based on your image size
             limitButton.heightAnchor.constraint(equalToConstant: 100) // Adjust the width and height based on your image size
         ])
