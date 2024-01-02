@@ -24,7 +24,7 @@ struct TotalActivityReport: DeviceActivityReportScene {
         var list: [AppDeviceActivity] = [] /// 사용 앱 리스트
             let limitTime: Double = 2700
             /*let specificLimitTime: Double = $selectedGoalHours*/ //38
-            let specificLimitTime: Double = 60
+            let specificLimitTime: Double = 180
             
         for await eachData in data {
             for await activitySegment in eachData.activitySegments {
@@ -103,7 +103,6 @@ struct TotalActivityReport: DeviceActivityReportScene {
                         UNUserNotificationCenter.current().add(request)
                             notificationSentForApps["\(appName)2"] = true
                         }
-                    
                 }
                 func scheduleNotification_each2(appName: String) {
                     if notificationSentForApps["\(appName)3"] != true {

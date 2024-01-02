@@ -4,9 +4,9 @@ import Then
 
 
 
-class ActionItemController: UIViewController, ActionItemDelegate {
+class ActionItemController: UIViewController{
     
-    weak var delegate: ActionItemDelegate?
+//    weak var delegate: ActionItemDelegate?
     
     let titleLabel = UILabel()
     let backButton = UIButton(type: .system)
@@ -168,7 +168,7 @@ class ActionItemController: UIViewController, ActionItemDelegate {
 
             let addActionItemController = AddActionItemController()
             addActionItemController.selectedButtonName = selectedButtonName // 선택된 버튼의 이름을 전달
-            addActionItemController.delegate = self // Set ActionItemController as the delegate
+//            addActionItemController.delegate = self // Set ActionItemController as the delegate
 
             navigationController?.pushViewController(addActionItemController, animated: true)
         }

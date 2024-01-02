@@ -9,17 +9,17 @@ import UIKit
 import SnapKit
 
 
-protocol ActionItemDelegate: AnyObject {
-    func didAddActionItemText(_ text: String)
-    // Add any other methods needed to pass data back to MainVC
-}
+//protocol ActionItemDelegate: AnyObject {
+//    func didAddActionItemText(_ text: String)
+//    // Add any other methods needed to pass data back to MainVC
+//}
 
 
 class AddActionItemController: UIViewController, UITextFieldDelegate {
     var textField: UITextField = UITextField()
     var selectedButtonName: String? // 선택된 버튼의 이름을 저장하는 변수
 
-    weak var delegate: ActionItemDelegate?
+//    weak var delegate: ActionItemDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -154,7 +154,7 @@ class AddActionItemController: UIViewController, UITextFieldDelegate {
         print("⚽️ MainVC로 전달된 텍스트: \(text)") // 사용자가 작성한 목표 출력
         
         if let selectedButton = selectedButtonName {
-            delegate?.didAddActionItemText(text) // Pass the text to MainVC
+//            delegate?.didAddActionItemText(text) // Pass the text to MainVC
             print("🎾 사용자가 선택한 버튼 이름: \(selectedButton)") // 사용자가 선택한 버튼의 이름 출력
         }
 

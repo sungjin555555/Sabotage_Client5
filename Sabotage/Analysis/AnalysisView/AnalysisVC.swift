@@ -125,7 +125,7 @@ class AnalysisVC: UIViewController {
             rankingTableView.topAnchor.constraint(equalTo: label2.bottomAnchor, constant: 20),
             rankingTableView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
             rankingTableView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
-            rankingTableView.heightAnchor.constraint(equalToConstant: CGFloat(rankingTableView.cellCount * 50) - 50),
+            rankingTableView.heightAnchor.constraint(equalToConstant: CGFloat(rankingTableView.cellCount * 50)),
         ])
         
         // rankingBG를 contentView에 추가합니다.
