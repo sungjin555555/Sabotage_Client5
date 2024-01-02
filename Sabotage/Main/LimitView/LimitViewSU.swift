@@ -32,7 +32,7 @@ struct ScheduleView: View {
     @State private var selectedGoalMinutes = 0
     @State private var selectedNudgeHours = 0
     @State private var selectedNudgeMinutes = 0
-    
+    @State var groupName = ""
     
     @State private var selectedMinute: Int = 0
     let minutes = Array(0...59)
@@ -40,10 +40,9 @@ struct ScheduleView: View {
     var body: some View {
         NavigationView {
             VStack {
-                setupListView()
-                setButtons()
+                setupListView().background(Color.base50)
+//                setButtons()
             }
-            .background(Color.base50)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .toolbar { savePlanButtonView() }
             .navigationTitle("제한 습관")
@@ -64,15 +63,16 @@ struct ScheduleView: View {
 
 // MARK: - Views
 extension ScheduleView {
-    private func savePlanButtonView() -> ToolbarItemGroup<Button<Text>> {
+    private func savePlanButtonView() -> ToolbarItemGroup<some View> {
         ToolbarItemGroup(placement: .navigationBarTrailing) {
-            let BUTTON_LABEL = "저장하기s"
+            let BUTTON_LABEL = "저장"
             
-            Button {
+            Button(action: {
                 scheduleVM.saveSchedule(selectedApps: tempSelection)
-            } label: {
-                Text(BUTTON_LABEL)
+            }) {
+                Text(BUTTON_LABEL).foregroundColor(isInputValid ? Color.primary700 : Color.base200).font(.headline)
             }
+            .padding(.trailing, 8) // 오른쪽에 패딩 추가
         }
     }
     
@@ -82,7 +82,9 @@ extension ScheduleView {
             setUPAppSectionView()
             setUpGoalTimeView(selectedTime: $selectedGoalTime, isPickerPresented: $isGoalPickerPresented)
             setUpNudgeTimeView(selectedTime: $selectedNudgeTime, isPickerPresented: $isNudgePickerPresented)
-        }
+            setButtons().listRowInsets(EdgeInsets()).padding(0).listRowBackground(Color.clear)
+        }.background(Color.base50)
+            .scrollContentBackground(.hidden)
         .listStyle(.insetGrouped)
         .padding(.horizontal, 5).fullScreenCover(isPresented: $isGoalPickerPresented) {
             VStack {
@@ -102,7 +104,6 @@ extension ScheduleView {
         }
     }
     private func setUpGroupTextField() -> some View {
-        @State var groupName = ""
         
         return Section(header: Text("그룹 이름").padding(.leading, -13)) {
             VStack {
@@ -301,38 +302,62 @@ extension ScheduleView {
             }
         }
     }
+    private var isInputValid: Bool {
+            !groupName.isEmpty && // 그룹 이름이 비어있지 않고
+            (selectedNudgeHours != 0 || selectedNudgeMinutes != 0) && // Nudge 시간이 0이 아니며
+            (selectedGoalHours != 0 || selectedGoalMinutes != 0) // Goal 시간이 0이 아닌지 확인
+            // 여기에 추가적인 조건들을 넣을 수 있습니다.
+        }
     private func setButtons() -> some View{
         return VStack{
             Button("저장하기") {
-                scheduleVM.saveSchedule(selectedApps: tempSelection)
-                print("tempSelection = \(tempSelection)")
-                print("selectedNudge = \(selectedNudgeHours):\(selectedMinute)")
-                print("selectedGoalHours = \(selectedGoalHours):\(selectedGoalMinutes)")
-                
+                if isInputValid {
+                    let finalTotal = selectedGoalHours * 60 * 60 + selectedGoalMinutes * 60
+//                    scheduleVM.saveSchedule(selectedApps: tempSelection, totalLimitTime: finalTotal)
+//                    scheduleVM.finalGoalTime = finalTotal
+//                    print("goalTime = \(scheduleVM.finalGoalTime)")
+                    print("finalTotal = \(finalTotal)")
+                    print("tempSelection = \(tempSelection)")
+                    print("selectedNudge = \(selectedNudgeHours):\(selectedNudgeMinutes)")
+                    print("selectedGoalHours = \(selectedGoalHours):\(selectedGoalMinutes)")
+                    // 추가 로직
+                }
             }
             .padding()
             .frame(maxWidth: .infinity)
-            .background(Color.gray.opacity(0.2)) // 그레이 배경에 약간의 투명도를 줌
-            .foregroundColor(.black)
+            .frame(height: 56)
+            .background(isInputValid ? Color.primary300 : Color.base200)
+            .font(.headline)
+            .foregroundColor(isInputValid ? Color.black : Color.baseWhite)
             .cornerRadius(20)
+            .padding(.vertical, 0)
+            // 두 번째 버튼
+            Button("삭제하기") {
+                //함수
+            }
+            .padding()
+            .frame(maxWidth: .infinity)
+            .background(Color.clear)
+            .foregroundColor(Color.func500)
+            .cornerRadius(20)
+            .font(.headline)
             .padding(.horizontal, 20)
             
-            // 두 번째 버튼
+        }
+        .padding(.vertical, 10)
+    }
+    private func setDeleteButton() -> some View{
+        return VStack {
             Button("삭제하기") {
                 // '삭제하기' 버튼의 액션을 여기에 작성
             }
-            .padding()
             .frame(maxWidth: .infinity)
-            .background(Color.red) // 빨간색 배경
-            .foregroundColor(.white)
-            .cornerRadius(20)
-            .padding(.horizontal, 20)
-            .overlay(
-                RoundedRectangle(cornerRadius: 20)
-                    .stroke(Color.white, lineWidth: 3) // 흰색 테두리
-            )
+            .foregroundColor(Color.func500)
+            .font(.headline)
+            .padding(.bottom, 25)
+            .frame(height: 40)
         }
-        .padding(.vertical, 10)
+        .listRowBackground(Color.clear)
     }
 }
 
