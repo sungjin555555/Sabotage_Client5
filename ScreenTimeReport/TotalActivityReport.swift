@@ -24,7 +24,7 @@ struct TotalActivityReport: DeviceActivityReportScene {
         var list: [AppDeviceActivity] = [] /// 사용 앱 리스트
             let limitTime: Double = 2700
             /*let specificLimitTime: Double = $selectedGoalHours*/ //38
-            let specificLimitTime: Double = 180
+            let specificLimitTime: Double = 480
             
         for await eachData in data {
             for await activitySegment in eachData.activitySegments {
