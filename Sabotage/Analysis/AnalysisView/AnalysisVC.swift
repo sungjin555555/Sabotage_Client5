@@ -9,6 +9,7 @@ class AnalysisVC: UIViewController {
     let ExitRank = UILabel()
     let updateTime = UILabel()
 
+//    let weekBarGraphView = WeekBarGraphView()
     let rankingTableView = RankingTableView()
     let rankingBG = UIButton(type: .custom)
 
@@ -87,7 +88,18 @@ override func viewDidLoad() {
         thisweekimage.backgroundColor = .clear
         thisweekimage.setImage(UIImage(named: "weeklyBG"), for: .normal)
         contentView.addSubview(thisweekimage)
-
+        
+//        contentView.addSubview(weekBarGraphView)
+//        weekBarGraphView.translatesAutoresizingMaskIntoConstraints = false
+//        weekBarGraphView.backgroundColor = .black
+//        
+//        // weekBarGraphView를 thisweekimage 위에 추가
+//        contentView.insertSubview(weekBarGraphView, aboveSubview: thisweekimage)
+//        weekBarGraphView.translatesAutoresizingMaskIntoConstraints = false
+//        weekBarGraphView.backgroundColor = .black // 적절한 배경색으로 설정합니다.
+        
+//        contentView.bringSubviewToFront(weekBarGraphView)
+        
         Change.translatesAutoresizingMaskIntoConstraints = false
         Change.text = "사용 변화량"
         Change.font = UIFont.Headline()
@@ -122,18 +134,23 @@ override func viewDidLoad() {
 
             // thisweekimage 이미지 위치 설정
             thisweekimage.topAnchor.constraint(equalTo: ThisWeek.bottomAnchor, constant: 20),
-            thisweekimage.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
-            thisweekimage.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
-            thisweekimage.heightAnchor.constraint(equalToConstant: 100), // 이미지 크기에 맞게 조정
+            thisweekimage.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            thisweekimage.widthAnchor.constraint(equalToConstant: 343),
+            thisweekimage.heightAnchor.constraint(equalToConstant: 320), // 이미지 크기에 맞게 조정
+            
+//            weekBarGraphView.topAnchor.constraint(equalTo: thisweekimage.bottomAnchor, constant: 20),
+//            weekBarGraphView.centerXAnchor.constraint(equalTo: thisweekimage.centerXAnchor),
+//            weekBarGraphView.widthAnchor.constraint(equalToConstant: 333),
+//            weekBarGraphView.heightAnchor.constraint(equalToConstant: 310), // 적절한 높이 설정
             
             Change.topAnchor.constraint(equalTo: thisweekimage.bottomAnchor, constant: 50),
             Change.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
 
 
             changeimage.topAnchor.constraint(equalTo: Change.bottomAnchor, constant: 20),
-            changeimage.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
-            changeimage.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
-            changeimage.heightAnchor.constraint(equalToConstant: 100), // 이미지 크기에 맞게 조정
+            changeimage.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            changeimage.widthAnchor.constraint(equalToConstant: 343),
+            changeimage.heightAnchor.constraint(equalToConstant: 255), // 이미지 크기에 맞게 조정
 
 
             // ExitRank 위치 설정
@@ -149,25 +166,26 @@ override func viewDidLoad() {
     func rankingUI() {
         // 테이블 뷰를 먼저 contentView에 추가합니다.
         rankingTableView.translatesAutoresizingMaskIntoConstraints = false
-        rankingTableView.backgroundColor = .brown
+        rankingTableView.backgroundColor = .systemPink
         contentView.addSubview(rankingTableView)
         
         NSLayoutConstraint.activate([
             // 테이블 뷰 위치 설정
             rankingTableView.topAnchor.constraint(equalTo: ExitRank.bottomAnchor, constant: 20),
-            rankingTableView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
-            rankingTableView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
-            rankingTableView.heightAnchor.constraint(equalToConstant: CGFloat(rankingTableView.cellCount * 50) - 50),
+            rankingTableView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+//            rankingTableView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
+//            rankingTableView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
+            rankingTableView.widthAnchor.constraint(equalToConstant: 343),
+            rankingTableView.heightAnchor.constraint(equalToConstant: 403)
+//            rankingTableView.heightAnchor.constraint(equalToConstant: CGFloat(rankingTableView.cellCount * 50) - 50),
         ])
         
         // rankingBG를 contentView에 추가합니다.
-        rankingBG.translatesAutoresizingMaskIntoConstraints = false
-        rankingBG.contentMode = .scaleAspectFit
-        rankingBG.backgroundColor = .base100
-        rankingBG.setImage(UIImage(named: "RankingBG"), for: .normal)
-        rankingBG.layer.cornerRadius = 20
-        rankingBG.layer.masksToBounds = true
-        contentView.addSubview(rankingBG)
+            rankingBG.translatesAutoresizingMaskIntoConstraints = false
+            rankingBG.contentMode = .scaleAspectFit
+            rankingBG.backgroundColor = .clear
+            rankingBG.setImage(UIImage(named: "RankingBG"), for: .normal)
+            contentView.addSubview(rankingBG)
         
         // rankingBG를 rankingTableView 위에 올리기 위해 순서를 조정합니다.
         // contentView.bringSubviewToFront(rankingBG)
@@ -177,21 +195,24 @@ override func viewDidLoad() {
         NSLayoutConstraint.activate([
             // 배경 이미지 버튼 위치 설정
             rankingBG.topAnchor.constraint(equalTo: ExitRank.topAnchor, constant: -20),
-            rankingBG.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
-            rankingBG.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
-            rankingBG.heightAnchor.constraint(equalToConstant: CGFloat(rankingTableView.cellCount * 50) + 180),
+            rankingBG.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            rankingBG.widthAnchor.constraint(equalToConstant: 343),
+//            rankingBG.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
+//            rankingBG.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
+//            rankingBG.heightAnchor.constraint(equalToConstant: CGFloat(rankingTableView.cellCount * 50) + 180),
+            rankingBG.heightAnchor.constraint(equalToConstant: 512)
         ])
         
         // 스크롤뷰 길이 확인을 위한 이미지
         let newImageView = UIImageView()
         newImageView.translatesAutoresizingMaskIntoConstraints = false
         newImageView.contentMode = .scaleAspectFit
-        newImageView.backgroundColor = .blue // 원하는 색상으로 변경하세요
+        newImageView.backgroundColor = .systemPink // 원하는 색상으로 변경하세요
         newImageView.image = UIImage(named: "YourImageName") // 이미지를 넣어주세요
         contentView.addSubview(newImageView)
         
         NSLayoutConstraint.activate([
-            newImageView.topAnchor.constraint(equalTo: rankingBG.bottomAnchor, constant: 20),
+            newImageView.topAnchor.constraint(equalTo: rankingBG.bottomAnchor, constant: 100),
             newImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
             newImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
             newImageView.heightAnchor.constraint(equalToConstant: 200), // 이미지 높이 조정
