@@ -129,8 +129,8 @@ extension ScheduleView {
             if isSelectionEmpty() {
                 HStack {
                     Text(EMPTY_TEXT)
-                        .foregroundColor(Color.base400)
-                        .font(.system(size: 18))
+                        .font(.callout)
+                        .foregroundColor(.base400)
                     Spacer()
                     Button {
                         scheduleVM.showFamilyActivitySelection()
@@ -192,8 +192,8 @@ extension ScheduleView {
                 }) {
                     HStack {
                         Text("목표 사용시간")
-                            .font(.system(size: 18))
-                            .foregroundColor(.primary)
+                            .font(.callout)
+                            .foregroundColor(.base400)
                         Spacer()
                         //                        Text(timeFormatter.string(from: selectedTime.wrappedValue))
                         Text("\(selectedGoalHours) hours \(selectedGoalMinutes) min")
@@ -255,8 +255,8 @@ extension ScheduleView {
                 }) {
                     HStack {
                         Text("알림 간격")
-                            .font(.system(size: 18))
-                            .foregroundColor(.primary)
+                            .font(.callout)
+                            .foregroundColor(.base400)
                         Spacer()
                         Text("\(selectedNudgeHours) hours \(selectedNudgeMinutes) min")
                             .foregroundColor(.secondary)

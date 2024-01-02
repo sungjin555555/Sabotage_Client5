@@ -22,7 +22,7 @@ class ActionItemController: UIViewController{
     var actionItemData: ActionItemData?
     
     var selectedRadioButton: UIButton?
-    var selectedButtonName: String? // 선택된 버튼의 이름을 저장하는 변수
+    var selectedButtonName: String = "" // 선택된 버튼의 이름을 저장하는 변수
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -164,7 +164,7 @@ class ActionItemController: UIViewController{
     
     @objc func nextButtonTapped() {
         if selectedRadioButton != nil {
-            selectedButtonName = selectedRadioButton?.titleLabel?.text // 선택된 버튼의 이름을 변수에 저장
+            selectedButtonName = (selectedRadioButton?.titleLabel?.text)! // 선택된 버튼의 이름을 변수에 저장
 
             let addActionItemController = AddActionItemController()
             addActionItemController.selectedButtonName = selectedButtonName // 선택된 버튼의 이름을 전달

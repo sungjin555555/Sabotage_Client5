@@ -116,7 +116,7 @@ class SaveActionItemController: UIViewController, UITextFieldDelegate {
     ////*
 //    weak var delegate: AddActionItemDelegate?
     var textField: UITextField = UITextField()
-    var selectedButtonName: String? // 선택된 버튼의 이름을 저장하는 변수
+    var selectedButtonName: String = "" // 선택된 버튼의 이름을 저장하는 변수
 
     
     override func viewDidLoad() {
@@ -248,8 +248,6 @@ class SaveActionItemController: UIViewController, UITextFieldDelegate {
         ])
         deleteButton.addTarget(self, action: #selector(deleteButtonTapped), for: .touchUpInside)
         
-
-        
         // 다른 화면을 탭할 때
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyBoard(sender:)))
         tapGesture.cancelsTouchesInView = false
@@ -267,6 +265,7 @@ class SaveActionItemController: UIViewController, UITextFieldDelegate {
     
     // Delegate를 통해 MainVC로 텍스트 이동되었는지 콘솔에서 확인
     @objc func completeButtonTapped() {
+        var selectedCategory:String = ""
         guard let text = self.textField.text else {
             print("입력된 텍스트가 비어 있습니다.")
             return
@@ -275,11 +274,10 @@ class SaveActionItemController: UIViewController, UITextFieldDelegate {
 //        delegate?.didAddActionItemText(text)
         
         print("⚽️ MainVC로 전달된 텍스트: \(text)") // 사용자가 작성한 목표 출력
-        
-        if let selectedButton = selectedButtonName {
-            print("🎾 사용자가 선택한 버튼 이름: \(selectedButton)") // 사용자가 선택한 버튼의 이름 출력
-        }
-
+        print("🫶 final")
+        print("🫶 category = \(selectedButtonName)")
+        print("🫶 text = \(text)")
+//        actionPostRequest(with: selectedCategory, content: text)
         let mainVC = MainVC()
         navigationController?.pushViewController(mainVC, animated: true)
     }
