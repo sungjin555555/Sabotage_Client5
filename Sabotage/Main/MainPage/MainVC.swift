@@ -392,7 +392,7 @@ class MainVC: UIViewController, LimitItemDelegate{
         
         // MARK: - 디자인때 필요할 것 같아서 남겨뒀움
         // "액션 아이템" 추가 버튼
-        actionButton.setTitle("+", for: .normal)
+        actionButton.setTitle("목표", for: .normal)
         actionButton.titleLabel?.font = UIFont.systemFont(ofSize: 24)
         actionButton.layer.cornerRadius = 25 // 테두리 둥글기 설정
         actionButton.layer.borderWidth = 1 // 테두리 두께 설정
@@ -410,7 +410,7 @@ class MainVC: UIViewController, LimitItemDelegate{
             actionButton.heightAnchor.constraint(equalToConstant: 80)
         ])
         
-        limitButton.setTitle("+", for: .normal)
+        limitButton.setTitle("제한", for: .normal)
         limitButton.titleLabel?.font = UIFont.systemFont(ofSize: 24)
         limitButton.layer.cornerRadius = 25 // 테두리 둥글기 설정
         limitButton.layer.borderWidth = 1 // 테두리 두께 설정
