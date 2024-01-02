@@ -25,7 +25,7 @@ class RankingTableView: UIView, UITableViewDataSource, UITableViewDelegate {
         
         // Remove cell separator
         tableView.separatorStyle = .none
-        tableView.backgroundColor = .base100
+        tableView.backgroundColor = .base400
         
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: topAnchor),
