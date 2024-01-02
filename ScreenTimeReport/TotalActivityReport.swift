@@ -41,8 +41,8 @@ struct TotalActivityReport: DeviceActivityReportScene {
         // the report's view.
         var totalActivityDuration: Double = 0 /// 총 스크린 타임 시간
         var list: [AppDeviceActivity] = [] /// 사용 앱 리스트
-            let limitTime: Double = 6
-            let specificLimitTime: Double = 300
+//            let limitTime: Double = 6
+            let specificLimitTime: Double = 180
             
         /// DeviceActivityResults 데이터에서 화면에 보여주기 위해 필요한 내용을 추출해줍니다.
         for await eachData in data {
@@ -81,15 +81,15 @@ struct TotalActivityReport: DeviceActivityReportScene {
                     }
                 }
                 // MARK: - ram : 전체 시간에 대한 처리
-                if totalActivityDuration >= limitTime - 60 && totalActivityDuration <= limitTime  { // 10 minutes
-                    scheduleNotification0()
-                }
-                if totalActivityDuration >= limitTime && totalActivityDuration <= limitTime + 60 { // 10 minutes
-                    scheduleNotification1()
-                }
-                else if totalActivityDuration >= limitTime + 60 && totalActivityDuration <= limitTime + 120 { // 10 minutes
-                    scheduleNotification2()
-                }
+//                if totalActivityDuration >= limitTime - 60 && totalActivityDuration <= limitTime  { // 10 minutes
+//                    scheduleNotification_each0(appName: AppDeviceActivity.)
+//                }
+//                if totalActivityDuration >= limitTime && totalActivityDuration <= limitTime + 60 { // 10 minutes
+//                    scheduleNotification1()
+//                }
+//                else if totalActivityDuration >= limitTime + 60 && totalActivityDuration <= limitTime + 120 { // 10 minutes
+//                    scheduleNotification2()
+//                }
                 func scheduleNotification_each0(appName: String) {
                     if notificationSentForApps["\(appName)1"] != true {
                         let content = UNMutableNotificationContent()
