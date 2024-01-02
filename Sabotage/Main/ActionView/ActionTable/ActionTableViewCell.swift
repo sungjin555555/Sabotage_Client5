@@ -8,34 +8,37 @@
 import UIKit
 
 class ActionTableViewCell: UITableViewCell {
-    let titleLabel = UILabel()
-    let descriptionLabel = UILabel()
+    // Your cell UI components
+    let cellImageView = UIImageView()
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-
-        setupLayout()
+        setupCell()
     }
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
-    private func setupLayout() {
-        // titleLabel 설정
-        titleLabel.font = UIFont.systemFont(ofSize: 16)
-        titleLabel.textColor = .black
-        contentView.addSubview(titleLabel)
-        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+    private func setupCell() {
+        // Configure your cell UI here
+        cellImageView.contentMode = .scaleAspectFit
+        contentView.backgroundColor = .base50 // 또는 원하는 다른 UIColor
+        contentView.addSubview(cellImageView)
 
-        // Auto Layout 제약 조건 설정
+        // Set constraints for the image view
+        cellImageView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-            titleLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            cellImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 0),
+            cellImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 0),
+            cellImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: 0),
+            cellImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 0)
         ])
     }
 
-    func configure(title: String) {
-        titleLabel.text = title
+    func configure(with imageName: String) {
+        // Configure cell with data
+        cellImageView.image = UIImage(named: imageName)
     }
 }
+
