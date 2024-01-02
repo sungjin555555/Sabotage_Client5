@@ -10,11 +10,12 @@ import SwiftUI
 
 func actionPostRequest(with category: String, content: String) {
     // 서버 링크가 유요한지 확인
-    guard let url = URL(string: "\(urlLink)actionItem") else {
+    guard let url = URL(string: "\(urlLink)actionItem/\(userId)") else {
         print("🚨 Invalid URL")
         return
     }
     print("✅ Valid URL = \(url)")
+    print("🥹 userId = \(userId)")
     // request 생성하기
     var request = URLRequest(url: url)
     request.httpMethod = "POST"
@@ -54,7 +55,6 @@ func actionPostRequest(with category: String, content: String) {
             print("🚨 ", error)
         }
     }
-    // 시작하기. 꼭 적어줘야 함 !
     task.resume()
 }
 
@@ -85,7 +85,7 @@ func actionPatchRequest(with category: String, content: String) {
             print("✅ success: \(response)")
             DispatchQueue.main.async {
                 DispatchQueue.main.async {
-                    //                    NotificationCenter.default.post(name: .addNotification, object: nil)
+                    // NotificationCenter.default.post(name: .addNotification, object: nil)
                 }
             }
         } catch {

@@ -17,7 +17,7 @@ import SnapKit
 
 class AddActionItemController: UIViewController, UITextFieldDelegate {
     var textField: UITextField = UITextField()
-    var selectedButtonName: String? // 선택된 버튼의 이름을 저장하는 변수
+    var selectedButtonName: String = "" // 선택된 버튼의 이름을 저장하는 변수
 
 //    weak var delegate: ActionItemDelegate?
     
@@ -26,9 +26,10 @@ class AddActionItemController: UIViewController, UITextFieldDelegate {
         view.backgroundColor = .white
         
         // MARK: -  ActionItemController에서 잘 넘어왔느닞 확인하는 코드
-        if let selectedButton = selectedButtonName {
-            print("😎 ActionItemController로부터 받은 선택된 버튼 이름: \(selectedButton)")
-        }
+//        if let selectedButton = selectedButtonName {
+//            print("😎 ActionItemController로부터 받은 선택된 버튼 이름: \(selectedButton)")
+//        }
+        print("😎 ActionItemController로부터 받은 선택된 버튼 이름: \(selectedButtonName)")
         
         // "X" 버튼 추가
         let closeButton = UIBarButtonItem(title: "X", style: .plain, target: self, action: #selector(closeButtonTapped))
@@ -153,11 +154,15 @@ class AddActionItemController: UIViewController, UITextFieldDelegate {
         
         print("⚽️ MainVC로 전달된 텍스트: \(text)") // 사용자가 작성한 목표 출력
         
-        if let selectedButton = selectedButtonName {
-//            delegate?.didAddActionItemText(text) // Pass the text to MainVC
-            print("🎾 사용자가 선택한 버튼 이름: \(selectedButton)") // 사용자가 선택한 버튼의 이름 출력
-        }
-
+//        if let selectedButton = selectedButtonName {
+////            delegate?.didAddActionItemText(text) // Pass the text to MainVC
+//            print("🎾 사용자가 선택한 버튼 이름: \(selectedButton)") // 사용자가 선택한 버튼의 이름 출력
+//        }
+        print("⚽️ MainVC로 전달된 텍스트: \(text)") // 사용자가 작성한 목표 출력
+        print("🫶 final")
+        print("🫶 category = \(selectedButtonName)")
+        print("🫶 text = \(text)")
+        actionPostRequest(with: selectedButtonName, content: text)
         if let navController = navigationController {
             navController.popToRootViewController(animated: true) // 모든 뷰 컨트롤러를 제거하고 MainVC로 이동
         }
