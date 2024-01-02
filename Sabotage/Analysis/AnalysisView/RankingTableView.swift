@@ -43,23 +43,23 @@ class RankingTableView: UIView, UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
-        cell.backgroundColor = .base100
+        cell.backgroundColor = .systemPink
         
         let number = UILabel()
         number.translatesAutoresizingMaskIntoConstraints = false
-        number.font = .boldSystemFont(ofSize: 20)
+        number.font = .Headline()
         cell.contentView.addSubview(number)
         
         let leftText = UILabel()
         leftText.translatesAutoresizingMaskIntoConstraints = false
         leftText.text = "Left Text"
-        leftText.font = .boldSystemFont(ofSize: 20)
+        leftText.font = .Headline()
         cell.contentView.addSubview(leftText)
         
         let rightText = UILabel()
         rightText.translatesAutoresizingMaskIntoConstraints = false
         rightText.text = "Right Text"
-        rightText.font = .boldSystemFont(ofSize: 20)
+        rightText.font = .Headline()
         rightText.textAlignment = .right
         cell.contentView.addSubview(rightText)
         
@@ -74,13 +74,15 @@ class RankingTableView: UIView, UITableViewDataSource, UITableViewDelegate {
             rightText.trailingAnchor.constraint(equalTo: cell.contentView.trailingAnchor, constant: -50)
         ])
         
+        // 상위 랭킹 3위 안
         if indexPath.row < 3 {
             let button = UIButton(type: .custom)
             button.translatesAutoresizingMaskIntoConstraints = false
             button.setBackgroundImage(UIImage(named: "rankingTop3BG"), for: .normal)
             button.contentMode = .scaleAspectFit
             cell.contentView.addSubview(button)
-                
+            
+            // 초록색 동그라미
             NSLayoutConstraint.activate([
                 button.widthAnchor.constraint(equalToConstant: 22), // 버튼의 크기 조정
                 button.heightAnchor.constraint(equalToConstant: 22), // 버튼의 크기 조정
@@ -91,7 +93,9 @@ class RankingTableView: UIView, UITableViewDataSource, UITableViewDelegate {
             cell.contentView.bringSubviewToFront(number) // 이거 해야 이미지 위에 number 올릴 수 있음.
             number.text = "\(indexPath.row + 1)"
             number.textColor = .base500
+            
         }
+        // 내 랭킹
         else if indexPath.row == 10 {
             let button = UIButton(type: .custom)
             button.translatesAutoresizingMaskIntoConstraints = false
@@ -99,11 +103,13 @@ class RankingTableView: UIView, UITableViewDataSource, UITableViewDelegate {
             button.contentMode = .scaleAspectFit
             cell.contentView.addSubview(button)
                 
+            // 내 랭킹 위치
             NSLayoutConstraint.activate([
-                button.widthAnchor.constraint(equalToConstant: 350), // 버튼의 크기 조정
-                button.heightAnchor.constraint(equalToConstant: 45), // 버튼의 크기 조정
+                button.widthAnchor.constraint(equalToConstant: 310), // 버튼의 크기 조정
+                button.heightAnchor.constraint(equalToConstant: 36), // 버튼의 크기 조정
+                button.centerXAnchor.constraint(equalTo: cell.contentView.centerXAnchor),
                 button.centerYAnchor.constraint(equalTo: cell.contentView.centerYAnchor),
-                button.leadingAnchor.constraint(equalTo: cell.contentView.leadingAnchor, constant: 10)
+//                button.leadingAnchor.constraint(equalTo: cell.contentView.leadingAnchor, constant: 10)
             ])
         
             cell.contentView.bringSubviewToFront(number) // 이거 해야 이미지 위에 number 올릴 수 있음.
@@ -118,15 +124,24 @@ class RankingTableView: UIView, UITableViewDataSource, UITableViewDelegate {
         }
         
         switch indexPath.row {
+
         case ..<3:
             leftText.textColor = .base500
             rightText.textColor = .base500
+            cell.frame.size.width = 290
+            cell.frame.size.height = 15
+
         case 3..<10:
             leftText.textColor = .base300
             rightText.textColor = .base300
+            cell.frame.size.width = 290 // 상위 랭킹 3위 안의 셀 높이
+            cell.frame.size.height = 15
+
         case 10:
             leftText.textColor = .base500
             rightText.textColor = .base500
+            cell.frame.size.width = 290
+            cell.frame.size.height = 15
         default:
             break
         }
