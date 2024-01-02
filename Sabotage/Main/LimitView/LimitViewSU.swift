@@ -314,8 +314,10 @@ extension ScheduleView {
                 if isInputValid {
                     let finalTotal = selectedGoalHours * 60 * 60 + selectedGoalMinutes * 60
 //                    scheduleVM.saveSchedule(selectedApps: tempSelection, totalLimitTime: finalTotal)
+                    
 //                    scheduleVM.finalGoalTime = finalTotal
 //                    print("goalTime = \(scheduleVM.finalGoalTime)")
+                    scheduleVM.saveSchedule(selectedApps: tempSelection)
                     print("finalTotal = \(finalTotal)")
                     print("tempSelection = \(tempSelection)")
                     print("selectedNudge = \(selectedNudgeHours):\(selectedNudgeMinutes)")
