@@ -305,8 +305,8 @@ class SaveActionItemController: UIViewController, UITextFieldDelegate {
     }
     
     @objc func deleteButtonTapped() {
-        let alert = UIAlertController(title: nil, message: "정말로 삭제하시겠어요?", preferredStyle: .alert)
-        
+        let alert = UIAlertController(title: "정말 삭제하시겠어요?", message: "삭제하면 다시 불러올 수 없어요", preferredStyle: .alert)
+
         // 취소 버튼
         alert.addAction(UIAlertAction(title: "취소", style: .cancel, handler: nil))
         // 삭제 버튼
