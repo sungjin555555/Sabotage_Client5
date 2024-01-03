@@ -1,4 +1,4 @@
-//  SaveActionItemController.swift
+//  AddActionItemController.swift
 //  Sabotage
 //
 //  Created by 오성진 on 12/27/23.
@@ -8,7 +8,6 @@ import UIKit
 import SnapKit
 
 class AddActionItemController: UIViewController, UITextFieldDelegate {
-
     
     var selectedCard: Int = 0
     
@@ -21,61 +20,6 @@ class AddActionItemController: UIViewController, UITextFieldDelegate {
     let inputItem = UIImageView(image: UIImage(named: "addaction_inputitem.png"))
 
     let inputField: UITextField = {
-
-    var textField: UITextField = UITextField()
-    var selectedButtonName: String = "" // 선택된 버튼의 이름을 저장하는 변수
-
-//    weak var delegate: ActionItemDelegate?
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        view.backgroundColor = .white
-        
-        // MARK: -  ActionItemController에서 잘 넘어왔느닞 확인하는 코드
-//        if let selectedButton = selectedButtonName {
-//            print("😎 ActionItemController로부터 받은 선택된 버튼 이름: \(selectedButton)")
-//        }
-        print("😎 ActionItemController로부터 받은 선택된 버튼 이름: \(selectedButtonName)")
-        
-        // "X" 버튼 추가
-        let closeButton = UIBarButtonItem(title: "X", style: .plain, target: self, action: #selector(closeButtonTapped))
-        closeButton.tintColor = .black
-        navigationItem.leftBarButtonItem = closeButton
-        
-        // "명상" 텍스트를 보여줄 레이블 생성
-        let meditationLabel = UILabel()
-        meditationLabel.text = "명상"
-        meditationLabel.textAlignment = .center
-        meditationLabel.font = UIFont.boldSystemFont(ofSize: 24)
-        meditationLabel.translatesAutoresizingMaskIntoConstraints = false
-        
-        // 레이블을 뷰에 추가
-        view.addSubview(meditationLabel)
-        
-        // Auto Layout을 사용하여 레이블을 페이지 중앙에 위치시킴
-        NSLayoutConstraint.activate([
-            meditationLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 50),
-            meditationLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 40),
-        ])
-        
-        // "알겠습니다" 텍스트를 보여줄 레이블 생성
-        let understandLabel = UILabel()
-        understandLabel.text = "해당 카테고리를 실행하기 위해"
-        understandLabel.textAlignment = .center
-        understandLabel.font = UIFont.systemFont(ofSize: 18)
-        understandLabel.translatesAutoresizingMaskIntoConstraints = false
-        
-        // 레이블을 뷰에 추가
-        view.addSubview(understandLabel)
-        
-        // Auto Layout을 사용하여 레이블을 "명상" 텍스트 아래에 위치시킴
-        NSLayoutConstraint.activate([
-            understandLabel.topAnchor.constraint(equalTo: meditationLabel.bottomAnchor, constant: 20),
-            understandLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 40),
-        ])
-        
-        // 사용자가 입력할 수 있는 텍스트 필드 생성
-
         let textField = UITextField()
         textField.placeholder = "예) 자리에 앉기"
         textField.backgroundColor = .clear // Set the background color to clear
@@ -211,7 +155,6 @@ class AddActionItemController: UIViewController, UITextFieldDelegate {
             return
         }
 
-
         // Navigate back to MainVC
         if let navigationController = navigationController {
             for controller in navigationController.viewControllers {
@@ -220,26 +163,6 @@ class AddActionItemController: UIViewController, UITextFieldDelegate {
                     return
                 }
             }
-
-        
-        print("⚽️ MainVC로 전달된 텍스트: \(text)") // 사용자가 작성한 목표 출력
-        
-//        if let selectedButton = selectedButtonName {
-////            delegate?.didAddActionItemText(text) // Pass the text to MainVC
-//            print("🎾 사용자가 선택한 버튼 이름: \(selectedButton)") // 사용자가 선택한 버튼의 이름 출력
-//        }
-        print("⚽️ MainVC로 전달된 텍스트: \(text)") // 사용자가 작성한 목표 출력
-        print("🫶 final")
-        print("🫶 category = \(selectedButtonName)")
-        print("🫶 text = \(text)")
-        
-        // MARK: - 하람 ) Api 호출하여 데이터 post, get
-        actionPostRequest(with: selectedButtonName, content: text)
-        getActionData()
-        
-        if let navController = navigationController {
-            navController.popToRootViewController(animated: true) // 모든 뷰 컨트롤러를 제거하고 MainVC로 이동
-
         }
 
         // If MainVC is not found in the navigation stack, you can create and present a new instance
