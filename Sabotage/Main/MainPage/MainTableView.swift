@@ -26,7 +26,7 @@ extension MainVC: UITableViewDataSource, UITableViewDelegate {
     func addNewItem(item: LimitDummyDataType) {
         // 데이터 소스 업데이트
         limitItems.append(item)
-
+        
         // 테이블 뷰에 새로운 셀 추가
         let newIndexPath1 = IndexPath(row: limitItems.count - 1, section: 0)
         limitTableView.insertRows(at: [newIndexPath1], with: .automatic)
@@ -37,14 +37,14 @@ extension MainVC: UITableViewDataSource, UITableViewDelegate {
     func addNewActionItem(item: ActionDummyDataType) { // 'limit' -> 'action'
         // 데이터 소스 업데이트
         actionItems.append(item) // 'limit' -> 'action'
-
+        
         // 테이블 뷰에 새로운 셀 추가
         let newIndexPath2 = IndexPath(row: actionItems.count - 1, section: 0) // 'limit' -> 'action'
         actionTableView.insertRows(at: [newIndexPath2], with: .automatic) // 'limit' -> 'action'
         
         print("액션 아이템 추가함.")
     }
-
+    
     // 셀을 선택했을 때의 동작
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if tableView == actionTableView {
@@ -55,22 +55,19 @@ extension MainVC: UITableViewDataSource, UITableViewDelegate {
             print("LimitTableView의 \(indexPath.row) 번째 셀 선택됨")
         }
     }
-    
-//    var sandTexts: [String] {
-//        return Sand.getTexts()
-//    }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if tableView == actionTableView {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "ActionCustomCell", for: indexPath) as? ActionTableViewCell else {
                 return UITableViewCell()
             }
 
-            if indexPath.row == 0 {
-                cell.textLabels.text = "1번째"
-            } else if indexPath.row == 1 {
-                cell.textLabels.text = "2번째"
-            }
+            // actionItems 배열에서 해당 indexPath의 데이터를 가져옴
+            let actionItem = actionItems[indexPath.row]
+            // actionItem의 데이터를 셀에 구성
+            cell.categoryLabel.text = actionItem.category
+            cell.contentLabel.text = actionItem.content
+            // 'configure' 메서드는 적절히 수정 필요
 
             return cell
         }
@@ -79,22 +76,45 @@ extension MainVC: UITableViewDataSource, UITableViewDelegate {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "LimitCustomCell", for: indexPath) as? LimitTableViewCell else {
                 return UITableViewCell()
             }
-            
-            if indexPath.row == 0 {
-                cell.groupName.text = "1번째"
-                cell.time.text = "1번째"
-            } else if indexPath.row == 1 {
-                cell.groupName.text = "2번째"
-                cell.time.text = "2번째"
-            }
+
+            // limitItems 배열에서 해당 indexPath의 데이터를 가져옴
+            let limitItem = limitItems[indexPath.row]
+            // limitItem의 데이터를 셀에 구성
+            cell.configure(with: limitItem.description, title: limitItem.title) // 'configure' 메서드는 적절히 수정 필요
 
             return cell
         }
         
-        // Other table view configurations
+        // 다른 테이블 뷰 구성이 필요한 경우
         return UITableViewCell()
     }
 
+    
+    //    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    //        if tableView == actionTableView {
+    //            guard let cell = tableView.dequeueReusableCell(withIdentifier: "ActionCustomCell", for: indexPath) as? ActionTableViewCell else {
+    //                return UITableViewCell()
+    //            }
+    //
+    //            let imageName = "main_actiontableview.png"
+    //            cell.configure(with: imageName)
+    //            return cell
+    //        }
+    //
+    //        if tableView == limitTableView {
+    //            guard let cell = tableView.dequeueReusableCell(withIdentifier: "LimitCustomCell", for: indexPath) as? LimitTableViewCell else {
+    //                return UITableViewCell()
+    //            }
+    //
+    //            let imageName = "main_limittableview.png" // Provide the image name from your data source
+    //            let title = "" // Provide the title from your data source
+    //            cell.configure(with: imageName, title: title) // Pass both imageName and title
+    //            return cell
+    //        }
+    //
+    //        // Other table view configurations
+    //        return UITableViewCell()
+    //    }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if tableView == actionTableView {
@@ -105,12 +125,12 @@ extension MainVC: UITableViewDataSource, UITableViewDelegate {
             // Set the desired height for the actionTableView cells
             return 180 // Adjust this value to the height you prefer
         }
-
+        
         // Return a default height for other table views if needed
         return UITableView.automaticDimension
     }
-
-        // MARK: - 데이터 전달 후 셀 추가를 위한 함수.
+    
+    // MARK: - 데이터 전달 후 셀 추가를 위한 함수.
     @objc func addCellButtonTapped() {
         // 버튼 탭 시 실행될 액션
         // 예: 새로운 데이터 항목 추가 등
