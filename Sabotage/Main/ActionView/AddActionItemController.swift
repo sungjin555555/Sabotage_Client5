@@ -162,7 +162,11 @@ class AddActionItemController: UIViewController, UITextFieldDelegate {
         print("🫶 final")
         print("🫶 category = \(selectedButtonName)")
         print("🫶 text = \(text)")
+        
+        // MARK: - 하람 ) Api 호출하여 데이터 post, get
         actionPostRequest(with: selectedButtonName, content: text)
+        getActionData()
+        
         if let navController = navigationController {
             navController.popToRootViewController(animated: true) // 모든 뷰 컨트롤러를 제거하고 MainVC로 이동
         }

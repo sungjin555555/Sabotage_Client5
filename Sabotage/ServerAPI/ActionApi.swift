@@ -8,6 +8,7 @@
 import Foundation
 import SwiftUI
 
+// MARK: - [Create] ActionItem
 func actionPostRequest(with category: String, content: String) {
     // 서버 링크가 유요한지 확인
     guard let url = URL(string: "\(urlLink)actionItem/\(userId)") else {
@@ -37,20 +38,27 @@ func actionPostRequest(with category: String, content: String) {
         }
         do {
             // 데이터를 성공적으로 받은 경우, 해당 데이터를 JSON으로 파싱하기
-            let response = try JSONSerialization.jsonObject(with: data, options: .allowFragments)
-            // 정상적으로 response를 받은 경우, notification center를 사용하여 알림 보내기
-            print("✅ success: \(response)")
+            let jsonResponse = try JSONSerialization.jsonObject(with: data, options: [])
+            if let jsonData = try? JSONSerialization.data(withJSONObject: jsonResponse, options: .prettyPrinted),
+               let convertString = String(data: jsonData, encoding: .utf8) {
+                print("✅ Success: \(convertString)")
+            } else {
+                print("✅ Success with JSON response: \(jsonResponse)")
+            }
+            // 메인 스레드에서 알림 전송
             DispatchQueue.main.async {
-                //                NotificationCenter.default.post(name: .addNotification, object: nil)
-                print("✅ notification 완료 in limitPostRequest")
+                // NotificationCenter.default.post(name: .addNotification, object: nil)
+                print("✅ [actionPostRequest] Notification posted in actionPostRequest")
             }
         } catch {
-            print("🚨 ", error)
+            print("🚨 Error parsing JSON: ", error)
         }
+
     }
     task.resume()
 }
 
+// MARK: - [Update] ActionItem (ui 필요)
 func actionPatchRequest(with category: String, content: String) {
     guard let url = URL(string: "\(urlLink)actionItem/\(userId)") else {
         print("🚨 Invalid URL")
@@ -74,16 +82,17 @@ func actionPatchRequest(with category: String, content: String) {
             return
         }
         do {
-            let response = try JSONSerialization.jsonObject(with: data, options: .allowFragments)
-            print("✅ success: \(response)")
+            let jsonResponse = try JSONSerialization.jsonObject(with: data, options: .allowFragments)
+            print("✅ Success: \(jsonResponse)")
+
             DispatchQueue.main.async {
-                DispatchQueue.main.async {
-                    // NotificationCenter.default.post(name: .addNotification, object: nil)
-                }
+                // 필요한 경우 NotificationCenter를 사용하여 알림 보내기
+                // NotificationCenter.default.post(name: .addNotification, object: nil)
             }
         } catch {
-            print("🚨 ", error)
+            print("🚨 Error parsing JSON: ", error)
         }
+
     }
     task.resume()
 }
@@ -116,7 +125,7 @@ func showActionPatchRequest(with category: String, content: String) {
             print("✅ success: \(response)")
             DispatchQueue.main.async {
                 DispatchQueue.main.async {
-                    //                    NotificationCenter.default.post(name: .addNotification, object: nil)
+//                    NotificationCenter.default.post(name: .addNotification, object: nil)
                 }
             }
         } catch {
@@ -126,31 +135,32 @@ func showActionPatchRequest(with category: String, content: String) {
     task.resume()
 }
 
-//func getActionData() {
-//    if let url = URL(string: "\(urlLink)actionItem/\(userId)/all") {
-//        let session = URLSession(configuration: .default)
-//        let task = session.dataTask(with: url) { data, response, error in
-//                   if let error = error {
-//                       print("🚨 Error: \(error.localizedDescription)")
-//                       return
-//                   }
-//            // JSON data를 가져온다. optional 풀어줘야 함
-//            if let JSONdata = data {
-//                let dataString = String(data: JSONdata, encoding: .utf8) //얘도 확인을 위한 코드임
-//                print(dataString!)
-//                // JSONDecoder 사용하기
-//                let decoder = JSONDecoder() // initialize
-//                do {
-//                                    let decodeData = try decoder.decode(ActionItemData.self, from: JSONdata)
-//                                    DispatchQueue.main.async {
-//                                        self.ActionItemData = decodeData
-//                                        // self.collectionView.reloadData()
-//                                    }
-//                                } catch {
-//                                    print("🚨 JSON decoding error: \(error)")
-//                                }
-//            }
-//        }
-//        task.resume()
-//    }
-//}
+// MARK: - [Read] ActionItem
+func getActionData() {
+    if let url = URL(string: "\(urlLink)actionItem/\(userId)/all") {
+        let session = URLSession(configuration: .default)
+        let task = session.dataTask(with: url) { data, response, error in
+            if let error = error {
+                print("🚨 Error: \(error.localizedDescription)")
+                return
+            }
+            // JSON data를 가져온다. optional 풀어줘야 함
+            if let JSONdata = data {
+                let dataString = String(data: JSONdata, encoding: .utf8) //얘도 확인을 위한 코드임
+                print(dataString!)
+                // JSONDecoder 사용하기
+                let decoder = JSONDecoder() // initialize
+                do {
+                    let decodeData = try decoder.decode(ActionItemData.self, from: JSONdata)
+                    DispatchQueue.main.async {
+                        // self.ActionItemData = decodeData
+                        // self.collectionView.reloadData()
+                    }
+                } catch {
+                    print("🚨 JSON decoding error: \(error)")
+                }
+            }
+        }
+        task.resume()
+    }
+}
