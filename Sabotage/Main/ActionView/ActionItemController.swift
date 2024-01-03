@@ -6,6 +6,7 @@ class ActionItemController: UIViewController {
     var selectedCard = UILabel()
     var selectedCardTag: Int?
     
+    let closeButton = UIImageView(image: UIImage(named: "closeButton.png"))
     let Title = UIImageView(image: UIImage(named: "action_title.png"))
     let tracker1 = UIImageView(image: UIImage(named: "action_tracker1.png"))
     let subtitle = UIImageView(image: UIImage(named: "action_subtitle.png"))
@@ -22,9 +23,13 @@ class ActionItemController: UIViewController {
     
     let backButton = UIImageView(image: UIImage(named: "action_backbutton.png"))
     let nextButton = UIImageView(image: UIImage(named: "action_nextbutton.png"))
-
+    
     // MARK: UI
     func setUI() {
+        
+        closeButton.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(closeButton)
+        
         Title.contentMode = .center
         Title.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(Title)
@@ -62,6 +67,8 @@ class ActionItemController: UIViewController {
         }
     }
     
+    
+    
     @objc func actionCardTapped(_ sender: UITapGestureRecognizer) {
         if let imageView = sender.view as? UIImageView {
             let tappedTag = imageView.tag
@@ -82,10 +89,17 @@ class ActionItemController: UIViewController {
             }
         }
     }
-
+    
     // MARK: constraint
     func setConstraint() {
         NSLayoutConstraint.activate([
+            
+        
+            closeButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
+            closeButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
+            closeButton.widthAnchor.constraint(equalToConstant: 40),
+            closeButton.heightAnchor.constraint(equalToConstant: 40),
+            
             Title.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             Title.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 30),
             Title.widthAnchor.constraint(equalToConstant: 80),
@@ -112,12 +126,12 @@ class ActionItemController: UIViewController {
             
             // Set aspect ratio constraint
             let aspectConstraint = NSLayoutConstraint(item: imageView,
-                                                     attribute: .height,
-                                                     relatedBy: .equal,
-                                                     toItem: imageView,
-                                                     attribute: .width,
-                                                     multiplier: imageView.image!.size.height / imageView.image!.size.width,
-                                                     constant: 0)
+                                                      attribute: .height,
+                                                      relatedBy: .equal,
+                                                      toItem: imageView,
+                                                      attribute: .width,
+                                                      multiplier: imageView.image!.size.height / imageView.image!.size.width,
+                                                      constant: 0)
             aspectConstraint.isActive = true
             
             if let previous = previousCardImageView {
@@ -141,10 +155,10 @@ class ActionItemController: UIViewController {
             nextButton.heightAnchor.constraint(equalToConstant: 80),
         ])
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(nextButtonTapped))
-            nextButton.isUserInteractionEnabled = true
-            nextButton.addGestureRecognizer(tapGesture)
+        nextButton.isUserInteractionEnabled = true
+        nextButton.addGestureRecognizer(tapGesture)
     }
-        
+    
     @objc func nextButtonTapped() {
         let addActionItemController = AddActionItemController()
         
@@ -155,14 +169,34 @@ class ActionItemController: UIViewController {
         
         navigationController?.pushViewController(addActionItemController, animated: true)
     }
-
-
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-
+        
         setUI()
         setConstraint()
+        
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(closeButtonTapped))
+        closeButton.addGestureRecognizer(tapGesture)
+        closeButton.isUserInteractionEnabled = true
     }
+    
+    
+    // MARK: -  카드 뒤집기
+    @objc func closeButtonTapped() {
+//        if let mainVC = navigationController?.viewControllers.first(where: { $0 is MainVC }) {
+//            UIView.transition(with: navigationController!.view, duration: 0.5, options: .transitionFlipFromLeft, animations: {
+//                self.navigationController?.popToViewController(mainVC, animated: false)
+//            }, completion: nil)
+//        } else {
+//            let mainVC = MainVC() // Instantiate your MainVC if not in the navigation stack
+//            navigationController?.pushViewController(mainVC, animated: true)
+//        }
+        navigationController?.popToRootViewController(animated: true)
+    }
+    
 }

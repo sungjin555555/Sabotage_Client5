@@ -8,6 +8,10 @@
 import Foundation
 import SwiftUI
 
+extension Notification.Name {
+    static let addNotification = Notification.Name("addNotification")
+}
+
 // MARK: - [Create] ActionItem
 func actionPostRequest(with category: String, content: String) {
     // 서버 링크가 유요한지 확인
@@ -47,7 +51,8 @@ func actionPostRequest(with category: String, content: String) {
             }
             // 메인 스레드에서 알림 전송
             DispatchQueue.main.async {
-                // NotificationCenter.default.post(name: .addNotification, object: nil)
+                 NotificationCenter.default.post(name: .addNotification, object: nil)
+                
                 print("✅ [actionPostRequest] Notification posted in actionPostRequest")
             }
         } catch {
@@ -133,44 +138,4 @@ func showActionPatchRequest(with category: String, content: String) {
         }
     }
     task.resume()
-}
-
-// 클로저 타입 정의
-typealias ActionDataCompletion = (ActionItemData?) -> Void
-
-// MARK: - [Read] ActionItem
-func getActionData(completion: @escaping ActionDataCompletion) {  // MARK: - "completion: @escaping ActionDataCompletion" 파라미터 추가
-    if let url = URL(string: "\(urlLink)actionItem/\(userId)/all") {
-        let session = URLSession(configuration: .default)
-        let task = session.dataTask(with: url) { data, response, error in
-            if let error = error {
-                print("🚨 Error: \(error.localizedDescription)")
-                return
-            }
-            // JSON data를 가져온다. optional 풀어줘야 함
-            if let JSONdata = data {
-                let dataString = String(data: JSONdata, encoding: .utf8) //얘도 확인을 위한 코드임
-                print(dataString!)
-                // JSONDecoder 사용하기
-                let decoder = JSONDecoder() // initialize
-                do {
-                    let decodeData = try decoder.decode(ActionItemData.self, from: JSONdata)
-                    DispatchQueue.main.async {
-                        // self.ActionItemData = decodeData
-                        // self.collectionView.reloadData()
-//                        completion(decodeData) // MARK: - // 성공 시 가져온 데이터 전달
-                        print("🤢 decodeData", decodeData)
-//                        let categories = decodeData.data.map { $0.category }
-//                        print("🎃", categories)
-
-                    }
-                    
-                } catch {
-                    print("🚨 JSON decoding error: \(error)")
-                    completion(nil) // MARK: - // 디코딩 실패 시 nil 반환
-                }
-            }
-        }
-        task.resume()
-    }
 }

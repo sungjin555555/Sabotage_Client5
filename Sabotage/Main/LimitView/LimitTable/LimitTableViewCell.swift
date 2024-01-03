@@ -1,46 +1,60 @@
 import UIKit
 
+//
+//  ActionTableViewCell.swift
+//  Sabotage
+//
+//  Created by 김하람 on 12/30/23.
+//
+
+import UIKit
 class LimitTableViewCell: UITableViewCell {
-    let titleLabel = UILabel()
-    let cellImageView = UIImageView()
+    
+    let cellBackgroundView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .base200
+        view.layer.cornerRadius = 20
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    let groupName: UILabel = {
+        let label = UILabel()
+        label.textColor = .black
+        label.font = UIFont.systemFont(ofSize: 16)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    let time: UILabel = {
+        let label = UILabel()
+        label.textColor = .black
+        label.font = UIFont.systemFont(ofSize: 16)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-
-        setupLayout()
+        setupCell()
     }
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
-    private func setupLayout() {
-        // titleLabel 설정
-        titleLabel.font = UIFont.systemFont(ofSize: 16)
-        titleLabel.textColor = .black
-        contentView.addSubview(titleLabel)
-        contentView.backgroundColor = .base50 
-        titleLabel.translatesAutoresizingMaskIntoConstraints = false
-
-        // cellImageView 설정
-        cellImageView.contentMode = .scaleAspectFit
-        contentView.addSubview(cellImageView)
-        cellImageView.translatesAutoresizingMaskIntoConstraints = false
-
-        // Auto Layout 제약 조건 설정
-        NSLayoutConstraint.activate([
-            cellImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
-            cellImageView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
-            cellImageView.widthAnchor.constraint(equalToConstant: 350),
-            cellImageView.heightAnchor.constraint(equalToConstant: 150),
-
-//            titleLabel.leadingAnchor.constraint(equalTo: cellImageView.trailingAnchor, constant: 16),
-//            titleLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor)
-        ])
+    
+    func configure(with text: String) {
+        groupName.text = text
     }
 
-    func configure(with imageName: String, title: String) {
-        cellImageView.image = UIImage(named: imageName)
-        titleLabel.text = title
+    private func setupCell() {
+        contentView.addSubview(cellBackgroundView)
+
+        NSLayoutConstraint.activate([
+            cellBackgroundView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 0),
+            cellBackgroundView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
+            cellBackgroundView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
+            cellBackgroundView.heightAnchor.constraint(equalToConstant: 140),
+        ])
     }
 }
