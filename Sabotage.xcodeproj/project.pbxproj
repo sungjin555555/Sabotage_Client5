@@ -19,17 +19,6 @@
 		210B7B422B400E4000D4105D /* MainTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210B7B412B400E4000D4105D /* MainTableView.swift */; };
 		210B7B452B40176900D4105D /* APICaller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210B7B442B40176900D4105D /* APICaller.swift */; };
 		210B7B472B4018CF00D4105D /* ActionApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210B7B462B4018CF00D4105D /* ActionApi.swift */; };
-
-		212CE3362B45422500B7CCCE /* AppleSDGothicNeoEB.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 212CE32D2B45422500B7CCCE /* AppleSDGothicNeoEB.ttf */; };
-		212CE3372B45422500B7CCCE /* AppleSDGothicNeoSB.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 212CE32E2B45422500B7CCCE /* AppleSDGothicNeoSB.ttf */; };
-		212CE3382B45422500B7CCCE /* AppleSDGothicNeoL.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 212CE32F2B45422500B7CCCE /* AppleSDGothicNeoL.ttf */; };
-		212CE3392B45422500B7CCCE /* AppleSDGothicNeoH.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 212CE3302B45422500B7CCCE /* AppleSDGothicNeoH.ttf */; };
-		212CE33A2B45422500B7CCCE /* AppleSDGothicNeoM.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 212CE3312B45422500B7CCCE /* AppleSDGothicNeoM.ttf */; };
-		212CE33B2B45422500B7CCCE /* AppleSDGothicNeoB.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 212CE3322B45422500B7CCCE /* AppleSDGothicNeoB.ttf */; };
-		212CE33C2B45422500B7CCCE /* AppleSDGothicNeoR.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 212CE3332B45422500B7CCCE /* AppleSDGothicNeoR.ttf */; };
-		212CE33D2B45422500B7CCCE /* AppleSDGothicNeoT.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 212CE3342B45422500B7CCCE /* AppleSDGothicNeoT.ttf */; };
-		212CE33E2B45422500B7CCCE /* AppleSDGothicNeoUL.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 212CE3352B45422500B7CCCE /* AppleSDGothicNeoUL.ttf */; };
-
 		214CC4812B3C4782003B74EB /* SabotageApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214CC4802B3C4782003B74EB /* SabotageApp.swift */; };
 		214CC4832B3C4782003B74EB /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214CC4822B3C4782003B74EB /* ContentView.swift */; };
 		214CC4852B3C4784003B74EB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 214CC4842B3C4784003B74EB /* Assets.xcassets */; };
@@ -96,6 +85,7 @@
 		88637AB72B3C70ED006F1FF6 /* SaveActionItemController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88637AB62B3C70ED006F1FF6 /* SaveActionItemController.swift */; };
 		88A521042B41654F00CB1DCE /* RankingTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88A521032B41654F00CB1DCE /* RankingTableView.swift */; };
 		88ABDAB22B3EA3BD0011682E /* PieChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88ABDAB12B3EA3BD0011682E /* PieChart.swift */; };
+		88E13A412B45D2D0004AB9E2 /* sand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88E13A402B45D2D0004AB9E2 /* sand.swift */; };
 		DB98B45E2DBF590A60210D39 /* Pods_Sabotage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BE09D05FFC7473D463C0201 /* Pods_Sabotage.framework */; };
 /* End PBXBuildFile section */
 
@@ -165,17 +155,6 @@
 		210B7B412B400E4000D4105D /* MainTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableView.swift; sourceTree = "<group>"; };
 		210B7B442B40176900D4105D /* APICaller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APICaller.swift; sourceTree = "<group>"; };
 		210B7B462B4018CF00D4105D /* ActionApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionApi.swift; sourceTree = "<group>"; };
-
-		212CE32D2B45422500B7CCCE /* AppleSDGothicNeoEB.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = AppleSDGothicNeoEB.ttf; path = "../../../../Apple 산돌고딕 Neo/AppleSDGothicNeoEB.ttf"; sourceTree = "<group>"; };
-		212CE32E2B45422500B7CCCE /* AppleSDGothicNeoSB.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = AppleSDGothicNeoSB.ttf; path = "../../../../Apple 산돌고딕 Neo/AppleSDGothicNeoSB.ttf"; sourceTree = "<group>"; };
-		212CE32F2B45422500B7CCCE /* AppleSDGothicNeoL.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = AppleSDGothicNeoL.ttf; path = "../../../../Apple 산돌고딕 Neo/AppleSDGothicNeoL.ttf"; sourceTree = "<group>"; };
-		212CE3302B45422500B7CCCE /* AppleSDGothicNeoH.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = AppleSDGothicNeoH.ttf; path = "../../../../Apple 산돌고딕 Neo/AppleSDGothicNeoH.ttf"; sourceTree = "<group>"; };
-		212CE3312B45422500B7CCCE /* AppleSDGothicNeoM.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = AppleSDGothicNeoM.ttf; path = "../../../../Apple 산돌고딕 Neo/AppleSDGothicNeoM.ttf"; sourceTree = "<group>"; };
-		212CE3322B45422500B7CCCE /* AppleSDGothicNeoB.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = AppleSDGothicNeoB.ttf; path = "../../../../Apple 산돌고딕 Neo/AppleSDGothicNeoB.ttf"; sourceTree = "<group>"; };
-		212CE3332B45422500B7CCCE /* AppleSDGothicNeoR.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = AppleSDGothicNeoR.ttf; path = "../../../../Apple 산돌고딕 Neo/AppleSDGothicNeoR.ttf"; sourceTree = "<group>"; };
-		212CE3342B45422500B7CCCE /* AppleSDGothicNeoT.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = AppleSDGothicNeoT.ttf; path = "../../../../Apple 산돌고딕 Neo/AppleSDGothicNeoT.ttf"; sourceTree = "<group>"; };
-		212CE3352B45422500B7CCCE /* AppleSDGothicNeoUL.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = AppleSDGothicNeoUL.ttf; path = "../../../../Apple 산돌고딕 Neo/AppleSDGothicNeoUL.ttf"; sourceTree = "<group>"; };
-
 		214CC47D2B3C4782003B74EB /* Sabotage.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sabotage.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		214CC4802B3C4782003B74EB /* SabotageApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SabotageApp.swift; sourceTree = "<group>"; };
 		214CC4822B3C4782003B74EB /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -247,6 +226,7 @@
 		888E796A2B458525008181EE /* AppleSDGothicNeoL.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = AppleSDGothicNeoL.ttf; path = "../../../../Apple 산돌고딕 Neo 2/AppleSDGothicNeoL.ttf"; sourceTree = "<group>"; };
 		88A521032B41654F00CB1DCE /* RankingTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankingTableView.swift; sourceTree = "<group>"; };
 		88ABDAB12B3EA3BD0011682E /* PieChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieChart.swift; sourceTree = "<group>"; };
+		88E13A402B45D2D0004AB9E2 /* sand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sand.swift; sourceTree = "<group>"; };
 		C1BCE96EF1EBB5C2257ED96E /* Pods-Sabotage.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sabotage.debug.xcconfig"; path = "Target Support Files/Pods-Sabotage/Pods-Sabotage.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -585,6 +565,7 @@
 				8852C06A2B3C4B2800219714 /* AddActionItemController.swift */,
 				88637AB62B3C70ED006F1FF6 /* SaveActionItemController.swift */,
 				210B7B392B400D6F00D4105D /* ActionModel.swift */,
+				88E13A402B45D2D0004AB9E2 /* sand.swift */,
 			);
 			path = ActionView;
 			sourceTree = "<group>";
@@ -894,6 +875,7 @@
 				215C7D802B45254800D217DA /* GoalGroupApi.swift in Sources */,
 				210B7B452B40176900D4105D /* APICaller.swift in Sources */,
 				88ABDAB22B3EA3BD0011682E /* PieChart.swift in Sources */,
+				88E13A412B45D2D0004AB9E2 /* sand.swift in Sources */,
 				8852C05D2B3C491600219714 /* ProfileVC.swift in Sources */,
 				883D8E192B42AA03003DD8C5 /* FontSystemUikit.swift in Sources */,
 				214CC4832B3C4782003B74EB /* ContentView.swift in Sources */,

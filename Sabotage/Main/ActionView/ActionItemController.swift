@@ -30,7 +30,6 @@ class ActionItemController: UIViewController {
         closeButton.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(closeButton)
         
-        
         Title.contentMode = .center
         Title.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(Title)
@@ -187,16 +186,17 @@ class ActionItemController: UIViewController {
     }
     
     
+    // MARK: -  카드 뒤집기
     @objc func closeButtonTapped() {
-        if let mainVC = navigationController?.viewControllers.first(where: { $0 is MainVC }) {
-            UIView.transition(with: navigationController!.view, duration: 0.5, options: .transitionFlipFromLeft, animations: {
-                self.navigationController?.popToViewController(mainVC, animated: false)
-            }, completion: nil)
-        } else {
-            let mainVC = MainVC() // Instantiate your MainVC if not in the navigation stack
-            navigationController?.pushViewController(mainVC, animated: true)
-        }
+//        if let mainVC = navigationController?.viewControllers.first(where: { $0 is MainVC }) {
+//            UIView.transition(with: navigationController!.view, duration: 0.5, options: .transitionFlipFromLeft, animations: {
+//                self.navigationController?.popToViewController(mainVC, animated: false)
+//            }, completion: nil)
+//        } else {
+//            let mainVC = MainVC() // Instantiate your MainVC if not in the navigation stack
+//            navigationController?.pushViewController(mainVC, animated: true)
+//        }
+        navigationController?.popToRootViewController(animated: true)
     }
-
     
 }

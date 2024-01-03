@@ -56,14 +56,22 @@ extension MainVC: UITableViewDataSource, UITableViewDelegate {
         }
     }
     
+//    var sandTexts: [String] {
+//        return Sand.getTexts()
+//    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if tableView == actionTableView {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "ActionCustomCell", for: indexPath) as? ActionTableViewCell else {
                 return UITableViewCell()
             }
 
-            let imageName = "main_actiontableview.png"
-            cell.configure(with: imageName)
+            if indexPath.row == 0 {
+                cell.textLabels.text = "1번째"
+            } else if indexPath.row == 1 {
+                cell.textLabels.text = "2번째"
+            }
+
             return cell
         }
         
@@ -71,25 +79,31 @@ extension MainVC: UITableViewDataSource, UITableViewDelegate {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "LimitCustomCell", for: indexPath) as? LimitTableViewCell else {
                 return UITableViewCell()
             }
+            
+            if indexPath.row == 0 {
+                cell.groupName.text = "1번째"
+                cell.time.text = "1번째"
+            } else if indexPath.row == 1 {
+                cell.groupName.text = "2번째"
+                cell.time.text = "2번째"
+            }
 
-            let imageName = "main_limittableview.png" // Provide the image name from your data source
-            let title = "" // Provide the title from your data source
-            cell.configure(with: imageName, title: title) // Pass both imageName and title
             return cell
         }
         
         // Other table view configurations
         return UITableViewCell()
     }
+
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if tableView == actionTableView {
             // Set the desired height for the actionTableView cells
-            return 100 // Adjust this value to the height you prefer
+            return 120 // Adjust this value to the height you prefer
         }
         if tableView == limitTableView {
             // Set the desired height for the actionTableView cells
-            return 150 // Adjust this value to the height you prefer
+            return 180 // Adjust this value to the height you prefer
         }
 
         // Return a default height for other table views if needed
