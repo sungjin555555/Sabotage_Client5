@@ -185,8 +185,6 @@ class AddActionItemController: UIViewController, UITextFieldDelegate {
             return
         }
         actionPostRequest(with: "\(selectedCard)", content: text)
-        // MARK: - [Create] Post ActionItem
-        // actionPostRequest(with: '여기 카테고리 변수', content: '내용 변수')
         
         let mainVC = MainVC() // Create a new instance of MainVC
         navigationController?.pushViewController(mainVC, animated: true) // Present MainVC

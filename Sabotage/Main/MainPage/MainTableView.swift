@@ -21,8 +21,6 @@ extension MainVC: UITableViewDataSource, UITableViewDelegate {
         }
         return 0
     }
-    
-    
     func addNewItem(item: LimitDummyDataType) {
         // 데이터 소스 업데이트
         limitItems.append(item)
@@ -77,7 +75,8 @@ extension MainVC: UITableViewDataSource, UITableViewDelegate {
             // limitItems 배열에서 해당 indexPath의 데이터를 가져옴
             let limitItem = limitItems[indexPath.row]
             // limitItem의 데이터를 셀에 구성
-            cell.configure(with: limitItem.description, title: limitItem.title) // 'configure' 메서드는 적절히 수정 필요
+            cell.titleLabel.text = limitItem.title
+            cell.timeBudget.text = String(limitItem.timeBudget)
             return cell
         }
         
@@ -118,16 +117,10 @@ extension MainVC: UITableViewDataSource, UITableViewDelegate {
         }
         if tableView == limitTableView {
             // Set the desired height for the actionTableView cells
-            return 150 // Adjust this value to the height you prefer
+            return 100 // Adjust this value to the height you prefer
         }
         
         // Return a default height for other table views if needed
         return UITableView.automaticDimension
-    }
-    
-    // MARK: - 데이터 전달 후 셀 추가를 위한 함수.
-    @objc func addCellButtonTapped() {
-        // 버튼 탭 시 실행될 액션
-        // 예: 새로운 데이터 항목 추가 등
     }
 }

@@ -206,7 +206,6 @@ class SaveActionItemController: UIViewController, UITextFieldDelegate {
         alert.addAction(UIAlertAction(title: "삭제", style: .destructive, handler: { _ in
             // 삭제 작업 수행
         }))
-        
         present(alert, animated: true, completion: nil)
     }
 
