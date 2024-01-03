@@ -60,8 +60,7 @@ struct ActionItemData : Codable {
 }
 
 struct DataList : Codable {
-    let name : String
-    let age : Int
-    let part : String
-    let imgURL : String
+    let id : Int
+    let category : String
+    let content : String
 }
