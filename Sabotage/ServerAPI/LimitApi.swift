@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-func limitPostRequest(title: String, apps: [String], timeBudget: Int) {
+func goalPostRequest(title: String, apps: [String], timeBudget: Int) {
     // 서버 링크가 유요한지 확인
     guard let url = URL(string: "\(urlLink)goalGroup") else {
         print("🚨 Invalid URL")

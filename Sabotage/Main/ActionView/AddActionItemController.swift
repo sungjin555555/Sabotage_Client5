@@ -164,8 +164,9 @@ class AddActionItemController: UIViewController, UITextFieldDelegate {
                 }
             }
         }
-
-        // If MainVC is not found in the navigation stack, you can create and present a new instance
+        // MARK: - [Create] Post ActionItem
+//        actionPostRequest(with: '여기 카테고리 변수', content: '내용 변수')
+        
         let mainVC = MainVC() // Create a new instance of MainVC
         navigationController?.pushViewController(mainVC, animated: true) // Present MainVC
     }
