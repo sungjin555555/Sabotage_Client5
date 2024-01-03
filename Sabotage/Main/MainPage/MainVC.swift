@@ -466,15 +466,15 @@ class MainVC: UIViewController, LimitItemDelegate{
 
     
     @objc func actionButtonTapped() {
-        let actionItemController = ActionItemController()
-//        actionItemController.delegate = self // Set MainVC as the delegate for ActionItemController
-        navigationController?.pushViewController(actionItemController, animated: true)
+//        let actionItemController = ActionItemController()
+////        actionItemController.delegate = self // Set MainVC as the delegate for ActionItemController
+//        navigationController?.pushViewController(actionItemController, animated: true)
         
         // MARK: ram - test code
 //        actionPostRequest(with: 0, title: "title", apps: ["String", "string2"], timeBudget: 0)
-//        let monitoringView = MonitoringView()
-//        let hostingController = UIHostingController(rootView: monitoringView)
-//        navigationController?.pushViewController(hostingController, animated: true)
+        let monitoringView = MonitoringView()
+        let hostingController = UIHostingController(rootView: monitoringView)
+        navigationController?.pushViewController(hostingController, animated: true)
 
 //        //MARK: 서윤 - saveactionitem 확인
 //        let saveActionItemController = SaveActionItemController()

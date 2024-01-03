@@ -7,6 +7,7 @@
 
 import SwiftUI
 import FamilyControls
+import ManagedSettingsUI
 /**
  
  1. 권한 설정 확인할 수 있어야함
@@ -320,23 +321,10 @@ extension ScheduleView {
 //                    print("goalTime = \(scheduleVM.finalGoalTime)")
                     scheduleVM.saveSchedule(selectedApps: tempSelection)
                     print("finalTotal = \(finalTotal)")
-                    print("tempSelection = \(tempSelection)")
                     print("selectedNudge = \(selectedNudgeHours):\(selectedNudgeMinutes)")
                     print("selectedGoalHours = \(selectedGoalHours):\(selectedGoalMinutes)")
-                    print("🔥 appList = \(tempSelection)")
-                    // Assuming 'ApplicationToken' conforms to 'CustomStringConvertible' or has a method to return a string
-                    let appNames = tempSelection.applicationTokens.map { token in
-                        
-                        // Replace 'tokenDescription' with the actual property or method that provides a string representation
-                        return String(token.hashValue)
-                    }
-                    print("🔥 🔥 🔥  \(appNames) 🔥 🔥 🔥 ")
-                    // Now, 'appNames' is an array of strings that you can send to your server
-//                    goalPostRequest(title: groupName, apps: appNames, timeBudget: finalTotal)
 
-//                    let appNames = tempSelection.applicationTokens.map { $0. }
-//                    print("🙌🏻 appNames = \(appNames)")
-//                    goalPostRequest(title: groupName, apps: <#T##[String]#>, timeBudget: finalTotal, nudgeInterval: nudgeTotal)
+                    goalPostRequest(title: groupName, timeBudget: finalTotal, nudgeInterval: nudgeTotal)
                 }
             }
             .padding()
