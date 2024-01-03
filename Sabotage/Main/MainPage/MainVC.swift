@@ -361,6 +361,9 @@ class MainVC: UIViewController, LimitItemDelegate{
         actionTableView = UITableView(frame: .zero, style: .plain)
         limitTableView = UITableView(frame: .zero, style: .plain)
         
+        actionTableView.backgroundColor = UIColor.green // 색을 원하는 대로 변경해주세요.
+        limitTableView.backgroundColor = UIColor.blue
+        
         // MARK: tableView 관련 코드
         actionTableView.register(ActionTableViewCell.self, forCellReuseIdentifier: "ActionCustomCell")
         limitTableView.register(LimitTableViewCell.self, forCellReuseIdentifier: "LimitCustomCell")
@@ -432,7 +435,7 @@ class MainVC: UIViewController, LimitItemDelegate{
         // 버튼을 마지막 셀 아래에 위치하도록 Auto Layout을 사용하여 조정
         NSLayoutConstraint.activate([
             actionButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            actionButton.topAnchor.constraint(equalTo: actionTableView.bottomAnchor, constant: 220),
+            actionButton.topAnchor.constraint(equalTo: actionTableView.bottomAnchor, constant: 250),
             actionButton.widthAnchor.constraint(equalToConstant: 467), // 버튼의 너비 조정
             actionButton.heightAnchor.constraint(equalToConstant: 80) // 버튼의 높이 조정
             
@@ -484,8 +487,13 @@ class MainVC: UIViewController, LimitItemDelegate{
         //        tableView.backgroundColor = UIColor.red // 원하는 색상으로 변경
         
         if tableView == actionTableView {
+
+// //            tableView.backgroundColor = UIColor.orange // ActionTableView의 배경색을 orange로 변경
+//             tableView.backgroundColor = UIColor.red
+
             //            tableView.backgroundColor = UIColor.orange // ActionTableView의 배경색을 orange로 변경
             tableView.backgroundColor = .base50
+
         } else if tableView == limitTableView {
             tableView.backgroundColor = .base50
             //            tableView.backgroundColor = UIColor.brown // LimitTableView의 배경색을 brown으로 변경
@@ -550,9 +558,8 @@ class MainVC: UIViewController, LimitItemDelegate{
     
     
     @objc func actionButtonTapped() {
-        print()
-        let actionItemController = ActionItemController()
-        //        actionItemController.delegate = self // Set MainVC as the delegate for ActionItemController
+
+        let actionItemController = ActionItemController() // 잠깐 test
         navigationController?.pushViewController(actionItemController, animated: true)
         
         // MARK: ram - test code

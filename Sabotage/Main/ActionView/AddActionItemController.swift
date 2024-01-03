@@ -128,7 +128,6 @@ class AddActionItemController: UIViewController, UITextFieldDelegate {
             backButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20),
             backButton.heightAnchor.constraint(equalToConstant: 70),
             
-            
             completeButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 215),
             completeButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             completeButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20),
@@ -165,12 +164,7 @@ class AddActionItemController: UIViewController, UITextFieldDelegate {
     }
     
     @objc func closeButtonTapped() {
-        if let mainVC = navigationController?.viewControllers.first(where: { $0 is MainVC }) {
-            navigationController?.popToViewController(mainVC, animated: true)
-        } else {
-            let mainVC = MainVC() // Instantiate your MainVC if not in the navigation stack
-            navigationController?.pushViewController(mainVC, animated: true)
-        }
+        navigationController?.popToRootViewController(animated: true)
     }
     
     @objc func dismissKeyboard() {
@@ -194,10 +188,10 @@ class AddActionItemController: UIViewController, UITextFieldDelegate {
         // MARK: - [Create] Post ActionItem
         // actionPostRequest(with: '여기 카테고리 변수', content: '내용 변수')
 
-        let mainVC = MainVC() // Create a new instance of MainVC
-        navigationController?.pushViewController(mainVC, animated: true) // Present MainVC
+//        let mainVC = MainVC() // Create a new instance of MainVC
+//        navigationController?.pushViewController(mainVC, animated: true) // Present MainVC
+        navigationController?.popToRootViewController(animated: true)
     }
-    
     
     @objc func textFieldDidChange(_ textField: UITextField) {
         if let text = textField.text, !text.isEmpty {

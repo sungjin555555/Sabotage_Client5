@@ -4,105 +4,7 @@
 ////
 ////  Created by 오성진 on 12/27/23.
 ////
-//
-//import UIKit
-//// test
-//
-//class SaveActionItemController : UIViewController {
-//    
-//    override func viewDidLoad() {
-//        view.backgroundColor = .white
-//        
-//        let closeButton = UIBarButtonItem(title: "X", style: .plain, target: self, action: #selector(closeButtonTapped))
-//        closeButton.tintColor = .black
-//        navigationItem.leftBarButtonItem = closeButton
-//        
-//        let saveButton = UIButton(type: .system)
-//        saveButton.setTitle("저장하기", for: .normal)
-//        saveButton.setTitleColor(.black, for: .normal)
-//        saveButton.backgroundColor = .systemBlue
-//        saveButton.layer.cornerRadius = 15
-//        saveButton.translatesAutoresizingMaskIntoConstraints = false
-//        
-//        view.addSubview(saveButton)
-//        
-//        NSLayoutConstraint.activate([
-//            saveButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-//            saveButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-//            saveButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -100),
-//            saveButton.heightAnchor.constraint(equalToConstant: 70)
-//        ])
-//        saveButton.addTarget(self, action: #selector(saveButtonTapped), for: .touchUpInside)
-//        
-////        let deleteButton = UIButton(type: .system)
-////        deleteButton.setTitle("삭제하기", for: .normal)
-////        deleteButton.setTitleColor(.black, for: .normal)
-////        deleteButton.backgroundColor = .systemGray6
-////        deleteButton.layer.cornerRadius = 15
-////        deleteButton.translatesAutoresizingMaskIntoConstraints = false
-////        
-////        view.addSubview(deleteButton)
-//        
-////        NSLayoutConstraint.activate([
-////            deleteButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-////            deleteButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-////            deleteButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20),
-////            deleteButton.heightAnchor.constraint(equalToConstant: 70)
-////        ])
-////        deleteButton.addTarget(self, action: #selector(deleteButtonTapped), for: .touchUpInside)
-//        
-//        let backButton = UIButton(type: .system)
-//        backButton.setTitle("이전", for: .normal)
-//        backButton.setTitleColor(.systemGray, for: .normal)
-//        backButton.backgroundColor = .systemGray4
-//        backButton.layer.cornerRadius = 15
-//        backButton.translatesAutoresizingMaskIntoConstraints = false
-//        
-//        view.addSubview(backButton)
-//        
-//        NSLayoutConstraint.activate([
-//            backButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-//            backButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -210),
-//            backButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20),
-//            backButton.heightAnchor.constraint(equalToConstant: 70)
-//        ])
-//        
-//        backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
-//    }
-//    
-//    @objc func saveButtonTapped() {
-//        let saveActionItemController = MainVC()
-//        navigationController?.pushViewController(saveActionItemController, animated: true)
-//    }
-//    
-//    @objc func deleteButtonTapped() {
-//        let alert = UIAlertController(title: nil, message: "정말로 삭제하시겠어요?", preferredStyle: .alert)
-//        
-//        // 취소 버튼
-//        alert.addAction(UIAlertAction(title: "취소", style: .cancel, handler: nil))
-//        // 삭제 버튼
-//        alert.addAction(UIAlertAction(title: "삭제", style: .destructive, handler: { _ in
-//            // 삭제 작업 수행
-//        }))
-//        
-//        present(alert, animated: true, completion: nil)
-//    }
-//
-//    // "X" 버튼 액션
-//    @objc func closeButtonTapped() {
-//        let gotoMainController = MainVC()
-//        navigationController?.pushViewController(gotoMainController, animated: true)
-//    }
-//    
-//    @objc func backButtonTapped() {
-//        let gotoBackController = AddActionItemController()
-//        navigationController?.pushViewController(gotoBackController, animated: true)
-//    }
-//}
-
-
-//
-//  SaveActionItemController.swift
+//  AddActionItemController.swift
 //  Sabotage
 //
 //  Created by 오성진 on 12/27/23.
@@ -113,206 +15,177 @@ import SnapKit
 
 class SaveActionItemController: UIViewController, UITextFieldDelegate {
     
-    ////*
-//    weak var delegate: AddActionItemDelegate?
-    var textField: UITextField = UITextField()
-    var selectedButtonName: String = "" // 선택된 버튼의 이름을 저장하는 변수
+    var selectedCard: Int = 0
+    
+    // MARK: 변수
+    //    let backButton = UIButton(type: .system)
+    let closeButton = UIImageView(image: UIImage(named: "closeButton.png"))
+    let Title = UIImageView(image: UIImage(named: "action_title.png"))
+    let category1 = UIImageView(image: UIImage(named: "addaction_category1.png"))
+    let inputItem = UIImageView(image: UIImage(named: "addaction_inputitem.png"))
+    var content: String = "" // MARK: 외부에서 받을 content
+    
+    let saveButton = UIImageView(image: UIImage(named: "saveButton.png"))
+    let deleteButton = UIImageView(image: UIImage(named: "deleteButton.png"))
+    
+    let inputField: UITextField = {
+        let textField = UITextField()
+//        textField.placeholder = "예) 자리에 앉기"
+        textField.backgroundColor = .clear // Set the background color to clear
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        return textField
+    }()
+    // 외부에서 텍스트를 전달받아 content에 할당하는 함수
+    func receiveTextFromExternalSource(text: String) {
+        content = text // 외부에서 받은 텍스트를 content에 할당
+        inputField.text = content // content를 textField의 placeholder로 설정
+    }
+    
+    // MARK: UI
+    func setUI() {
 
+        closeButton.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(closeButton)
+
+        
+        Title.contentMode = .center
+        Title.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(Title)
+        
+        // category 이미지 설정
+        let categoryImageName = "addaction_category\(selectedCard).png"
+        if let categoryImage = UIImage(named: categoryImageName) {
+            category1.image = categoryImage
+        } else {
+            // 선택된 카드에 맞는 이미지가 없을 경우에 대한 처리
+            print("해당하는 이미지가 없습니다.")
+        }
+        category1.contentMode = .scaleAspectFit
+        category1.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(category1)
+        
+        inputItem.contentMode = .scaleAspectFit
+        inputItem.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(inputItem)
+        
+        view.addSubview(inputField)
+        
+        saveButton.contentMode = .scaleAspectFit
+        saveButton.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(saveButton)
+        
+        deleteButton.contentMode = .scaleAspectFit
+        deleteButton.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(deleteButton)
+        
+    }
+    
+    // MARK: constraint
+    func setConstraint() {
+        NSLayoutConstraint.activate([
+            
+            closeButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
+            closeButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
+            closeButton.widthAnchor.constraint(equalToConstant: 40),
+            closeButton.heightAnchor.constraint(equalToConstant: 40),
+            
+            Title.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            Title.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 30),
+            Title.widthAnchor.constraint(equalToConstant: 80),
+            
+            category1.topAnchor.constraint(equalTo: view.topAnchor, constant: 160),
+            category1.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            category1.widthAnchor.constraint(equalToConstant: 370),
+            category1.heightAnchor.constraint(equalToConstant: 90),
+            
+            inputItem.topAnchor.constraint(equalTo: view.topAnchor, constant: 270),
+            inputItem.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            inputItem.widthAnchor.constraint(equalToConstant: 370),
+            inputItem.heightAnchor.constraint(equalToConstant: 120),
+            
+            inputField.topAnchor.constraint(equalTo: inputItem.topAnchor, constant: 10),
+            inputField.leadingAnchor.constraint(equalTo: inputItem.leadingAnchor, constant: 10),
+            inputField.trailingAnchor.constraint(equalTo: inputItem.trailingAnchor, constant: -10),
+            inputField.bottomAnchor.constraint(equalTo: inputItem.bottomAnchor, constant: -10),
+            
+            saveButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            saveButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            saveButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -80),
+            saveButton.heightAnchor.constraint(equalToConstant: 70),
+            
+            deleteButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -60),
+//            deleteButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            deleteButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            
+            deleteButton.widthAnchor.constraint(equalToConstant: 60),
+            deleteButton.heightAnchor.constraint(equalToConstant: 25),
+        ])
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
         
-        // "X" 버튼 추가
-        let closeButton = UIBarButtonItem(title: "<", style: .plain, target: self, action: #selector(closeButtonTapped))
-        closeButton.tintColor = .black
-        navigationItem.leftBarButtonItem = closeButton
+        setUI()
+        setConstraint()
         
-        // "명상" 텍스트를 보여줄 레이블 생성
-        let meditationLabel = UILabel()
-        meditationLabel.text = "명상"
-        meditationLabel.textAlignment = .center
-        meditationLabel.font = UIFont.boldSystemFont(ofSize: 24)
-        meditationLabel.translatesAutoresizingMaskIntoConstraints = false
+        inputField.text = content
         
-        // 레이블을 뷰에 추가
-        view.addSubview(meditationLabel)
+        print("Selected card: \(selectedCard)")
         
-        // Auto Layout을 사용하여 레이블을 페이지 중앙에 위치시킴
-        NSLayoutConstraint.activate([
-            meditationLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 50),
-            meditationLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 40),
-        ])
+        let tapGesture1 = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        tapGesture1.cancelsTouchesInView = false // Allow touch events to pass through the view hierarchy
+        view.addGestureRecognizer(tapGesture1)
         
-        // "알겠습니다" 텍스트를 보여줄 레이블 생성
-        let categoryLabel = UILabel()
-        categoryLabel.text = "카테고리"
-        categoryLabel.textAlignment = .center
-        categoryLabel.font = UIFont.systemFont(ofSize: 18)
-        categoryLabel.translatesAutoresizingMaskIntoConstraints = false
+        let tapGesture2 = UITapGestureRecognizer(target: self, action: #selector(closeButtonTapped))
+        closeButton.addGestureRecognizer(tapGesture2)
+        closeButton.isUserInteractionEnabled = true
         
-        // 레이블을 뷰에 추가
-        view.addSubview(categoryLabel)
-        
-        // Auto Layout을 사용하여 레이블을 "명상" 텍스트 아래에 위치시킴
-        NSLayoutConstraint.activate([
-            categoryLabel.topAnchor.constraint(equalTo: meditationLabel.bottomAnchor, constant: 20),
-            categoryLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 40),
-        ])
-        
-        // 사용자가 입력할 수 있는 텍스트 필드 생성
-        let textField = UITextField()
-        textField.placeholder = "운동"
-        textField.borderStyle = .roundedRect
-        textField.translatesAutoresizingMaskIntoConstraints = false
-        
-        // 텍스트 필드를 뷰에 추가
-        view.addSubview(textField)
-        
-        // 여기가 중요
-        textField.delegate = self
-        
-        // Auto Layout을 사용하여 텍스트 필드를 "알겠습니다" 텍스트 아래에 위치시킴
-        NSLayoutConstraint.activate([
-            textField.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            textField.topAnchor.constraint(equalTo: categoryLabel.bottomAnchor, constant: 20),
-            textField.widthAnchor.constraint(equalToConstant: 250)
-        ])
-        
-        // "알겠습니다" 텍스트를 보여줄 레이블 생성
-        let updateLabel = UILabel()
-        updateLabel.text = "액션 아이템"
-        updateLabel.textAlignment = .center
-        updateLabel.font = UIFont.systemFont(ofSize: 18)
-        updateLabel.translatesAutoresizingMaskIntoConstraints = false
-        
-        // 레이블을 뷰에 추가
-        view.addSubview(updateLabel)
-        
-        // Auto Layout을 사용하여 레이블을 "명상" 텍스트 아래에 위치시킴
-        NSLayoutConstraint.activate([
-            updateLabel.topAnchor.constraint(equalTo: textField.bottomAnchor, constant: 20),
-            updateLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 40),
-        ])
-        
-        // 사용자가 입력할 수 있는 텍스트 필드 생성
-        let textField2 = UITextField()
-        textField2.placeholder = "책읽기"
-        textField2.borderStyle = .roundedRect
-        textField2.translatesAutoresizingMaskIntoConstraints = false
-        
-        // 텍스트 필드를 뷰에 추가
-        view.addSubview(textField2)
-        
-        // 여기가 중요
-        textField2.delegate = self
-        
-        // Auto Layout을 사용하여 텍스트 필드를 "알겠습니다" 텍스트 아래에 위치시킴
-        NSLayoutConstraint.activate([
-            textField2.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            textField2.topAnchor.constraint(equalTo: updateLabel.bottomAnchor, constant: 20),
-            textField2.widthAnchor.constraint(equalToConstant: 250)
-        ])
-        
-        let saveButton = UIButton(type: .system)
-        saveButton.setTitle("저장하기", for: .normal)
-        saveButton.setTitleColor(.black, for: .normal)
-        saveButton.backgroundColor = .systemBlue
-        saveButton.layer.cornerRadius = 15
-        saveButton.translatesAutoresizingMaskIntoConstraints = false
-        
-        view.addSubview(saveButton)
-        
-        NSLayoutConstraint.activate([
-            saveButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            saveButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            saveButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -100),
-            saveButton.heightAnchor.constraint(equalToConstant: 70)
-        ])
-        saveButton.addTarget(self, action: #selector(saveButtonTapped), for: .touchUpInside)
-        
-        let deleteButton = UIButton(type: .system)
-        deleteButton.setTitle("삭제하기", for: .normal)
-        deleteButton.setTitleColor(.black, for: .normal)
-        deleteButton.backgroundColor = .systemGray6
-        deleteButton.layer.cornerRadius = 15
-        deleteButton.translatesAutoresizingMaskIntoConstraints = false
-    
-        view.addSubview(deleteButton)
-        
-        NSLayoutConstraint.activate([
-            deleteButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            deleteButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            deleteButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20),
-            deleteButton.heightAnchor.constraint(equalToConstant: 70)
-        ])
-        deleteButton.addTarget(self, action: #selector(deleteButtonTapped), for: .touchUpInside)
-        
-        // 다른 화면을 탭할 때
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyBoard(sender:)))
-        tapGesture.cancelsTouchesInView = false
-        view.addGestureRecognizer(tapGesture)
+//        inputField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
         
     }
     
-    // UITextFieldDelegate 메서드 구현, textfield에 작성한 내용 콘솔로 가져오기.
-    @objc func textFieldDidEndEditing(_ textField: UITextField) {
-        if let text = textField.text {
-            self.textField.text = text
-            print("사용자가 입력한 텍스트: \(text)")
+    @objc func closeButtonTapped() {
+        if let mainVC = navigationController?.viewControllers.first(where: { $0 is MainVC }) {
+            navigationController?.popToViewController(mainVC, animated: true)
+        } else {
+            let mainVC = MainVC() // Instantiate your MainVC if not in the navigation stack
+            navigationController?.pushViewController(mainVC, animated: true)
         }
     }
     
-    // Delegate를 통해 MainVC로 텍스트 이동되었는지 콘솔에서 확인
-    @objc func completeButtonTapped() {
-        var selectedCategory:String = ""
-        guard let text = self.textField.text else {
-            print("입력된 텍스트가 비어 있습니다.")
-            return
-        }
-
-//        delegate?.didAddActionItemText(text)
-        
-        print("⚽️ MainVC로 전달된 텍스트: \(text)") // 사용자가 작성한 목표 출력
-        print("🫶 final")
-        print("🫶 category = \(selectedButtonName)")
-        print("🫶 text = \(text)")
-//        actionPostRequest(with: selectedCategory, content: text)
-        let mainVC = MainVC()
-        navigationController?.pushViewController(mainVC, animated: true)
+    @objc func dismissKeyboard() {
+        view.endEditing(true) // Dismiss the keyboard
     }
     
     @objc func backButtonTapped() {
         navigationController?.popViewController(animated: true)
     }
     
-    // "X" 버튼 액션
-    @objc func closeButtonTapped() {
-        let gotoMainController = MainVC()
-        navigationController?.pushViewController(gotoMainController, animated: true)
-    }
-    
-    // 다른 곳을 탭했을 때 키보드 숨기기
-    @objc func dismissKeyBoard(sender: UITapGestureRecognizer) {
-        view.endEditing(true)
-    }
-    
-    @objc func saveButtonTapped() {
-        let saveActionItemController = MainVC()
-        navigationController?.pushViewController(saveActionItemController, animated: true)
-    }
-    
-    @objc func deleteButtonTapped() {
-        let alert = UIAlertController(title: "정말 삭제하시겠어요?", message: "삭제하면 다시 불러올 수 없어요", preferredStyle: .alert)
-
-        // 취소 버튼
-        alert.addAction(UIAlertAction(title: "취소", style: .cancel, handler: nil))
-        // 삭제 버튼
-        alert.addAction(UIAlertAction(title: "삭제", style: .destructive, handler: { _ in
-            // 삭제 작업 수행
-        }))
+    @objc func completeButtonTapped() {
+        // Check if both selectedCard and inputField have valid values
+        guard let text = inputField.text, !text.isEmpty else {
+            print("Text is missing")
+            return
+        }
         
-        present(alert, animated: true, completion: nil)
-    }
+        // Call actionPostRequest to send data
+        //        actionPostRequest(with: "\(selectedCardValue)", content: text)
+        actionPostRequest(with: "\(selectedCard)", content: text)
+        // MARK: - [Create] Post ActionItem
+        // actionPostRequest(with: '여기 카테고리 변수', content: '내용 변수')
 
+        let mainVC = MainVC() // Create a new instance of MainVC
+        navigationController?.pushViewController(mainVC, animated: true) // Present MainVC
+    }
+    
+    
+    // 저장하기 
+//    @objc func textFieldDidChange(_ textField: UITextField) {
+//        if let text = textField.text, !text.isEmpty {
+//            completeButton.image = UIImage(named: "addaction_completebutton.png")
+//        } else {
+//            completeButton.image = UIImage(named: "addaction_completebuttonUntapped.png")
+//        }
+//    }
 }

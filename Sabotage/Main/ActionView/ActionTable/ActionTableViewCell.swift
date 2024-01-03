@@ -45,6 +45,7 @@ import UIKit
 //    }
 //}
 
+
 class ActionTableViewCell: UITableViewCell {
     //    // Your cell UI components
     //    let cellImageView = UIImageView()
@@ -112,6 +113,7 @@ class ActionTableViewCell: UITableViewCell {
             categoryLabel.topAnchor.constraint(equalTo: contentView.topAnchor,constant: 0),
             contentLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             contentLabel.topAnchor.constraint(equalTo: contentView.topAnchor,constant: 30)
+
         ])
         func configure(with category: String, content: String) {
             // Configure cell with data
