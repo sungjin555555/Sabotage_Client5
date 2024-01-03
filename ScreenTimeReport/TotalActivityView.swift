@@ -12,96 +12,72 @@ import UserNotifications
 // MARK: - MonitoringView에서 보여줄 SwiftUI 뷰
 struct TotalActivityView: View {
     var activityReport: ActivityReport
-    
     var body: some View {
         VStack(spacing: 4) {
-            Spacer(minLength: 24)
-            Text("스크린타임 총 사용 시간")
-                .font(.callout)
-                .foregroundColor(.secondary)
-            Text(activityReport.totalDuration.toString())
-                .font(.largeTitle)
-                .bold()
-                .padding(.bottom, 8)
-            List {
-                Section {
-                    ForEach(Array(activityReport.apps.prefix(3))) { eachApp in
-                                            ListRow(eachApp: eachApp)
-                                        }
+            Section {
+                // 앱을 'duration'에 따라 내림차순으로 정렬하고 상위 3개 선택
+                ForEach(activityReport.apps.sorted { $0.duration > $1.duration }.prefix(3).indices, id: \.self) { index in
+                    let eachApp = activityReport.apps.sorted { $0.duration > $1.duration }[index]
+                    ListRow(eachApp: eachApp, index: index + 1)
                 }
             }
         }
+    }
+}
+
+extension AppDeviceActivity: Hashable {
+    static func == (lhs: AppDeviceActivity, rhs: AppDeviceActivity) -> Bool {
+        return lhs.id == rhs.id
+    }
+
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
     }
 }
 
 
 struct ListRow: View {
     var eachApp: AppDeviceActivity
+    var index: Int
     @State private var showAlert = false
     @EnvironmentObject var viewModel: AppActivityViewModel
     
     var body: some View {
-        
-        VStack(spacing: 4) {
-            HStack(spacing: 0) {
-                if let token = eachApp.token {
-                    Label(token)
-                        .labelStyle(.iconOnly)
-                        .offset(x: -4)
-                }
-                Text(eachApp.displayName)
-                Spacer()
-                VStack(alignment: .trailing, spacing: 2) {
-                    HStack(spacing: 4) {
-                        Text("화면 깨우기")
-                            .font(.footnote)
-                            .foregroundColor(.secondary)
-                            .frame(width: 72, alignment: .leading)
-                        Text("\(eachApp.numberOfPickups)회")
-                            .font(.headline)
-                            .bold()
-                            .frame(minWidth: 52, alignment: .trailing)
-                    }
-                    HStack(spacing: 4) {
-                        Text("모니터링 시간")
-                            .font(.footnote)
-                            .foregroundColor(.secondary)
-                            .frame(width: 72, alignment: .leading)
-                        Text(String(eachApp.duration.toString()))
-                            .font(.headline)
-                            .bold()
-                            .frame(minWidth: 52, alignment: .trailing).onAppear {
-                            }
-                    }
-                }
+        HStack{
+            if let token = eachApp.token {
+                Label(token)
+                    .labelStyle(.iconOnly)
+                    .frame(width: max(0, 30), height: 78)
             }
-            HStack {
-                Text("앱 ID")
-                    .font(.footnote)
-                    .foregroundColor(.secondary)
-                Text(eachApp.id)
-                    .font(.footnote)
-                    .foregroundColor(.secondary)
-                    .bold()
-                Spacer()
-            }
+            VStack{
+                HStack {
+                    Text("\(index). \(eachApp.displayName)").frame(alignment: .leading)
+                        .padding(.leading, 20)
+                    Spacer()
+                }
+                HStack {
+                    Text(formatDuration(Int(eachApp.duration)))
+                        .font(.headline)
+                        .bold()
+                        .background(Color.red)
+                        .frame(minWidth: 52, alignment: .trailing).onAppear {
+                        }
+                    Spacer()
+                }.frame(alignment: .leading)
+            }.frame(alignment: .leading)
         }
         .background(.clear)
-        
+    }
+    func formatDuration(_ duration: Int) -> String {
+        let hours = duration / 3600
+        let minutes = (duration % 3600) / 60
+        if hours > 0 {
+            return "    \(hours)시간 \(minutes)분"
+        } else {
+            return "\(minutes)분"
+        }
     }
 }
-
-//func scheduleNotification() {
-//    let content = UNMutableNotificationContent()
-//    content.title = "Time Alert"
-//    content.body = "각 앱"
-//    content.sound = .default
-//
-//    let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
-//    let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
-//
-//    UNUserNotificationCenter.current().add(request)
-//}
 
 class AppActivityViewModel: ObservableObject {
     var eachApp: AppDeviceActivity
