@@ -3,52 +3,32 @@
 //  Sabotage
 //
 //  Created by 박서윤 on 2024/01/03.
-
-//import UIKit
 //
-//class WeekBarVC: UIViewController {
-//    override func viewDidLoad() {
-//        super.viewDidLoad()
-//        view.backgroundColor = .green
-//
-//        // 백 버튼을 생성합니다.
-//        let backButton = UIBarButtonItem(title: "Back", style: .plain, target: self, action: #selector(backButtonTapped))
-//        navigationItem.leftBarButtonItem = backButton
-//    }
-//
-//    @objc func backButtonTapped() {
-//        if let analysisVC = navigationController?.viewControllers.first(where: { $0 is AnalysisVC }) {
-//            navigationController?.popToViewController(analysisVC, animated: true)
-//        }
-//    }
-//}
-
 
 import UIKit
 import DGCharts
 
 class WeekBarVC: UIViewController {
-
+    
     var barGraphView: BarChartView!
-    var dataPoints: [String] = ["일","월","화","수","목","금","토"] //dataPoints
-    var dataEntries : [BarChartDataEntry] = [] //실질적인 data 배열으로, BarChartDataEntry형 배열을 선언해줘야함
-    var dataArray:[Int] = [10,5,6,13,15,8,2] //y축의 데이터가 될 data 배열
+    var dataPoints: [String] = ["일","월","화","수","목","금","토"]
+    var dataEntries : [BarChartDataEntry] = []
+    var dataArray:[Int] = [10,5,6,13,15,8,2]
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.view.backgroundColor = .white
+        self.view.backgroundColor = .clear
         
-        // BarChartView 생성 및 설정
         barGraphView = BarChartView()
         barGraphView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(barGraphView)
         
         NSLayoutConstraint.activate([
-            barGraphView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
-            barGraphView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            barGraphView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            barGraphView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20)
+            barGraphView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 100),
+            barGraphView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            barGraphView.widthAnchor.constraint(equalToConstant: 307),
+            barGraphView.heightAnchor.constraint(equalToConstant: 200)
         ])
         
         for i in 0..<dataPoints.count {
@@ -56,22 +36,76 @@ class WeekBarVC: UIViewController {
             dataEntries.append(dataEntry)
         }
         
-        let valFormatter = NumberFormatter()
-        valFormatter.numberStyle = .currency
-        valFormatter.maximumFractionDigits = 2
-        valFormatter.currencySymbol = "$"
-                
-        let format = NumberFormatter()
-        format.numberStyle = .none
-        let formatter = DefaultValueFormatter(formatter: format)
-        
-        //chartDataSet의 label은 그래프 하단 데이터셋의 네이밍을 의미한다.
         let chartDataSet = BarChartDataSet(entries: dataEntries, label: "그래프 값 명칭")
+        chartDataSet.setColor(UIColor.base300)
+        
+        
         let chartData = BarChartData(dataSet: chartDataSet)
-        chartData.setValueFormatter(formatter)
-        barGraphView.leftAxis.valueFormatter = DefaultAxisValueFormatter(formatter: valFormatter)
-                
+        chartData.barWidth = 0.3
+        
         barGraphView.data = chartData
+        
+        // X, Y 축 설정 등 그래프 추가 설정
+        // X 축 설정
+        let xAxis = barGraphView.xAxis
+        xAxis.valueFormatter = IndexAxisValueFormatter(values: dataPoints)
+        xAxis.labelPosition = .bottom // X 축 레이블을 아래에 표시
+        xAxis.labelTextColor = .white // X 축 레이블의 글씨색을 흰색으로 설정
+        
+        // Y 축 레이블 표시
+        let yAxisRight = barGraphView.rightAxis
+        yAxisRight.axisMinimum = -2 // 음수 값으로 설정하여 그래프가 0 아래에서 시작하도록 조정
+        yAxisRight.axisMaximum = 24
+        yAxisRight.granularity = 4
+        yAxisRight.drawLabelsEnabled = true // Y 축 레이블 표시 활성화
+        yAxisRight.labelTextColor = .white // Y 축 레이블의 글씨색을 흰색으로 설정
+        
+        // 그래프 확대/축소 비활성화
+        barGraphView.scaleXEnabled = false
+        barGraphView.scaleYEnabled = false
+        
+        // 왼쪽 Y 축 숨기기
+        barGraphView.leftAxis.enabled = false
+        
+        // X 축 그리드 라인 숨기기
+        barGraphView.xAxis.drawGridLinesEnabled = false
+        
+        barGraphView.layer.borderWidth = 0 // 테두리의 너비를 0으로 설정하여 투명하게 만듭니다.
+
+        // 그래프 테두리를 투명하게 설정
+        barGraphView.layer.borderWidth = 0 // 테두리의 너비를 0으로 설정하여 투명하게 만듭니다.
+
+        // X 축 시작점 투명하게 만들기
+        xAxis.axisLineColor = .clear // X 축의 선 색상을 투명으로 설정합니다.
+        xAxis.axisMinimum = -0.5 // X 축 시작점을 조정하여 그래프를 가운데에 위치시킵니다.
+
+        // Y 축 시작점 투명하게 만들기
+        yAxisRight.axisLineColor = .clear // Y 축의 선 색상을 투명으로 설정합니다.
+        yAxisRight.axisMinimum = 0 // Y 축 시작점을 조정하여 그래프를 가운데에 위치시킵니다.
+        
+        // Y 축 단위 설정
+        yAxisRight.valueFormatter = Hours()
+        
+        // 범례(네모칸) 제거
+        barGraphView.legend.enabled = false
+    }
+    
+//    // Y 축 단위 포맷터
+//    class Hours: AxisValueFormatter {
+//        func stringForValue(_ value: Double, axis: AxisBase?) -> String {
+//            return "\(Int(value))h" // 'h'를 단위로 붙여줍니다.
+//        }
+//    }
+    // Hours 클래스에서 stringForValue 함수 내부를 아래와 같이 수정하여 'h'의 글씨색을 흰색으로 변경합니다.
+    class Hours: AxisValueFormatter {
+        func stringForValue(_ value: Double, axis: AxisBase?) -> String {
+            let formattedValue = "\(Int(value))"
+            let attributedString = NSMutableAttributedString(string: "\(formattedValue)h")
+            
+            // 'h'의 글씨색을 흰색으로 변경
+            attributedString.addAttribute(.foregroundColor, value: UIColor.white, range: NSRange(location: formattedValue.count, length: 1))
+            
+            return formattedValue
+        }
     }
 }
-
