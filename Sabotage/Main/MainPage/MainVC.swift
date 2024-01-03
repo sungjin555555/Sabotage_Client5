@@ -469,14 +469,11 @@ class MainVC: UIViewController, LimitItemDelegate{
         let actionItemController = ActionItemController()
 //        actionItemController.delegate = self // Set MainVC as the delegate for ActionItemController
         navigationController?.pushViewController(actionItemController, animated: true)
-
-//      let monitoringView = ScheduleView()
-////         SwiftUI 뷰를 호스팅하는 UIHostingController 생성
+        
+        // MARK: ram - test code
+//        actionPostRequest(with: 0, title: "title", apps: ["String", "string2"], timeBudget: 0)
+//        let monitoringView = MonitoringView()
 //        let hostingController = UIHostingController(rootView: monitoringView)
-
-//         actionPostRequest(with: 0, title: "title", apps: ["String", "string2"], timeBudget: 0)
-
-        // 네비게이션 컨트롤러를 사용하여 화면 전환
 //        navigationController?.pushViewController(hostingController, animated: true)
 
 //        //MARK: 서윤 - saveactionitem 확인
@@ -485,15 +482,10 @@ class MainVC: UIViewController, LimitItemDelegate{
     }
 
     @objc func limitButtonTapped() {
-        // MARK: - ram test code
+        // MARK: ram - test code
          print("addButtonTapped")
-         // SwiftUI 뷰 인스턴스 생성
          let scheduleView = ScheduleView()
-
-         // SwiftUI 뷰를 호스팅하는 UIHostingController 생성
          let hostingController = UIHostingController(rootView: scheduleView)
-
-//          네비게이션 컨트롤러를 사용하여 화면 전환
          navigationController?.pushViewController(hostingController, animated: true)
     }
 

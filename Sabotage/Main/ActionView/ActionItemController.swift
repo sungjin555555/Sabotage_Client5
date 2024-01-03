@@ -23,11 +23,37 @@ class ActionItemController: UIViewController {
     let backButton = UIImageView(image: UIImage(named: "action_backbutton.png"))
     let nextButton = UIImageView(image: UIImage(named: "action_nextbutton.png"))
 
+
     // MARK: UI
     func setUI() {
         Title.contentMode = .center
         Title.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(Title)
+
+
+class ActionItemController: UIViewController{
+    
+//    weak var delegate: ActionItemDelegate?
+    
+    let titleLabel = UILabel()
+    let backButton = UIButton(type: .system)
+    let nextButton = UIButton(type: .system)
+    
+    let aButton = UIButton(type: .system)
+    let bButton = UIButton(type: .system)
+    let cButton = UIButton(type: .system)
+    let dButton = UIButton(type: .system)
+    let eButton = UIButton(type: .system)
+    let fButton = UIButton(type: .system)
+    
+    var actionItemData: ActionItemData?
+    
+    var selectedRadioButton: UIButton?
+    var selectedButtonName: String = "" // 선택된 버튼의 이름을 저장하는 변수
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        view.backgroundColor = .white
         
         tracker1.contentMode = .scaleAspectFit
         tracker1.translatesAutoresizingMaskIntoConstraints = false
@@ -146,11 +172,22 @@ class ActionItemController: UIViewController {
     }
         
     @objc func nextButtonTapped() {
+
         let addActionItemController = AddActionItemController()
         
         // Pass selectedCard value to AddActionItemController
         if let selectedCardValue = Int(selectedCard.text ?? "") {
             addActionItemController.selectedCard = selectedCardValue
+
+        if selectedRadioButton != nil {
+            selectedButtonName = (selectedRadioButton?.titleLabel?.text)! // 선택된 버튼의 이름을 변수에 저장
+
+            let addActionItemController = AddActionItemController()
+            addActionItemController.selectedButtonName = selectedButtonName // 선택된 버튼의 이름을 전달
+//            addActionItemController.delegate = self // Set ActionItemController as the delegate
+
+            navigationController?.pushViewController(addActionItemController, animated: true)
+
         }
         
         navigationController?.pushViewController(addActionItemController, animated: true)

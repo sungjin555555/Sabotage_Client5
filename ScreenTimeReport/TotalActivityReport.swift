@@ -4,33 +4,56 @@
 //
 //  Created by 김하람 on 12/28/23.
 //
+
 import DeviceActivity
 import SwiftUI
 import UserNotifications
 
+//protocol DeviceActivityReportScene {
+//    // 프로토콜 정의
+//    // ...
+//}
+// MARK: - 각각의 Device Activity Report들에 대응하는 컨텍스트 정의
 extension DeviceActivityReport.Context {
+    // If your app initializes a DeviceActivityReport with this context, then the system will use
+    // your extension's corresponding DeviceActivityReportScene to render the contents of the
+    // report.
+    /// 해당 리포트의 내용 렌더링에 사용할 DeviceActivityReportScene에 대응하는 익스텐션이 필요합니다.  ex) TotalActivityReport
     static let totalActivity = Self("Total Activity")
 }
 // MARK: - ram : dictionary for triger check
 var notificationSentForApps: [String: Bool] = [:]
 
+// MARK: - Device Activity Report의 내용을 어떻게 구성할 지 설정
 struct TotalActivityReport: DeviceActivityReportScene {
+    // Define which context your scene will represent.
+    /// 보여줄 리포트에 대한 컨텍스트를 정의해줍니다.
     let context: DeviceActivityReport.Context = .totalActivity
+    
+    // Define the custom configuration and the resulting view for this report.
+    /// 어떤 데이터를 사용해서 어떤 뷰를 보여줄 지 정의해줍니다. (SwiftUI View)
     let content: (ActivityReport) -> TotalActivityView
     var activityStartTime: Date?
+    /// DeviceActivityResults 데이터를 받아서 필터링
     func makeConfiguration(
         representing data: DeviceActivityResults<DeviceActivityData>) async -> ActivityReport {
+        // Reformat the data into a configuration that can be used to create
+        // the report's view.
         var totalActivityDuration: Double = 0 /// 총 스크린 타임 시간
         var list: [AppDeviceActivity] = [] /// 사용 앱 리스트
-            let limitTime: Double = 2700
-            /*let specificLimitTime: Double = $selectedGoalHours*/ //38
-            let specificLimitTime: Double = 180
+//            let limitTime: Double = 6
+            let specificLimitTime: Double = 360
             
+        /// DeviceActivityResults 데이터에서 화면에 보여주기 위해 필요한 내용을 추출해줍니다.
         for await eachData in data {
+            /// 특정 시간 간격 동안 사용자의 활동
             for await activitySegment in eachData.activitySegments {
+                
+                /// 활동 세그먼트 동안 사용자의 카테고리 별 Device Activity
                 for await categoryActivity in activitySegment.categories {
                     /// 이 카테고리의 totalActivityDuration에 기여한 사용자의 application Activity
                     for await applicationActivity in categoryActivity.applications {
+                        print("🔥 TotalActivityReport worked")
                         let appName = (applicationActivity.application.localizedDisplayName ?? "nil") /// 앱 이름
                         let bundle = (applicationActivity.application.bundleIdentifier ?? "nil") /// 앱 번들id
                         let duration = applicationActivity.totalActivityDuration /// 앱의 total activity 기간
@@ -40,8 +63,6 @@ struct TotalActivityReport: DeviceActivityReportScene {
                         }
                         if duration >= specificLimitTime && duration <= specificLimitTime + 60  { // 10 minutes
                             scheduleNotification_each1(appName: applicationActivity.application.localizedDisplayName!)
-//                            setNotifications()
-                            
                         }
                         if duration >= specificLimitTime + 60 && duration <= specificLimitTime + 120  { // 10 minutes
                             scheduleNotification_each2(appName: applicationActivity.application.localizedDisplayName!)
@@ -60,21 +81,14 @@ struct TotalActivityReport: DeviceActivityReportScene {
                     }
                 }
                 // MARK: - ram : 전체 시간에 대한 처리
-                if totalActivityDuration >= limitTime - 60 && totalActivityDuration <= limitTime  { // 10 minutes
-                    scheduleNotification0()
-                }
-                if totalActivityDuration >= limitTime && totalActivityDuration <= limitTime + 60 { // 10 minutes
-                    scheduleNotification1()
-                }
-                else if totalActivityDuration >= limitTime + 60 && totalActivityDuration <= limitTime + 120 { // 10 minutes
-                    scheduleNotification2()
-                }
-//                func setNotifications() {
-//                    let manager = LocalNotificationManager()
-////                    manager.requestPermission()
-//                    manager.requestPermission()
-//                    manager.addNotification(title: "This is a test reminder")
-//                    manager.schedule()
+//                if totalActivityDuration >= limitTime - 60 && totalActivityDuration <= limitTime  { // 10 minutes
+//                    scheduleNotification_each0(appName: AppDeviceActivity.)
+//                }
+//                if totalActivityDuration >= limitTime && totalActivityDuration <= limitTime + 60 { // 10 minutes
+//                    scheduleNotification1()
+//                }
+//                else if totalActivityDuration >= limitTime + 60 && totalActivityDuration <= limitTime + 120 { // 10 minutes
+//                    scheduleNotification2()
 //                }
                 func scheduleNotification_each0(appName: String) {
                     if notificationSentForApps["\(appName)1"] != true {
@@ -103,6 +117,7 @@ struct TotalActivityReport: DeviceActivityReportScene {
                         UNUserNotificationCenter.current().add(request)
                             notificationSentForApps["\(appName)2"] = true
                         }
+                    
                 }
                 func scheduleNotification_each2(appName: String) {
                     if notificationSentForApps["\(appName)3"] != true {

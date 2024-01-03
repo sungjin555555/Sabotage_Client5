@@ -13,11 +13,9 @@ struct ScreenTime_SabotageApp: App {
     @StateObject var familyControlsManager = FamilyControlsManager.shared
     @StateObject var scheduleVM = ScheduleVM()
     init() {
-        Task {
-            handleRequestAuthorization()
-            requestNotificationPermission()
-//            initUUID()
-        }
+        handleRequestAuthorization()
+        requestNotificationPermission()
+        initUUID()
     }
     var body: some Scene {
         WindowGroup {

@@ -15,6 +15,7 @@ struct ScreenTimeReport: DeviceActivityReportExtension {
         TotalActivityReport { totalActivity in
             TotalActivityView(activityReport: totalActivity)
         }
+        
         // Add more reports here...
     }
 }

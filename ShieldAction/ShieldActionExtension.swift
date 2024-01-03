@@ -21,6 +21,7 @@ class ShieldActionExtension: ShieldActionDelegate {
         @unknown default:
             fatalError()
         }
+        print("🔥 ShieldActionExtension worked")
     }
     
     override func handle(action: ShieldAction, for webDomain: WebDomainToken, completionHandler: @escaping (ShieldActionResponse) -> Void) {
