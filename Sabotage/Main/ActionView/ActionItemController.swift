@@ -149,7 +149,7 @@ class ActionItemController: UIViewController {
         let addActionItemController = AddActionItemController()
         
         // Pass selectedCard value to AddActionItemController
-        if let selectedCardValue = Int(selectedCard.text ?? "") {
+        if let selectedCardValue = selectedCardTag {
             addActionItemController.selectedCard = selectedCardValue
         }
         

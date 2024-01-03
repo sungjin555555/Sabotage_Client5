@@ -167,6 +167,16 @@ class AddActionItemController: UIViewController, UITextFieldDelegate {
         // MARK: - [Create] Post ActionItem
 //        actionPostRequest(with: '여기 카테고리 변수', content: '내용 변수')
         
+        // Print selectedCard value received from ActionItemController
+//        print("🔥 Selected Card from ActionItemController: \(selectedCard)")
+//
+//        // Print text field data received from the textField
+//        if let text = inputField.text, !text.isEmpty {
+//            print("👍 Text received from textField: \(text)")
+//        } else {
+//            print("👎 No text received from textField or text is empty")
+//        }
+        
         let mainVC = MainVC() // Create a new instance of MainVC
         navigationController?.pushViewController(mainVC, animated: true) // Present MainVC
     }
