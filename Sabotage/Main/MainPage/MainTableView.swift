@@ -88,33 +88,6 @@ extension MainVC: UITableViewDataSource, UITableViewDelegate {
         // 다른 테이블 뷰 구성이 필요한 경우
         return UITableViewCell()
     }
-
-    
-    //    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    //        if tableView == actionTableView {
-    //            guard let cell = tableView.dequeueReusableCell(withIdentifier: "ActionCustomCell", for: indexPath) as? ActionTableViewCell else {
-    //                return UITableViewCell()
-    //            }
-    //
-    //            let imageName = "main_actiontableview.png"
-    //            cell.configure(with: imageName)
-    //            return cell
-    //        }
-    //
-    //        if tableView == limitTableView {
-    //            guard let cell = tableView.dequeueReusableCell(withIdentifier: "LimitCustomCell", for: indexPath) as? LimitTableViewCell else {
-    //                return UITableViewCell()
-    //            }
-    //
-    //            let imageName = "main_limittableview.png" // Provide the image name from your data source
-    //            let title = "" // Provide the title from your data source
-    //            cell.configure(with: imageName, title: title) // Pass both imageName and title
-    //            return cell
-    //        }
-    //
-    //        // Other table view configurations
-    //        return UITableViewCell()
-    //    }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if tableView == actionTableView {
