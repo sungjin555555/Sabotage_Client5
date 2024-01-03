@@ -366,11 +366,11 @@ class MainVC: UIViewController, LimitItemDelegate{
         limitTableView.isHidden = true
         
         // 이전 화면으로 돌아가는 "< Back" 버튼 숨기기
-//        navigationItem.hidesBackButton = true
-//
-//        let backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil) // title 부분 수정
-//        backBarButtonItem.tintColor = .black
-//        self.navigationItem.backBarButtonItem = backBarButtonItem
+        navigationItem.hidesBackButton = true
+
+        let backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil) // title 부분 수정
+        backBarButtonItem.tintColor = .black
+        self.navigationItem.backBarButtonItem = backBarButtonItem
         
         // MARK: - 디자인때 필요할 것 같아서 남겨뒀움
 
