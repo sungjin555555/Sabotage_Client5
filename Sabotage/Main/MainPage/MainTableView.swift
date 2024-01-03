@@ -53,17 +53,20 @@ extension MainVC: UITableViewDataSource, UITableViewDelegate {
             print("LimitTableView의 \(indexPath.row) 번째 셀 선택됨")
         }
     }
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if tableView == actionTableView {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "ActionCustomCell", for: indexPath) as? ActionTableViewCell else {
                 return UITableViewCell()
             }
+
             // actionItems 배열에서 해당 indexPath의 데이터를 가져옴
             let actionItem = actionItems[indexPath.row]
             // actionItem의 데이터를 셀에 구성
             cell.categoryLabel.text = actionItem.category
             cell.contentLabel.text = actionItem.content
             // 'configure' 메서드는 적절히 수정 필요
+
             return cell
         }
         
@@ -71,12 +74,16 @@ extension MainVC: UITableViewDataSource, UITableViewDelegate {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "LimitCustomCell", for: indexPath) as? LimitTableViewCell else {
                 return UITableViewCell()
             }
-            
+
             // limitItems 배열에서 해당 indexPath의 데이터를 가져옴
             let limitItem = limitItems[indexPath.row]
             // limitItem의 데이터를 셀에 구성
+
             cell.titleLabel.text = limitItem.title
             cell.timeBudget.text = String(limitItem.timeBudget)
+
+            cell.configure(with: limitItem.description, title: limitItem.title) // 'configure' 메서드는 적절히 수정 필요
+
             return cell
         }
         
@@ -84,40 +91,16 @@ extension MainVC: UITableViewDataSource, UITableViewDelegate {
         return UITableViewCell()
     }
     
-    //    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    //        if tableView == actionTableView {
-    //            guard let cell = tableView.dequeueReusableCell(withIdentifier: "ActionCustomCell", for: indexPath) as? ActionTableViewCell else {
-    //                return UITableViewCell()
-    //            }
-    //
-    //            let imageName = "main_actiontableview.png"
-    //            cell.configure(with: imageName)
-    //            return cell
-    //        }
-    //
-    //        if tableView == limitTableView {
-    //            guard let cell = tableView.dequeueReusableCell(withIdentifier: "LimitCustomCell", for: indexPath) as? LimitTableViewCell else {
-    //                return UITableViewCell()
-    //            }
-    //
-    //            let imageName = "main_limittableview.png" // Provide the image name from your data source
-    //            let title = "" // Provide the title from your data source
-    //            cell.configure(with: imageName, title: title) // Pass both imageName and title
-    //            return cell
-    //        }
-    //
-    //        // Other table view configurations
-    //        return UITableViewCell()
-    //    }
-    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if tableView == actionTableView {
             // Set the desired height for the actionTableView cells
-            return 100 // Adjust this value to the height you prefer
+            return 120 // Adjust this value to the height you prefer
         }
         if tableView == limitTableView {
             // Set the desired height for the actionTableView cells
+
             return 100 // Adjust this value to the height you prefer
+
         }
         
         // Return a default height for other table views if needed

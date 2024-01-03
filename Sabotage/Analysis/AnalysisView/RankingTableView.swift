@@ -31,7 +31,9 @@ class RankingTableView: UIView, UITableViewDataSource, UITableViewDelegate {
             tableView.topAnchor.constraint(equalTo: topAnchor),
             tableView.leadingAnchor.constraint(equalTo: leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            tableView.bottomAnchor.constraint(equalTo: bottomAnchor)
+//            tableView.bottomAnchor.constraint(equalTo: bottomAnchor),
+            tableView.widthAnchor.constraint(equalToConstant: 324),
+            tableView.heightAnchor.constraint(equalToConstant: 433),
         ])
     }
 
@@ -43,7 +45,7 @@ class RankingTableView: UIView, UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
-        cell.backgroundColor = .systemPink
+        cell.backgroundColor = .base100
         
         let number = UILabel()
         number.translatesAutoresizingMaskIntoConstraints = false
@@ -65,13 +67,13 @@ class RankingTableView: UIView, UITableViewDataSource, UITableViewDelegate {
         
         NSLayoutConstraint.activate([
             number.centerYAnchor.constraint(equalTo: cell.contentView.centerYAnchor),
-            number.leadingAnchor.constraint(equalTo: cell.contentView.leadingAnchor, constant: 40),
+            number.leadingAnchor.constraint(equalTo: cell.contentView.leadingAnchor, constant: 30),
             
             leftText.centerYAnchor.constraint(equalTo: cell.contentView.centerYAnchor),
             leftText.leadingAnchor.constraint(equalTo: cell.contentView.leadingAnchor, constant: 90),
             
             rightText.centerYAnchor.constraint(equalTo: cell.contentView.centerYAnchor),
-            rightText.trailingAnchor.constraint(equalTo: cell.contentView.trailingAnchor, constant: -50)
+            rightText.trailingAnchor.constraint(equalTo: cell.contentView.trailingAnchor, constant: -20)
         ])
         
         // 상위 랭킹 3위 안
@@ -87,7 +89,7 @@ class RankingTableView: UIView, UITableViewDataSource, UITableViewDelegate {
                 button.widthAnchor.constraint(equalToConstant: 22), // 버튼의 크기 조정
                 button.heightAnchor.constraint(equalToConstant: 22), // 버튼의 크기 조정
                 button.centerYAnchor.constraint(equalTo: cell.contentView.centerYAnchor),
-                button.leadingAnchor.constraint(equalTo: cell.contentView.leadingAnchor, constant: 35)
+                button.leadingAnchor.constraint(equalTo: cell.contentView.leadingAnchor, constant: 24)
             ])
         
             cell.contentView.bringSubviewToFront(number) // 이거 해야 이미지 위에 number 올릴 수 있음.
@@ -125,27 +127,71 @@ class RankingTableView: UIView, UITableViewDataSource, UITableViewDelegate {
         
         switch indexPath.row {
 
-        case ..<3:
+        case 0:
+            leftText.text = "활기찬무지개9865"
+            rightText.text = "180회"
             leftText.textColor = .base500
             rightText.textColor = .base500
-            cell.frame.size.width = 290
-            cell.frame.size.height = 15
-
-        case 3..<10:
+        case 1:
+            leftText.text = "활기찬고양이6798"
+            rightText.text = "153회"
+            leftText.textColor = .base500
+            rightText.textColor = .base500
+        case 2:
+            leftText.text = "창의적인호랑이7980"
+            rightText.text = "130회"
+            leftText.textColor = .base500
+            rightText.textColor = .base500
+        case 3:
+            leftText.text = "신비로운별1242"
+            rightText.text = "121회"
             leftText.textColor = .base300
             rightText.textColor = .base300
-            cell.frame.size.width = 290 // 상위 랭킹 3위 안의 셀 높이
-            cell.frame.size.height = 15
-
+        case 4:
+            leftText.text = "우아한강아지3564"
+            rightText.text = "99회"
+            leftText.textColor = .base300
+            rightText.textColor = .base300
+        case 5:
+            leftText.text = "귀여운토끼1010"
+            rightText.text = "87회"
+            leftText.textColor = .base300
+            rightText.textColor = .base300
+        case 6:
+            leftText.text = "매혹적인해파리2087"
+            rightText.text = "73회"
+            leftText.textColor = .base300
+            rightText.textColor = .base300
+        case 7:
+            leftText.text = "신비한바다사자5748"
+            rightText.text = "70회"
+            leftText.textColor = .base300
+            rightText.textColor = .base300
+        case 8:
+            leftText.text = "창의적인코알라2580"
+            rightText.text = "62회"
+            leftText.textColor = .base300
+            rightText.textColor = .base300
+        case 9:
+            leftText.text = "신비로운갈매기8192"
+            rightText.text = "59회"
+            leftText.textColor = .base300
+            rightText.textColor = .base300
         case 10:
+            leftText.text = nickname
+            rightText.text = "몇회"
             leftText.textColor = .base500
             rightText.textColor = .base500
-            cell.frame.size.width = 290
-            cell.frame.size.height = 15
+            
         default:
             break
         }
         
         return cell
     }
+    
+    // TableView의 Cell 높이 설정
+        func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+            return 39.0 // 원하는 height 값으로 변경
+        }
 }
