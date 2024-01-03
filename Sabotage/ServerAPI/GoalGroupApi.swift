@@ -8,6 +8,11 @@
 import Foundation
 import SwiftUI
 
+extension Notification.Name {
+    static let addLimitNotification = Notification.Name("addLimitNotification")
+}
+
+
 func goalPostRequest(title: String, timeBudget: Int, nudgeInterval: Int) {
     guard let url = URL(string: "\(urlLink)goalGroup/\(userId)") else {
         print("🚨 Invalid URL")
@@ -43,6 +48,11 @@ func goalPostRequest(title: String, timeBudget: Int, nudgeInterval: Int) {
         do {
             if let response = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
                 print("✅ \(response)")
+            }
+            DispatchQueue.main.async {
+                 NotificationCenter.default.post(name: .addLimitNotification, object: nil)
+                
+                print("✅ [actionPostRequest] Notification posted in actionPostRequest")
             }
         } catch {
             print("🚨 JSON parsing error: ", error)

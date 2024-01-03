@@ -82,7 +82,7 @@ extension MainVC: UITableViewDataSource, UITableViewDelegate {
             cell.titleLabel.text = limitItem.title
             cell.timeBudget.text = String(limitItem.timeBudget)
 
-            cell.configure(with: limitItem.description, title: limitItem.title) // 'configure' 메서드는 적절히 수정 필요
+//            cell.configure(with: limitItem.description, title: limitItem.title) // 'configure' 메서드는 적절히 수정 필요
 
             return cell
         }

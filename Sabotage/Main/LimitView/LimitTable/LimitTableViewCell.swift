@@ -36,10 +36,10 @@ class LimitTableViewCell: UITableViewCell {
             timeBudget.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             timeBudget.topAnchor.constraint(equalTo: contentView.topAnchor,constant: 30)
         ])
-        func configure(with title: String, timeBudgets: String) {
+        func configure(with title: String, timeBudgets: Int) {
             // Configure cell with data
             titleLabel.text = title
-            timeBudget.text = timeBudgets
+            timeBudget.text = String(timeBudgets)
             
         }
     }

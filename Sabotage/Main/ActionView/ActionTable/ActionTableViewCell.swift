@@ -47,7 +47,6 @@ class ActionTableViewCell: UITableViewCell {
             // Configure cell with data
             categoryLabel.text = category
             contentLabel.text = content
-            
         }
     }
 }
