@@ -64,10 +64,16 @@ extension MainVC: UITableViewDataSource, UITableViewDelegate {
 
             // actionItems 배열에서 해당 indexPath의 데이터를 가져옴
             let actionItem = actionItems[indexPath.row]
-            // actionItem의 데이터를 셀에 구성
-            cell.categoryLabel.text = actionItem.category
+            // Assuming actionItem.category is a String representation of category number
+            if let categoryInt = Int(actionItem.category) {
+                cell.categoryType.text = getCategoryTypeString(for: categoryInt)
+                cell.categoryImage.image = UIImage(named: "category\(categoryInt).png")
+            } else {
+                cell.categoryType.text = "Unknown"
+                cell.categoryImage.image = nil
+            }
+
             cell.contentLabel.text = actionItem.content
-            // 'configure' 메서드는 적절히 수정 필요
 
             return cell
         }
@@ -87,6 +93,25 @@ extension MainVC: UITableViewDataSource, UITableViewDelegate {
         
         // 다른 테이블 뷰 구성이 필요한 경우
         return UITableViewCell()
+    }
+    
+    func getCategoryTypeString(for category: Int) -> String {
+        switch category {
+        case 1:
+            return "운동"
+        case 2:
+            return "셀프케어"
+        case 3:
+            return "생활"
+        case 4:
+            return "생산성"
+        case 5:
+            return "성장"
+        case 6:
+            return "수면"
+        default:
+            return "기타"
+        }
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -109,3 +134,4 @@ extension MainVC: UITableViewDataSource, UITableViewDelegate {
         // 예: 새로운 데이터 항목 추가 등
     }
 }
+

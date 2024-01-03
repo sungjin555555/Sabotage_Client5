@@ -434,9 +434,11 @@ class MainVC: UIViewController, LimitItemDelegate{
         
         // 버튼을 마지막 셀 아래에 위치하도록 Auto Layout을 사용하여 조정
         NSLayoutConstraint.activate([
-            actionButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+//            actionButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             actionButton.topAnchor.constraint(equalTo: actionTableView.bottomAnchor, constant: 250),
-            actionButton.widthAnchor.constraint(equalToConstant: 467), // 버튼의 너비 조정
+            actionButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),
+            actionButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0),
+            actionButton.widthAnchor.constraint(equalToConstant: 370), // 버튼의 너비 조정
             actionButton.heightAnchor.constraint(equalToConstant: 80) // 버튼의 높이 조정
             
         ])
