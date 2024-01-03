@@ -1,4 +1,3 @@
-//
 //  SaveActionItemController.swift
 //  Sabotage
 //
@@ -8,14 +7,21 @@
 import UIKit
 import SnapKit
 
-
-//protocol ActionItemDelegate: AnyObject {
-//    func didAddActionItemText(_ text: String)
-//    // Add any other methods needed to pass data back to MainVC
-//}
-
-
 class AddActionItemController: UIViewController, UITextFieldDelegate {
+
+    
+    var selectedCard: Int = 0
+    
+    // MARK: 변수
+//    let backButton = UIButton(type: .system)
+    let Title = UIImageView(image: UIImage(named: "action_title.png"))
+    let tracker2 = UIImageView(image: UIImage(named: "action_tracker2.png"))
+    let subtitle = UIImageView(image: UIImage(named: "addaction_subtitle.png"))
+    let category1 = UIImageView(image: UIImage(named: "addaction_category1.png"))
+    let inputItem = UIImageView(image: UIImage(named: "addaction_inputitem.png"))
+
+    let inputField: UITextField = {
+
     var textField: UITextField = UITextField()
     var selectedButtonName: String = "" // 선택된 버튼의 이름을 저장하는 변수
 
@@ -69,88 +75,152 @@ class AddActionItemController: UIViewController, UITextFieldDelegate {
         ])
         
         // 사용자가 입력할 수 있는 텍스트 필드 생성
+
         let textField = UITextField()
-        textField.placeholder = "여기에 입력하세요"
-        textField.borderStyle = .roundedRect
+        textField.placeholder = "예) 자리에 앉기"
+        textField.backgroundColor = .clear // Set the background color to clear
         textField.translatesAutoresizingMaskIntoConstraints = false
-        textField.returnKeyType = .done
-        textField.delegate = self
+        return textField
+    }()
+    
+    let backButton: UIImageView = {
+        let imageView = UIImageView(image: UIImage(named: "addaction_backbutton.png"))
+        imageView.contentMode = .scaleAspectFit
+        imageView.isUserInteractionEnabled = true
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
+    }()
+    
+    let completeButton = UIImageView(image: UIImage(named: "addaction_completebuttonUntapped.png"))
+
+    
+    // MARK: UI
+    func setUI() {
+        Title.contentMode = .center
+        Title.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(Title)
         
-        // 텍스트 필드를 뷰에 추가
-        view.addSubview(textField)
+        tracker2.contentMode = .scaleAspectFit
+        tracker2.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(tracker2)
         
-        // 여기가 중요
-        textField.delegate = self
+        subtitle.contentMode = .scaleAspectFit
+        subtitle.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(subtitle)
         
-        // Auto Layout을 사용하여 텍스트 필드를 "알겠습니다" 텍스트 아래에 위치시킴
-        NSLayoutConstraint.activate([
-            textField.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            textField.topAnchor.constraint(equalTo: understandLabel.bottomAnchor, constant: 20),
-            textField.widthAnchor.constraint(equalToConstant: 250)
-        ])
+        category1.contentMode = .scaleAspectFit
+        category1.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(category1)
         
-        let backButton = UIButton(type: .system)
-        backButton.setTitle("이전", for: .normal)
-        backButton.setTitleColor(.systemGray, for: .normal)
-        backButton.backgroundColor = .systemGray4
-        backButton.layer.cornerRadius = 15
-        backButton.translatesAutoresizingMaskIntoConstraints = false
+        inputItem.contentMode = .scaleAspectFit
+        inputItem.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(inputItem)
         
+        view.addSubview(inputField)
         view.addSubview(backButton)
         
-        NSLayoutConstraint.activate([
-            backButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            backButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -210),
-            backButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20),
-            backButton.heightAnchor.constraint(equalToConstant: 70)
-        ])
-        
-        backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
-        
-        let completeButton = UIButton(type: .system)
-        completeButton.setTitle("완료", for: .normal)
-        completeButton.setTitleColor(.black, for: .normal)
-        completeButton.backgroundColor = .systemBlue
-        completeButton.layer.cornerRadius = 15
+        completeButton.contentMode = .scaleAspectFit
         completeButton.translatesAutoresizingMaskIntoConstraints = false
-        
         view.addSubview(completeButton)
+
         
+    }
+    
+    // MARK: constraint
+    func setConstraint() {
         NSLayoutConstraint.activate([
-            completeButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 210),
+    
+            Title.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            Title.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 30),
+            Title.widthAnchor.constraint(equalToConstant: 80),
+            Title.heightAnchor.constraint(equalToConstant: 25),
+            
+            tracker2.topAnchor.constraint(equalTo: view.topAnchor, constant: 110),
+            tracker2.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),
+            tracker2.widthAnchor.constraint(equalToConstant: 415),
+            tracker2.heightAnchor.constraint(equalToConstant: 50),
+            
+            subtitle.topAnchor.constraint(equalTo: view.topAnchor, constant: 150),
+            subtitle.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
+            subtitle.widthAnchor.constraint(equalToConstant: 280),
+            subtitle.heightAnchor.constraint(equalToConstant: 120),
+            
+            category1.topAnchor.constraint(equalTo: view.topAnchor, constant: 288),
+            category1.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            category1.widthAnchor.constraint(equalToConstant: 370),
+            category1.heightAnchor.constraint(equalToConstant: 90),
+            
+            inputItem.topAnchor.constraint(equalTo: view.topAnchor, constant: 400),
+            inputItem.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            inputItem.widthAnchor.constraint(equalToConstant: 370),
+            inputItem.heightAnchor.constraint(equalToConstant: 120),
+            
+            inputField.topAnchor.constraint(equalTo: inputItem.topAnchor, constant: 10),
+            inputField.leadingAnchor.constraint(equalTo: inputItem.leadingAnchor, constant: 10),
+            inputField.trailingAnchor.constraint(equalTo: inputItem.trailingAnchor, constant: -10),
+            inputField.bottomAnchor.constraint(equalTo: inputItem.bottomAnchor, constant: -10),
+            
+            backButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            backButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -215),
+            backButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20),
+            backButton.heightAnchor.constraint(equalToConstant: 70),
+            
+            
+            completeButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 215),
             completeButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             completeButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20),
-            completeButton.heightAnchor.constraint(equalToConstant: 70)
+            completeButton.heightAnchor.constraint(equalToConstant: 70),
         ])
-        
-        completeButton.addTarget(self, action: #selector(completeButtonTapped), for: .touchUpInside)
-        
-        // 다른 화면을 탭할 때
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyBoard(sender:)))
-        tapGesture.cancelsTouchesInView = false
-        view.addGestureRecognizer(tapGesture)
-        
     }
     
-    // UITextFieldDelegate 메서드 구현, textfield에 작성한 내용 콘솔로 가져오기.
-    @objc func textFieldDidEndEditing(_ textField: UITextField) {
-        if let text = textField.text {
-            self.textField.text = text
-            print("사용자가 입력한 텍스트: \(text)")
-        }
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        view.backgroundColor = .white
+        
+        setUI()
+        setConstraint()
+        
+        print("Selected card: \(selectedCard)")
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(backButtonTapped))
+        backButton.addGestureRecognizer(tapGesture)
+        
+        let tapGesture1 = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        tapGesture1.cancelsTouchesInView = false // Allow touch events to pass through the view hierarchy
+        view.addGestureRecognizer(tapGesture1)
+       
+        let completeTapGesture = UITapGestureRecognizer(target: self, action: #selector(completeButtonTapped))
+        completeButton.isUserInteractionEnabled = true
+        completeButton.addGestureRecognizer(completeTapGesture)
+        
+        inputField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
     }
     
-    // Delegate를 통해 MainVC로 텍스트 이동되었는지 콘솔에서 확인
+    @objc func dismissKeyboard() {
+        view.endEditing(true) // Dismiss the keyboard
+    }
+    
+    @objc func backButtonTapped() {
+        navigationController?.popViewController(animated: true)
+    }
+    
     @objc func completeButtonTapped() {
-
-//        actionPostRequest(category: <#T##String#>, content: <#T##String#>)
-//         let saveActionItemController = SaveActionItemController()
-//         navigationController?.pushViewController(saveActionItemController, animated: true)
-
-        guard let text = self.textField.text else {
-            print("입력된 텍스트가 비어 있습니다.")
+        guard let buttonImage = completeButton.image,
+              buttonImage == UIImage(named: "addaction_completebutton.png") else {
+            // If the image is not "addaction_completebutton.png", do nothing
             return
         }
+
+
+        // Navigate back to MainVC
+        if let navigationController = navigationController {
+            for controller in navigationController.viewControllers {
+                if controller is MainVC {
+                    navigationController.popToViewController(controller, animated: true)
+                    return
+                }
+            }
+
         
         print("⚽️ MainVC로 전달된 텍스트: \(text)") // 사용자가 작성한 목표 출력
         
@@ -165,27 +235,21 @@ class AddActionItemController: UIViewController, UITextFieldDelegate {
         actionPostRequest(with: selectedButtonName, content: text)
         if let navController = navigationController {
             navController.popToRootViewController(animated: true) // 모든 뷰 컨트롤러를 제거하고 MainVC로 이동
+
         }
+
+        // If MainVC is not found in the navigation stack, you can create and present a new instance
+        let mainVC = MainVC() // Create a new instance of MainVC
+        navigationController?.pushViewController(mainVC, animated: true) // Present MainVC
     }
 
-    @objc func backButtonTapped() {
-        navigationController?.popViewController(animated: true)
-    }
     
-    // "X" 버튼 액션
-    @objc func closeButtonTapped() {
-        let gotoMainController = MainVC()
-        navigationController?.pushViewController(gotoMainController, animated: true)
-    }
-//     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-//             textField.resignFirstResponder() // 키보드 숨기기
-//             return true
-//         }
-//}
+    @objc func textFieldDidChange(_ textField: UITextField) {
+            if let text = textField.text, !text.isEmpty {
+                completeButton.image = UIImage(named: "addaction_completebutton.png")
+            } else {
+                completeButton.image = UIImage(named: "addaction_completebuttonUntapped.png")
+            }
+        }
     
-    // 다른 곳을 탭했을 때 키보드 숨기기
-    @objc func dismissKeyBoard(sender: UITapGestureRecognizer) {
-        view.endEditing(true)
-    }
-
 }

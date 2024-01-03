@@ -299,12 +299,19 @@ class MainVC: UIViewController, LimitItemDelegate{
     // tableview data
     // LimitItemDelegate 메서드 구현
     func addNewLimitItem(_ itemName: String) {
-        // LimitItemController에서 전달된 itemName을 기존 데이터에 추가
+        // LimitItemDelegate 메서드 구현
         let newLimitItem = LimitDummyDataType(title: itemName, description: "새로운 항목 설명")
         limitItems.append(newLimitItem)
 
         // TableView 업데이트
         limitTableView.reloadData()
+
+        // Calculate total height of all cells in the limitTableView
+        let totalTableViewHeight = limitTableView.contentSize.height
+
+        // Set the content inset to accommodate the limitButton
+        let bottomInset = view.bounds.height - totalTableViewHeight
+        limitTableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: bottomInset, right: 0)
     }
 
     override func viewDidLoad() {
@@ -330,6 +337,9 @@ class MainVC: UIViewController, LimitItemDelegate{
         // 뷰에 테이블뷰 추가
         view.addSubview(actionTableView)
         view.addSubview(limitTableView)
+        
+        actionTableView.separatorStyle = .none
+        limitTableView.separatorStyle = .none
 
         // Auto Layout을 위한 설정
         actionTableView.translatesAutoresizingMaskIntoConstraints = false
@@ -377,13 +387,21 @@ class MainVC: UIViewController, LimitItemDelegate{
         // MARK: - 이거 안 되면 푸터 뷰 대신에 UITableViewCell 안에 버튼을 추가하는 방식 사용 -> UITableViewCell을 커스텀하여 버튼을 셀 안에 추가해야 함.
         actionTableView.tableFooterView = actionButton
 
-        
         NSLayoutConstraint.activate([
             actionButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            actionButton.topAnchor.constraint(equalTo: actionTableView.bottomAnchor, constant: 220),
-            actionButton.widthAnchor.constraint(equalToConstant: 370), // 이미지 크기에 맞게 조절
-            actionButton.heightAnchor.constraint(equalToConstant: 80) // 이미지 크기에 맞게 조절
+            actionButton.topAnchor.constraint(equalTo: actionTableView.bottomAnchor, constant: 180),
+            actionButton.widthAnchor.constraint(equalToConstant: 390), // 이미지 크기에 맞게 조절
+            actionButton.heightAnchor.constraint(equalToConstant: 120) // 이미지 크기에 맞게 조절]
         ])
+        
+        let actiontotalTableViewHeight = actionTableView.contentSize.height + actionButton.bounds.height
+
+        // Set the content inset to accommodate the `limitButton`
+//        let bottomInset = view.bounds.height - totalTableViewHeight
+//        print("bottomInset = ", bottomInset)
+        actionTableView.contentInset = UIEdgeInsets(top: 00, left: 0, bottom: actiontotalTableViewHeight, right: 0)
+        
+        
 
         limitButton.setImage(UIImage(named: "main_limitButton.png"), for: .normal)
         limitButton.contentMode = .scaleAspectFit
@@ -403,8 +421,9 @@ class MainVC: UIViewController, LimitItemDelegate{
         let totalTableViewHeight = limitTableView.contentSize.height + limitButton.bounds.height
 
         // Set the content inset to accommodate the `limitButton`
-        let bottomInset = view.bounds.height - totalTableViewHeight
-        limitTableView.contentInset = UIEdgeInsets(top: 00, left: 0, bottom: bottomInset, right: 0)
+//        let bottomInset = view.bounds.height - totalTableViewHeight
+//        print("bottomInset = ", bottomInset)
+        limitTableView.contentInset = UIEdgeInsets(top: 00, left: 0, bottom: totalTableViewHeight, right: 0)
     }
 
 
@@ -423,9 +442,11 @@ class MainVC: UIViewController, LimitItemDelegate{
 //        tableView.backgroundColor = UIColor.red // 원하는 색상으로 변경
         
         if tableView == actionTableView {
-            tableView.backgroundColor = UIColor.orange // ActionTableView의 배경색을 orange로 변경
+//            tableView.backgroundColor = UIColor.orange // ActionTableView의 배경색을 orange로 변경
+            tableView.backgroundColor = .base50
         } else if tableView == limitTableView {
-            tableView.backgroundColor = UIColor.brown // LimitTableView의 배경색을 brown으로 변경
+            tableView.backgroundColor = .base50
+//            tableView.backgroundColor = UIColor.brown // LimitTableView의 배경색을 brown으로 변경
         }
 
         tableView.register(cellClass, forCellReuseIdentifier: identifier)
@@ -468,4 +489,17 @@ class MainVC: UIViewController, LimitItemDelegate{
          navigationController?.pushViewController(hostingController, animated: true)
     }
 
+    
+    func openAddActionItemController() {
+        let addActionItemController = AddActionItemController()
+//        addActionItemController.delegate = self // Set the delegate
+        
+        // Present or push the AddActionItemController as needed
+        // ...
+    }
+
+    // Implement the protocol function to receive the data
+    func didCompleteAction(withData data: String) {
+        print("🔥 Received data from AddActionItemController: \(data)")
+    }
 }
