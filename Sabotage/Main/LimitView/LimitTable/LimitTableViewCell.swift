@@ -31,7 +31,7 @@ class LimitTableViewCell: UITableViewCell {
         NSLayoutConstraint.activate([
             cellImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
             cellImageView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
-            cellImageView.widthAnchor.constraint(equalToConstant: 370),
+            cellImageView.widthAnchor.constraint(equalToConstant: 350),
             cellImageView.heightAnchor.constraint(equalToConstant: 150),
 
 //            titleLabel.leadingAnchor.constraint(equalTo: cellImageView.trailingAnchor, constant: 16),
