@@ -7,6 +7,12 @@ import SwiftUI
 import SnapKit
 import Then
 
+struct ActionData {
+    let category: String
+    let content: String
+}
+
+
 protocol LimitItemDelegate: AnyObject {
     func addNewLimitItem(_ itemName: String)
 }
@@ -47,6 +53,18 @@ class MainVC: UIViewController, LimitItemDelegate{
     
     let leftButton = UIButton(type: .system)
     let rightButton = UIButton(type: .system)
+    
+    func updateActionTableView(with actionData: [ActionData]) {
+        // actionData를 받은 후 actionItems에 추가합니다.
+        for data in actionData {
+            let newActionItem = ActionDummyDataType(title: data.category, description: data.content)
+            actionItems.append(newActionItem)
+        }
+
+        // TableView 업데이트
+        actionTableView.reloadData()
+    }
+
 
     func toggleUI() {
         
@@ -489,18 +507,19 @@ class MainVC: UIViewController, LimitItemDelegate{
          let hostingController = UIHostingController(rootView: scheduleView)
          navigationController?.pushViewController(hostingController, animated: true)
     }
+    
+    func updateData(with actionData: ActionItemData) {
+        if !actionData.data.isEmpty {
+            for data in actionData.data {
+                let category = data.category
+                print("🐶 Category: \(category)")
+                // Do something else with 'category' here if needed
+            }
+        } else {
+            print("No data available in actionData")
+        }
+    }
 
     
-    func openAddActionItemController() {
-        let addActionItemController = AddActionItemController()
-//        addActionItemController.delegate = self // Set the delegate
-        
-        // Present or push the AddActionItemController as needed
-        // ...
-    }
 
-    // Implement the protocol function to receive the data
-    func didCompleteAction(withData data: String) {
-        print("🔥 Received data from AddActionItemController: \(data)")
-    }
 }

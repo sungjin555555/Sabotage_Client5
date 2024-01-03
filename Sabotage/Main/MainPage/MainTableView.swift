@@ -23,7 +23,6 @@ extension MainVC: UITableViewDataSource, UITableViewDelegate {
     }
     
     
-    
     func addNewItem(item: LimitDummyDataType) {
         // 데이터 소스 업데이트
         limitItems.append(item)
@@ -63,7 +62,7 @@ extension MainVC: UITableViewDataSource, UITableViewDelegate {
                 return UITableViewCell()
             }
 
-            let imageName = "main_actiontableview_test.png" // Provide the image name from your data source
+            let imageName = "main_actiontableview.png"
             cell.configure(with: imageName)
             return cell
         }
@@ -73,7 +72,7 @@ extension MainVC: UITableViewDataSource, UITableViewDelegate {
                 return UITableViewCell()
             }
 
-            let imageName = "main_limittableview_test.png" // Provide the image name from your data source
+            let imageName = "main_limittableview.png" // Provide the image name from your data source
             let title = "" // Provide the title from your data source
             cell.configure(with: imageName, title: title) // Pass both imageName and title
             return cell

@@ -135,8 +135,11 @@ func showActionPatchRequest(with category: String, content: String) {
     task.resume()
 }
 
+// 클로저 타입 정의
+typealias ActionDataCompletion = (ActionItemData?) -> Void
+
 // MARK: - [Read] ActionItem
-func getActionData() {
+func getActionData(completion: @escaping ActionDataCompletion) {  // MARK: - "completion: @escaping ActionDataCompletion" 파라미터 추가
     if let url = URL(string: "\(urlLink)actionItem/\(userId)/all") {
         let session = URLSession(configuration: .default)
         let task = session.dataTask(with: url) { data, response, error in
@@ -155,9 +158,16 @@ func getActionData() {
                     DispatchQueue.main.async {
                         // self.ActionItemData = decodeData
                         // self.collectionView.reloadData()
+//                        completion(decodeData) // MARK: - // 성공 시 가져온 데이터 전달
+                        print("🤢 decodeData", decodeData)
+//                        let categories = decodeData.data.map { $0.category }
+//                        print("🎃", categories)
+
                     }
+                    
                 } catch {
                     print("🚨 JSON decoding error: \(error)")
+                    completion(nil) // MARK: - // 디코딩 실패 시 nil 반환
                 }
             }
         }
