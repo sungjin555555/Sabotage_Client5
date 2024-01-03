@@ -22,7 +22,7 @@ class ActionItemController: UIViewController {
     
     let backButton = UIImageView(image: UIImage(named: "action_backbutton.png"))
     let nextButton = UIImageView(image: UIImage(named: "action_nextbutton.png"))
-
+    
     // MARK: UI
     func setUI() {
         Title.contentMode = .center
@@ -82,7 +82,7 @@ class ActionItemController: UIViewController {
             }
         }
     }
-
+    
     // MARK: constraint
     func setConstraint() {
         NSLayoutConstraint.activate([
@@ -112,12 +112,12 @@ class ActionItemController: UIViewController {
             
             // Set aspect ratio constraint
             let aspectConstraint = NSLayoutConstraint(item: imageView,
-                                                     attribute: .height,
-                                                     relatedBy: .equal,
-                                                     toItem: imageView,
-                                                     attribute: .width,
-                                                     multiplier: imageView.image!.size.height / imageView.image!.size.width,
-                                                     constant: 0)
+                                                      attribute: .height,
+                                                      relatedBy: .equal,
+                                                      toItem: imageView,
+                                                      attribute: .width,
+                                                      multiplier: imageView.image!.size.height / imageView.image!.size.width,
+                                                      constant: 0)
             aspectConstraint.isActive = true
             
             if let previous = previousCardImageView {
@@ -141,10 +141,10 @@ class ActionItemController: UIViewController {
             nextButton.heightAnchor.constraint(equalToConstant: 80),
         ])
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(nextButtonTapped))
-            nextButton.isUserInteractionEnabled = true
-            nextButton.addGestureRecognizer(tapGesture)
+        nextButton.isUserInteractionEnabled = true
+        nextButton.addGestureRecognizer(tapGesture)
     }
-        
+    
     @objc func nextButtonTapped() {
         let addActionItemController = AddActionItemController()
         
@@ -155,13 +155,13 @@ class ActionItemController: UIViewController {
         
         navigationController?.pushViewController(addActionItemController, animated: true)
     }
-
-
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-
+        
         setUI()
         setConstraint()
     }
