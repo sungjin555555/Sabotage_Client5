@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-func goalPostRequest(title: String, apps: [String], timeBudget: Int, nudgeInterval: Int) {
+func goalPostRequest(title: String, timeBudget: Int, nudgeInterval: Int) {
     // 서버 링크가 유요한지 확인
     guard let url = URL(string: "\(urlLink)goalGroup/\(userId)") else {
         print("🚨 Invalid URL")
@@ -23,12 +23,9 @@ func goalPostRequest(title: String, apps: [String], timeBudget: Int, nudgeInterv
     
     // POST로 요청할 경우 : json 형식으로 데이터 넘기기
     let body:[String: AnyHashable] = [
-        "title": "string",
-        "apps": [
-            "string"
-        ],
-        "timeBudget": 0,
-        "nudgeInterval": 0
+        "title": title,
+        "timeBudget": timeBudget,
+        "nudgeInterval": nudgeInterval
     ]
     request.httpBody = try? JSONSerialization.data(withJSONObject: body, options: .fragmentsAllowed)
     

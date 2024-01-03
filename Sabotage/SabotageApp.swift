@@ -8,6 +8,8 @@
 import SwiftUI
 import FamilyControls
 
+let deviceID = UIDevice.current.identifierForVendor!.uuidString
+
 @main
 struct ScreenTime_SabotageApp: App {
     @StateObject var familyControlsManager = FamilyControlsManager.shared
@@ -43,9 +45,10 @@ struct ScreenTime_SabotageApp: App {
 func requestNotificationPermission() {
     UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { granted, error in
         if granted {
-            print("Notification Permission Granted.")
+            print("Notification Permission Granted.\(deviceID)")
+            
         } else {
-            print("Notification Permission Denied.")
+            print("Notification Permission Denied.\(deviceID)")
         }
     }
 }

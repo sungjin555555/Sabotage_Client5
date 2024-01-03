@@ -38,6 +38,7 @@ struct MonitoringView: View {
                     categories: scheduleVM.selection.categoryTokens
                 )
             }
+//            .frame(height: 300)
         
     }
 }
