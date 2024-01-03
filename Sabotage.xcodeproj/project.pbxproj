@@ -83,6 +83,7 @@
 		2DB75DC72B458496005A0E0A /* AppleSDGothicNeoB.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2DB75DBE2B458496005A0E0A /* AppleSDGothicNeoB.ttf */; };
 		2DB75DC82B458496005A0E0A /* AppleSDGothicNeoL.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2DB75DBF2B458496005A0E0A /* AppleSDGothicNeoL.ttf */; };
 		2DB75DC92B458496005A0E0A /* AppleSDGothicNeoR.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2DB75DC02B458496005A0E0A /* AppleSDGothicNeoR.ttf */; };
+		2DB75DCB2B458CFE005A0E0A /* ChangeBarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DB75DCA2B458CFE005A0E0A /* ChangeBarVC.swift */; };
 		8800F0A72B421A25005CB6D2 /* FontSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8800F0A62B421A25005CB6D2 /* FontSystem.swift */; };
 		883D8E192B42AA03003DD8C5 /* FontSystemUikit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883D8E182B42AA03003DD8C5 /* FontSystemUikit.swift */; };
 		8852C05D2B3C491600219714 /* ProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8852C05C2B3C491600219714 /* ProfileVC.swift */; };
@@ -222,6 +223,7 @@
 		2DB75DBE2B458496005A0E0A /* AppleSDGothicNeoB.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = AppleSDGothicNeoB.ttf; path = "../../../../../Downloads/Apple 산돌고딕 Neo/AppleSDGothicNeoB.ttf"; sourceTree = "<group>"; };
 		2DB75DBF2B458496005A0E0A /* AppleSDGothicNeoL.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = AppleSDGothicNeoL.ttf; path = "../../../../../Downloads/Apple 산돌고딕 Neo/AppleSDGothicNeoL.ttf"; sourceTree = "<group>"; };
 		2DB75DC02B458496005A0E0A /* AppleSDGothicNeoR.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = AppleSDGothicNeoR.ttf; path = "../../../../../Downloads/Apple 산돌고딕 Neo/AppleSDGothicNeoR.ttf"; sourceTree = "<group>"; };
+		2DB75DCA2B458CFE005A0E0A /* ChangeBarVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeBarVC.swift; sourceTree = "<group>"; };
 		5BE09D05FFC7473D463C0201 /* Pods_Sabotage.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Sabotage.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8800F0A62B421A25005CB6D2 /* FontSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontSystem.swift; sourceTree = "<group>"; };
 		883D8E182B42AA03003DD8C5 /* FontSystemUikit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontSystemUikit.swift; sourceTree = "<group>"; };
@@ -538,8 +540,9 @@
 			children = (
 				2D6DF9322B45260A00CD0248 /* BeforeAnalysisVC.swift */,
 				8852C0602B3C4A7900219714 /* AnalysisVC.swift */,
-				88A521032B41654F00CB1DCE /* RankingTableView.swift */,
 				2D6DF9342B45318900CD0248 /* WeekBarVC.swift */,
+				2DB75DCA2B458CFE005A0E0A /* ChangeBarVC.swift */,
+				88A521032B41654F00CB1DCE /* RankingTableView.swift */,
 			);
 			path = AnalysisView;
 			sourceTree = "<group>";
@@ -865,6 +868,7 @@
 				2D6DF9332B45260A00CD0248 /* BeforeAnalysisVC.swift in Sources */,
 				21E4587F2B42007800AFC7F4 /* Buttons.swift in Sources */,
 				88A521042B41654F00CB1DCE /* RankingTableView.swift in Sources */,
+				2DB75DCB2B458CFE005A0E0A /* ChangeBarVC.swift in Sources */,
 				2169E8372B3DD3A600A8DC07 /* ScreenTimeVMSU.swift in Sources */,
 				21741A0A2B41699E0062B0D7 /* shared.xcconfig in Sources */,
 				21741A1E2B417D520062B0D7 /* MonitoringView.swift in Sources */,

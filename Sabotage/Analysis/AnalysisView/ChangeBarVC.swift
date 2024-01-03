@@ -1,5 +1,5 @@
 //
-//  WeekBarVC.swift
+//  ChangeBarVC.swift
 //  Sabotage
 //
 //  Created by 박서윤 on 2024/01/03.
@@ -8,12 +8,12 @@
 import UIKit
 import DGCharts
 
-class WeekBarVC: UIViewController {
+class ChangeBarVC: UIViewController {
     
     var barGraphView: BarChartView!
-    var dataPoints: [String] = ["일","월","화","수","목","금","토"]
+    var dataPoints: [String] = ["어제", "오늘"]
     var dataEntries : [BarChartDataEntry] = []
-    var dataArray:[Int] = [10,5,6,13,15,8,2]
+    var dataArray:[Int] = [5,5]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,31 +27,32 @@ class WeekBarVC: UIViewController {
         NSLayoutConstraint.activate([
             barGraphView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 100),
             barGraphView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            barGraphView.widthAnchor.constraint(equalToConstant: 307),
-            barGraphView.heightAnchor.constraint(equalToConstant: 200)
+            barGraphView.widthAnchor.constraint(equalToConstant: 121),
+            barGraphView.heightAnchor.constraint(equalToConstant: 172)
         ])
         
-
-        // 데이터가 토요일에 해당하는 위치를 식별하여 해당 막대 그래프만 초록색으로 설정
-            dataArray[6] = 20 // '토' 요일에 해당하는 데이터를 20으로 변경
+        // 확대하지 못하게 고정
+        barGraphView.scaleXEnabled = false
+        barGraphView.scaleYEnabled = false
         
         for i in 0..<dataPoints.count {
-                let dataEntry = BarChartDataEntry(x: Double(i), y: Double(dataArray[i]))
-                dataEntries.append(dataEntry)
+            var xValue = Double(i) * 1.7 // 간격을 늘리기 위해 x 값에 2를 곱합니다
+            if i > 0 {
+                xValue -= 0.5 // 각 막대 그래프가 중앙에 위치하도록 x 값을 조정합니다
             }
-            
-            let chartDataSet = BarChartDataSet(entries: dataEntries, label: "그래프 값 명칭")
-            
-            // '토' 요일에 해당하는 막대 그래프만 초록색으로 설정
-            let colors = dataPoints.enumerated().map { (index, day) in
-                index == 6 ? UIColor.primary500 : UIColor.base300
-            }
-            chartDataSet.colors = colors
+            let dataEntry = BarChartDataEntry(x: xValue, y: Double(dataArray[i]))
+            dataEntries.append(dataEntry)
+        }
+        
+        let chartDataSet = BarChartDataSet(entries: dataEntries, label: "그래프 값 명칭")
+        chartDataSet.colors = [.base300, .primary500] // 각 데이터 엔트리에 대한 색상 배열
+        chartDataSet.valueTextColor = .black // 데이터 레이블(데이터 값) 텍스트 색상 지정
+        chartDataSet.valueFont = UIFont.systemFont(ofSize: 12) // 데이터 레이블(데이터 값) 폰트 크기 지정
 
-        
-        
         let chartData = BarChartData(dataSet: chartDataSet)
-        chartData.barWidth = 0.3
+
+        // 그래프 데이터 포인트 값 설정
+        chartData.setValueFormatter(CustomValueFormatter())
         
         barGraphView.data = chartData
         
@@ -61,25 +62,16 @@ class WeekBarVC: UIViewController {
         xAxis.valueFormatter = IndexAxisValueFormatter(values: dataPoints)
         xAxis.labelPosition = .bottom // X 축 레이블을 아래에 표시
         xAxis.labelTextColor = .white // X 축 레이블의 글씨색을 흰색으로 설정
-        
-        // Y 축 레이블 표시
-        let yAxisRight = barGraphView.rightAxis
-        yAxisRight.axisMinimum = -2 // 음수 값으로 설정하여 그래프가 0 아래에서 시작하도록 조정
-        yAxisRight.axisMaximum = 24
-        yAxisRight.granularity = 4
-        yAxisRight.drawLabelsEnabled = true // Y 축 레이블 표시 활성화
-        yAxisRight.labelTextColor = .white // Y 축 레이블의 글씨색을 흰색으로 설정
-        
-        // 그래프 확대/축소 비활성화
-        barGraphView.scaleXEnabled = false
-        barGraphView.scaleYEnabled = false
-        
-        // 왼쪽 Y 축 숨기기
+        xAxis.drawAxisLineEnabled = false // X 축 라인 숨기기
+        xAxis.drawLabelsEnabled = false // X 축 레이블 숨기기
+
+        // Y 축 숨기기
+        barGraphView.rightAxis.enabled = false
         barGraphView.leftAxis.enabled = false
-        
+            
         // X 축 그리드 라인 숨기기
         barGraphView.xAxis.drawGridLinesEnabled = false
-        
+            
         barGraphView.layer.borderWidth = 0 // 테두리의 너비를 0으로 설정하여 투명하게 만듭니다.
 
         // 그래프 테두리를 투명하게 설정
@@ -89,13 +81,9 @@ class WeekBarVC: UIViewController {
         xAxis.axisLineColor = .clear // X 축의 선 색상을 투명으로 설정합니다.
         xAxis.axisMinimum = -0.5 // X 축 시작점을 조정하여 그래프를 가운데에 위치시킵니다.
 
-        // Y 축 시작점 투명하게 만들기
-        yAxisRight.axisLineColor = .clear // Y 축의 선 색상을 투명으로 설정합니다.
-        yAxisRight.axisMinimum = 0 // Y 축 시작점을 조정하여 그래프를 가운데에 위치시킵니다.
-        
         // Y 축 단위 설정
-        yAxisRight.valueFormatter = Hours()
-        
+        xAxis.valueFormatter = Hours()
+            
         // 범례(네모칸) 제거
         barGraphView.legend.enabled = false
     }
@@ -112,4 +100,12 @@ class WeekBarVC: UIViewController {
             return formattedValue
         }
     }
+    
+    class CustomValueFormatter: ValueFormatter {
+        func stringForValue(_ value: Double, entry: ChartDataEntry, dataSetIndex: Int, viewPortHandler: ViewPortHandler?) -> String {
+            return "\(Int(value))"
+        }
+    }
+
 }
+
