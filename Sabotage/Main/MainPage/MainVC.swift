@@ -317,7 +317,7 @@ class MainVC: UIViewController, LimitItemDelegate{
         
         // MARK: - getLimitData
         getLimitData()
-    
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadCollectionView), name: .addLimitNotification, object: nil)
         
         
         // MARK: tableView 관련 코드
