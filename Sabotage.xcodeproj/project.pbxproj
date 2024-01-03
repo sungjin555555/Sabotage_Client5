@@ -84,6 +84,7 @@
 		2D6DF9302B45253900CD0248 /* AppleSDGothicNeoL.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2D6DF9272B45253800CD0248 /* AppleSDGothicNeoL.ttf */; };
 		2D6DF9312B45253900CD0248 /* AppleSDGothicNeoH.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2D6DF9282B45253900CD0248 /* AppleSDGothicNeoH.ttf */; };
 		2D6DF9332B45260A00CD0248 /* BeforeAnalysisVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D6DF9322B45260A00CD0248 /* BeforeAnalysisVC.swift */; };
+		2D6DF9352B45318900CD0248 /* WeekBarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D6DF9342B45318900CD0248 /* WeekBarVC.swift */; };
 		8800F0A72B421A25005CB6D2 /* FontSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8800F0A62B421A25005CB6D2 /* FontSystem.swift */; };
 		883D8E192B42AA03003DD8C5 /* FontSystemUikit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883D8E182B42AA03003DD8C5 /* FontSystemUikit.swift */; };
 		8852C05D2B3C491600219714 /* ProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8852C05C2B3C491600219714 /* ProfileVC.swift */; };
@@ -225,6 +226,7 @@
 		2D6DF9272B45253800CD0248 /* AppleSDGothicNeoL.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = AppleSDGothicNeoL.ttf; path = "../../../../../Downloads/Apple 산돌고딕 Neo/AppleSDGothicNeoL.ttf"; sourceTree = "<group>"; };
 		2D6DF9282B45253900CD0248 /* AppleSDGothicNeoH.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = AppleSDGothicNeoH.ttf; path = "../../../../../Downloads/Apple 산돌고딕 Neo/AppleSDGothicNeoH.ttf"; sourceTree = "<group>"; };
 		2D6DF9322B45260A00CD0248 /* BeforeAnalysisVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeforeAnalysisVC.swift; sourceTree = "<group>"; };
+		2D6DF9342B45318900CD0248 /* WeekBarVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekBarVC.swift; sourceTree = "<group>"; };
 		5BE09D05FFC7473D463C0201 /* Pods_Sabotage.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Sabotage.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8800F0A62B421A25005CB6D2 /* FontSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontSystem.swift; sourceTree = "<group>"; };
 		883D8E182B42AA03003DD8C5 /* FontSystemUikit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontSystemUikit.swift; sourceTree = "<group>"; };
@@ -541,6 +543,7 @@
 				2D6DF9322B45260A00CD0248 /* BeforeAnalysisVC.swift */,
 				8852C0602B3C4A7900219714 /* AnalysisVC.swift */,
 				88A521032B41654F00CB1DCE /* RankingTableView.swift */,
+				2D6DF9342B45318900CD0248 /* WeekBarVC.swift */,
 			);
 			path = AnalysisView;
 			sourceTree = "<group>";
@@ -900,6 +903,7 @@
 				210B7B402B400DD600D4105D /* LimitModel.swift in Sources */,
 				210B7B222B3FEA6600D4105D /* (null) in Sources */,
 				21E4587C2B41F22D00AFC7F4 /* DeviceID.swift in Sources */,
+				2D6DF9352B45318900CD0248 /* WeekBarVC.swift in Sources */,
 				210B7B422B400E4000D4105D /* MainTableView.swift in Sources */,
 				2169E8242B3D787500A8DC07 /* DeviceActivtyManager.swift in Sources */,
 				2169E8352B3DA3FD00A8DC07 /* SelectLimitAppVMSU.swift in Sources */,
