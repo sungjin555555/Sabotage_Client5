@@ -26,6 +26,7 @@ class NotificationView: UIViewController {
             button.setTitle("Notify", for: .normal)
             button.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
 
+        
             // 버튼 레이아웃 설정
             button.frame = CGRect(x: 100, y: 50, width: 100, height: 50)
             view.addSubview(button)

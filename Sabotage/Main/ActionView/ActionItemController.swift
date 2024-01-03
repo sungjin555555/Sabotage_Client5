@@ -6,6 +6,7 @@ class ActionItemController: UIViewController {
     var selectedCard = UILabel()
     var selectedCardTag: Int?
     
+    let closeButton = UIImageView(image: UIImage(named: "closeButton.png"))
     let Title = UIImageView(image: UIImage(named: "action_title.png"))
     let tracker1 = UIImageView(image: UIImage(named: "action_tracker1.png"))
     let subtitle = UIImageView(image: UIImage(named: "action_subtitle.png"))
@@ -25,6 +26,11 @@ class ActionItemController: UIViewController {
     
     // MARK: UI
     func setUI() {
+        
+        closeButton.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(closeButton)
+        
+        
         Title.contentMode = .center
         Title.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(Title)
@@ -62,6 +68,8 @@ class ActionItemController: UIViewController {
         }
     }
     
+    
+    
     @objc func actionCardTapped(_ sender: UITapGestureRecognizer) {
         if let imageView = sender.view as? UIImageView {
             let tappedTag = imageView.tag
@@ -86,6 +94,13 @@ class ActionItemController: UIViewController {
     // MARK: constraint
     func setConstraint() {
         NSLayoutConstraint.activate([
+            
+        
+            closeButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
+            closeButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
+            closeButton.widthAnchor.constraint(equalToConstant: 40),
+            closeButton.heightAnchor.constraint(equalToConstant: 40),
+            
             Title.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             Title.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 30),
             Title.widthAnchor.constraint(equalToConstant: 80),
@@ -164,5 +179,24 @@ class ActionItemController: UIViewController {
         
         setUI()
         setConstraint()
+        
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(closeButtonTapped))
+        closeButton.addGestureRecognizer(tapGesture)
+        closeButton.isUserInteractionEnabled = true
     }
+    
+    
+    @objc func closeButtonTapped() {
+        if let mainVC = navigationController?.viewControllers.first(where: { $0 is MainVC }) {
+            UIView.transition(with: navigationController!.view, duration: 0.5, options: .transitionFlipFromLeft, animations: {
+                self.navigationController?.popToViewController(mainVC, animated: false)
+            }, completion: nil)
+        } else {
+            let mainVC = MainVC() // Instantiate your MainVC if not in the navigation stack
+            navigationController?.pushViewController(mainVC, animated: true)
+        }
+    }
+
+    
 }
