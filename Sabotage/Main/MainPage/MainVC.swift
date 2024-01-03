@@ -242,6 +242,10 @@ class MainVC: UIViewController, LimitItemDelegate{
         forMoreAnalysis.contentMode = .scaleAspectFit // 로고 이미지의 크기를 유지하면서 비율을 맞춤
         view.addSubview(forMoreAnalysis)
         
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(forMoreAnalysisTapped))
+        forMoreAnalysis.isUserInteractionEnabled = true
+        forMoreAnalysis.addGestureRecognizer(tapGesture)
+        
     }
     
     func pieChartConstraintUI() {
@@ -289,18 +293,23 @@ class MainVC: UIViewController, LimitItemDelegate{
             
             ranking3App.topAnchor.constraint(equalTo: ranking2App.bottomAnchor, constant: 20),
             ranking3App.trailingAnchor.constraint(equalTo: pieChartBG.trailingAnchor, constant: -135),
-            ranking3App.widthAnchor.constraint(equalToConstant: 35), // 이미지의 가로 크기 조정
-            ranking3App.heightAnchor.constraint(equalToConstant: 35), // 이미지의 세로 크기 조정
+            ranking3App.widthAnchor.constraint(equalToConstant: 35),
+            ranking3App.heightAnchor.constraint(equalToConstant: 35),
             
             forMoreAnalysis.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 290), // 상단에 여백을 줄 수 있도록 조정
             forMoreAnalysis.centerXAnchor.constraint(equalTo: view.centerXAnchor),
 //            forMoreAnalysis.leadingAnchor.constraint(equalTo: logoImageView.leadingAnchor, constant: 45),
-            forMoreAnalysis.widthAnchor.constraint(equalToConstant: 80), // 이미지의 가로 크기 조정
-            forMoreAnalysis.heightAnchor.constraint(equalToConstant: 30), // 이미지의 세로 크기 조정
+            forMoreAnalysis.widthAnchor.constraint(equalToConstant: 80),
+            forMoreAnalysis.heightAnchor.constraint(equalToConstant: 30),
         ])
 
     }
     
+    @objc func forMoreAnalysisTapped() {
+        // Navigate to AnalysisVC
+        let analysisVC = AnalysisVC() // Assuming AnalysisVC is your destination view controller
+        navigationController?.pushViewController(analysisVC, animated: true)
+    }
     
     // MARK: tableView 관련 코드
     
@@ -393,7 +402,7 @@ class MainVC: UIViewController, LimitItemDelegate{
         // MARK: - 디자인때 필요할 것 같아서 남겨뒀움
 
         
-//        actionButton = UIButton(type: .system)
+//        var actionButton = UIButton(type: .system)
         actionButton.setImage(UIImage(named: "main_actionButton.png"), for: .normal)
         actionButton.contentMode = .scaleAspectFit
         actionButton.addTarget(self, action: #selector(actionButtonTapped), for: .touchUpInside)
@@ -403,15 +412,27 @@ class MainVC: UIViewController, LimitItemDelegate{
 
         // actionTableView의 푸터 뷰로 actionButton을 설정
         // MARK: - 이거 안 되면 푸터 뷰 대신에 UITableViewCell 안에 버튼을 추가하는 방식 사용 -> UITableViewCell을 커스텀하여 버튼을 셀 안에 추가해야 함.
+//        actionTableView.tableFooterView = actionButton
+//
+//        NSLayoutConstraint.activate([
+//            actionButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+//            actionButton.topAnchor.constraint(equalTo: actionTableView.bottomAnchor, constant: 180),
+//            actionButton.widthAnchor.constraint(equalToConstant: 390), // 이미지 크기에 맞게 조절
+//            actionButton.heightAnchor.constraint(equalToConstant: 120) // 이미지 크기에 맞게 조절]
+//        ])
+        
+        // actionTableView의 푸터 뷰로 actionButton을 설정
         actionTableView.tableFooterView = actionButton
 
+        // 버튼을 마지막 셀 아래에 위치하도록 Auto Layout을 사용하여 조정
         NSLayoutConstraint.activate([
             actionButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            actionButton.topAnchor.constraint(equalTo: actionTableView.bottomAnchor, constant: 180),
-            actionButton.widthAnchor.constraint(equalToConstant: 390), // 이미지 크기에 맞게 조절
-            actionButton.heightAnchor.constraint(equalToConstant: 120) // 이미지 크기에 맞게 조절]
+            actionButton.topAnchor.constraint(equalTo: actionTableView.bottomAnchor, constant: 220),
+            actionButton.widthAnchor.constraint(equalToConstant: 467), // 버튼의 너비 조정
+            actionButton.heightAnchor.constraint(equalToConstant: 80) // 버튼의 높이 조정
+            
         ])
-        
+
         let actiontotalTableViewHeight = actionTableView.contentSize.height + actionButton.bounds.height
 
         // Set the content inset to accommodate the `limitButton`
@@ -419,8 +440,6 @@ class MainVC: UIViewController, LimitItemDelegate{
 //        print("bottomInset = ", bottomInset)
         actionTableView.contentInset = UIEdgeInsets(top: 00, left: 0, bottom: actiontotalTableViewHeight, right: 0)
         
-        
-
         limitButton.setImage(UIImage(named: "main_limitButton.png"), for: .normal)
         limitButton.contentMode = .scaleAspectFit
         limitButton.addTarget(self, action: #selector(limitButtonTapped), for: .touchUpInside)
@@ -484,20 +503,18 @@ class MainVC: UIViewController, LimitItemDelegate{
 
     
     @objc func actionButtonTapped() {
-//        let actionItemController = ActionItemController()
-////        actionItemController.delegate = self // Set MainVC as the delegate for ActionItemController
-//        navigationController?.pushViewController(actionItemController, animated: true)
+        let actionItemController = ActionItemController()
+        navigationController?.pushViewController(actionItemController, animated: true)
         
         // MARK: ram - test code
 //        actionPostRequest(with: 0, title: "title", apps: ["String", "string2"], timeBudget: 0)
-        let monitoringView = MonitoringView()
-        let hostingController = UIHostingController(rootView: monitoringView)
-        navigationController?.pushViewController(hostingController, animated: true)
+//        let monitoringView = MonitoringView()
+//        let hostingController = UIHostingController(rootView: monitoringView)
+//        navigationController?.pushViewController(hostingController, animated: true)
 
 //        //MARK: 서윤 - saveactionitem 확인
-//        let saveActionItemController = SaveActionItemController()
+//        let saveActionItemController = BeforeAnalysisVC()
 //        navigationController?.pushViewController(saveActionItemController, animated: true)
-    
     }
 
     @objc func limitButtonTapped() {
@@ -507,19 +524,4 @@ class MainVC: UIViewController, LimitItemDelegate{
          let hostingController = UIHostingController(rootView: scheduleView)
          navigationController?.pushViewController(hostingController, animated: true)
     }
-    
-    func updateData(with actionData: ActionItemData) {
-        if !actionData.data.isEmpty {
-            for data in actionData.data {
-                let category = data.category
-                print("🐶 Category: \(category)")
-                // Do something else with 'category' here if needed
-            }
-        } else {
-            print("No data available in actionData")
-        }
-    }
-
-    
-
 }

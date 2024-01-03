@@ -12,13 +12,14 @@ class AddActionItemController: UIViewController, UITextFieldDelegate {
     var selectedCard: Int = 0
     
     // MARK: 변수
-//    let backButton = UIButton(type: .system)
+    //    let backButton = UIButton(type: .system)
+    let closeButton = UIImageView(image: UIImage(named: "closeButton.png"))
     let Title = UIImageView(image: UIImage(named: "action_title.png"))
     let tracker2 = UIImageView(image: UIImage(named: "action_tracker2.png"))
     let subtitle = UIImageView(image: UIImage(named: "addaction_subtitle.png"))
     let category1 = UIImageView(image: UIImage(named: "addaction_category1.png"))
     let inputItem = UIImageView(image: UIImage(named: "addaction_inputitem.png"))
-
+    
     let inputField: UITextField = {
         let textField = UITextField()
         textField.placeholder = "예) 자리에 앉기"
@@ -36,10 +37,15 @@ class AddActionItemController: UIViewController, UITextFieldDelegate {
     }()
     
     let completeButton = UIImageView(image: UIImage(named: "addaction_completebuttonUntapped.png"))
-
+    
     
     // MARK: UI
     func setUI() {
+
+        closeButton.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(closeButton)
+
+        
         Title.contentMode = .center
         Title.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(Title)
@@ -52,6 +58,14 @@ class AddActionItemController: UIViewController, UITextFieldDelegate {
         subtitle.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(subtitle)
         
+        // category 이미지 설정
+        let categoryImageName = "addaction_category\(selectedCard).png"
+        if let categoryImage = UIImage(named: categoryImageName) {
+            category1.image = categoryImage
+        } else {
+            // 선택된 카드에 맞는 이미지가 없을 경우에 대한 처리
+            print("해당하는 이미지가 없습니다.")
+        }
         category1.contentMode = .scaleAspectFit
         category1.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(category1)
@@ -66,14 +80,19 @@ class AddActionItemController: UIViewController, UITextFieldDelegate {
         completeButton.contentMode = .scaleAspectFit
         completeButton.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(completeButton)
-
+        
         
     }
     
     // MARK: constraint
     func setConstraint() {
         NSLayoutConstraint.activate([
-    
+            
+            closeButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
+            closeButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
+            closeButton.widthAnchor.constraint(equalToConstant: 40),
+            closeButton.heightAnchor.constraint(equalToConstant: 40),
+            
             Title.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             Title.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 30),
             Title.widthAnchor.constraint(equalToConstant: 80),
@@ -132,12 +151,26 @@ class AddActionItemController: UIViewController, UITextFieldDelegate {
         let tapGesture1 = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         tapGesture1.cancelsTouchesInView = false // Allow touch events to pass through the view hierarchy
         view.addGestureRecognizer(tapGesture1)
-       
+        
+        let tapGesture2 = UITapGestureRecognizer(target: self, action: #selector(closeButtonTapped))
+        closeButton.addGestureRecognizer(tapGesture2)
+        closeButton.isUserInteractionEnabled = true
+        
         let completeTapGesture = UITapGestureRecognizer(target: self, action: #selector(completeButtonTapped))
         completeButton.isUserInteractionEnabled = true
         completeButton.addGestureRecognizer(completeTapGesture)
         
         inputField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
+        
+    }
+    
+    @objc func closeButtonTapped() {
+        if let mainVC = navigationController?.viewControllers.first(where: { $0 is MainVC }) {
+            navigationController?.popToViewController(mainVC, animated: true)
+        } else {
+            let mainVC = MainVC() // Instantiate your MainVC if not in the navigation stack
+            navigationController?.pushViewController(mainVC, animated: true)
+        }
     }
     
     @objc func dismissKeyboard() {
@@ -149,45 +182,28 @@ class AddActionItemController: UIViewController, UITextFieldDelegate {
     }
     
     @objc func completeButtonTapped() {
-        guard let buttonImage = completeButton.image,
-              buttonImage == UIImage(named: "addaction_completebutton.png") else {
-            // If the image is not "addaction_completebutton.png", do nothing
+        // Check if both selectedCard and inputField have valid values
+        guard let text = inputField.text, !text.isEmpty else {
+            print("Text is missing")
             return
         }
-
-        // Navigate back to MainVC
-        if let navigationController = navigationController {
-            for controller in navigationController.viewControllers {
-                if controller is MainVC {
-                    navigationController.popToViewController(controller, animated: true)
-                    return
-                }
-            }
-        }
+        
+        // Call actionPostRequest to send data
+        //        actionPostRequest(with: "\(selectedCardValue)", content: text)
+        actionPostRequest(with: "\(selectedCard)", content: text)
         // MARK: - [Create] Post ActionItem
-//        actionPostRequest(with: '여기 카테고리 변수', content: '내용 변수')
-        
-        // Print selectedCard value received from ActionItemController
-//        print("🔥 Selected Card from ActionItemController: \(selectedCard)")
-//
-//        // Print text field data received from the textField
-//        if let text = inputField.text, !text.isEmpty {
-//            print("👍 Text received from textField: \(text)")
-//        } else {
-//            print("👎 No text received from textField or text is empty")
-//        }
-        
+        // actionPostRequest(with: '여기 카테고리 변수', content: '내용 변수')
+
         let mainVC = MainVC() // Create a new instance of MainVC
         navigationController?.pushViewController(mainVC, animated: true) // Present MainVC
     }
-
+    
     
     @objc func textFieldDidChange(_ textField: UITextField) {
-            if let text = textField.text, !text.isEmpty {
-                completeButton.image = UIImage(named: "addaction_completebutton.png")
-            } else {
-                completeButton.image = UIImage(named: "addaction_completebuttonUntapped.png")
-            }
+        if let text = textField.text, !text.isEmpty {
+            completeButton.image = UIImage(named: "addaction_completebutton.png")
+        } else {
+            completeButton.image = UIImage(named: "addaction_completebuttonUntapped.png")
         }
-    
+    }
 }

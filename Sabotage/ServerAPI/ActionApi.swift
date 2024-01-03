@@ -162,9 +162,8 @@ func getActionData(completion: @escaping ActionDataCompletion) {  // MARK: - "co
                         print("🤢 decodeData", decodeData)
 //                        let categories = decodeData.data.map { $0.category }
 //                        print("🎃", categories)
-
                     }
-                    
+                
                 } catch {
                     print("🚨 JSON decoding error: \(error)")
                     completion(nil) // MARK: - // 디코딩 실패 시 nil 반환
