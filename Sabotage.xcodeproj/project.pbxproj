@@ -19,9 +19,6 @@
 		210B7B422B400E4000D4105D /* MainTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210B7B412B400E4000D4105D /* MainTableView.swift */; };
 		210B7B452B40176900D4105D /* APICaller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210B7B442B40176900D4105D /* APICaller.swift */; };
 		210B7B472B4018CF00D4105D /* ActionApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210B7B462B4018CF00D4105D /* ActionApi.swift */; };
-
-		210B7B492B4018D800D4105D /* LimitApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210B7B482B4018D800D4105D /* LimitApi.swift */; };
-
 		214CC4812B3C4782003B74EB /* SabotageApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214CC4802B3C4782003B74EB /* SabotageApp.swift */; };
 		214CC4832B3C4782003B74EB /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214CC4822B3C4782003B74EB /* ContentView.swift */; };
 		214CC4852B3C4784003B74EB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 214CC4842B3C4784003B74EB /* Assets.xcassets */; };
@@ -85,6 +82,7 @@
 		2D6DF9312B45253900CD0248 /* AppleSDGothicNeoH.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2D6DF9282B45253900CD0248 /* AppleSDGothicNeoH.ttf */; };
 		2D6DF9332B45260A00CD0248 /* BeforeAnalysisVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D6DF9322B45260A00CD0248 /* BeforeAnalysisVC.swift */; };
 		2D6DF9352B45318900CD0248 /* WeekBarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D6DF9342B45318900CD0248 /* WeekBarVC.swift */; };
+		2D6DF93D2B4540A900CD0248 /* DGCharts in Frameworks */ = {isa = PBXBuildFile; productRef = 2D6DF93C2B4540A900CD0248 /* DGCharts */; };
 		8800F0A72B421A25005CB6D2 /* FontSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8800F0A62B421A25005CB6D2 /* FontSystem.swift */; };
 		883D8E192B42AA03003DD8C5 /* FontSystemUikit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883D8E182B42AA03003DD8C5 /* FontSystemUikit.swift */; };
 		8852C05D2B3C491600219714 /* ProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8852C05C2B3C491600219714 /* ProfileVC.swift */; };
@@ -165,9 +163,6 @@
 		210B7B412B400E4000D4105D /* MainTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableView.swift; sourceTree = "<group>"; };
 		210B7B442B40176900D4105D /* APICaller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APICaller.swift; sourceTree = "<group>"; };
 		210B7B462B4018CF00D4105D /* ActionApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionApi.swift; sourceTree = "<group>"; };
-
-		210B7B482B4018D800D4105D /* LimitApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LimitApi.swift; sourceTree = "<group>"; };
-
 		214CC47D2B3C4782003B74EB /* Sabotage.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sabotage.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		214CC4802B3C4782003B74EB /* SabotageApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SabotageApp.swift; sourceTree = "<group>"; };
 		214CC4822B3C4782003B74EB /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -247,6 +242,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2D6DF93D2B4540A900CD0248 /* DGCharts in Frameworks */,
 				DB98B45E2DBF590A60210D39 /* Pods_Sabotage.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -637,6 +633,7 @@
 			);
 			name = Sabotage;
 			packageProductDependencies = (
+				2D6DF93C2B4540A900CD0248 /* DGCharts */,
 			);
 			productName = Sabotage;
 			productReference = 214CC47D2B3C4782003B74EB /* Sabotage.app */;
@@ -747,6 +744,7 @@
 			);
 			mainGroup = 214CC4742B3C4782003B74EB;
 			packageReferences = (
+				2D6DF93B2B4540A900CD0248 /* XCRemoteSwiftPackageReference "Charts" */,
 			);
 			productRefGroup = 214CC47E2B3C4782003B74EB /* Products */;
 			projectDirPath = "";
@@ -1443,6 +1441,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		2D6DF93B2B4540A900CD0248 /* XCRemoteSwiftPackageReference "Charts" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/danielgindi/Charts.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		2D6DF93C2B4540A900CD0248 /* DGCharts */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2D6DF93B2B4540A900CD0248 /* XCRemoteSwiftPackageReference "Charts" */;
+			productName = DGCharts;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 214CC4752B3C4782003B74EB /* Project object */;
 }
