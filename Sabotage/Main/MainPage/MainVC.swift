@@ -29,9 +29,6 @@ class MainVC: UIViewController, LimitItemDelegate{
     var tabBar = UITabBar()
     
     var pieChartViewController: PieChart!
-    //    var firstButton = UIButton(type: .system)
-    //    var secondButton = UIButton(type: .system)
-    //    var thirdButton = UIButton(type: .system)
     
     var limitTableView: UITableView!
     var actionTableView: UITableView!
@@ -64,8 +61,6 @@ class MainVC: UIViewController, LimitItemDelegate{
         // TableView 업데이트
         actionTableView.reloadData()
     }
-    
-    
     func toggleUI() {
         
         actionTogglebuttonTapped.contentMode = .scaleAspectFit
@@ -164,47 +159,12 @@ class MainVC: UIViewController, LimitItemDelegate{
         addChild(pieChartViewController)
         view.addSubview(pieChartViewController.view)
         pieChartViewController.didMove(toParent: self)
-        
-        // Buttons
-        //            firstButton.setTitle("First", for: .normal)
-        //            secondButton.setTitle("Second", for: .normal)
-        //            thirdButton.setTitle("Third", for: .normal)
-        //
-        //            firstButton.addTarget(self, action: #selector(firstButtonTapped), for: .touchUpInside)
-        //            secondButton.addTarget(self, action: #selector(secondButtonTapped), for: .touchUpInside)
-        //            thirdButton.addTarget(self, action: #selector(thirdButtonTapped), for: .touchUpInside)
-        //
-        //            [firstButton, secondButton, thirdButton].forEach {
-        //                view.addSubview($0)
-        //                $0.translatesAutoresizingMaskIntoConstraints = false
-        //            }
-        
-        // Set constraints for the PieChart view and buttons using SnapKit
         pieChartViewController.view.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             pieChartViewController.view.topAnchor.constraint(equalTo: today.bottomAnchor, constant: 15),
             pieChartViewController.view.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 60),
-            
-            // pieChartViewController.view의 높이에 대한 제약을 추가하려면 필요한 제약 조건을 설정해야 합니다.
-            // 제약 조건이 필요한 경우 아래와 같이 해당 높이에 대한 제약을 추가하세요.
-            // pieChartViewController.view.heightAnchor.constraint(equalToConstant: 160)
         ])
-        
-        //            firstButton.snp.makeConstraints {
-        //                $0.top.equalTo(pieChartViewController.view.snp.bottom).offset(-50)
-        //                $0.leading.equalToSuperview().offset(80)
-        //            }
-        //
-        //            secondButton.snp.makeConstraints {
-        //                $0.top.equalTo(pieChartViewController.view.snp.bottom).offset(-50)
-        //                $0.centerX.equalToSuperview()
-        //            }
-        //
-        //            thirdButton.snp.makeConstraints {
-        //                $0.top.equalTo(pieChartViewController.view.snp.bottom).offset(-50)
-        //                $0.trailing.equalToSuperview().offset(-80)
-        //            }
     }
     
     func pieChartViewUI() {
@@ -355,7 +315,7 @@ class MainVC: UIViewController, LimitItemDelegate{
         // MARK: - getActionData
         getActionData()
         NotificationCenter.default.addObserver(self, selector: #selector(reloadCollectionView), name: .addNotification, object: nil)
-       
+        
         
         // MARK: tableView 관련 코드
         actionTableView = UITableView(frame: .zero, style: .plain)
@@ -493,19 +453,6 @@ class MainVC: UIViewController, LimitItemDelegate{
         
         tableView.register(cellClass, forCellReuseIdentifier: identifier)
     }
-    
-    //    @objc func firstButtonTapped() {
-    //        pieChartViewController.firstAppUI()
-    //    }
-    //
-    //    @objc func secondButtonTapped() {
-    //        pieChartViewController.secondAppUI()
-    //    }
-    //
-    //    @objc func thirdButtonTapped() {
-    //        pieChartViewController.thirdAppUI()
-    //    }
-    
     func getActionData() {  // MARK: - "completion: @escaping ActionDataCompletion" 파라미터 추가
         if let url = URL(string: "\(urlLink)actionItem/\(userId)/all") {
             let session = URLSession(configuration: .default)

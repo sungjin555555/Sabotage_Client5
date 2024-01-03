@@ -377,22 +377,6 @@ extension ScheduleView {
     
 }
 
-// MARK: - 기존 시간 설정 코드
-//private func setUpTimeSectionView() -> some View {
-//        let TIME_LABEL_LIST = ["시작 시간", "종료 시간"]
-//        let times = [$scheduleVM.scheduleStartTime, $scheduleVM.scheduleEndTime]
-//
-//        return Section(
-//            header: Text(ScheduleSectionInfo.time.header),
-//            footer: Text(ScheduleSectionInfo.time.footer)) {
-//                ForEach(0..<TIME_LABEL_LIST.count, id: \.self) { index in
-//                    DatePicker(selection: times[index], displayedComponents: .hourAndMinute) {
-//                        Text(TIME_LABEL_LIST[index])
-//                    }
-//                }
-//            }
-//    }
-
 struct ScheduleView_Previews: PreviewProvider {
     static var previews: some View {
         ScheduleView()
