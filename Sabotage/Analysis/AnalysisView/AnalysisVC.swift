@@ -80,6 +80,12 @@ override func viewDidLoad() {
         ThisWeek.textColor = .systemMint
         ThisWeek.numberOfLines = 0
         contentView.addSubview(ThisWeek) // label3를 contentView에 추가
+        
+        // MARK: 서윤 - test
+        // 이번주 Label에 탭 제스처를 추가합니다.
+        let thisWeekTapGesture = UITapGestureRecognizer(target: self, action: #selector(thisWeekTapped))
+        ThisWeek.isUserInteractionEnabled = true
+        ThisWeek.addGestureRecognizer(thisWeekTapGesture)
 
         // thisweekimage 이미지를 ThisWeek 밑에 추가
         let thisweekimage = UIButton(type: .custom)
@@ -222,6 +228,13 @@ override func viewDidLoad() {
             newImageView.heightAnchor.constraint(equalToConstant: 200), // 이미지 높이 조정
             newImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -20), // contentView 하단과 이미지 간격 조정
         ])
+    }
+    // MARK: 서윤 - test
+    // ThisWeek 라벨을 눌렀을 때 실행될 메서드를 추가합니다.
+    @objc func thisWeekTapped() {
+        // WeekBar 화면으로 이동하는 코드를 추가합니다.
+        let weekBarVC = WeekBarVC() // 이동할 WeekBarViewController 생성
+        navigationController?.pushViewController(weekBarVC, animated: true) // WeekBarViewController로 이동
     }
 
 }
