@@ -19,7 +19,6 @@
 		210B7B422B400E4000D4105D /* MainTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210B7B412B400E4000D4105D /* MainTableView.swift */; };
 		210B7B452B40176900D4105D /* APICaller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210B7B442B40176900D4105D /* APICaller.swift */; };
 		210B7B472B4018CF00D4105D /* ActionApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210B7B462B4018CF00D4105D /* ActionApi.swift */; };
-		210B7B492B4018D800D4105D /* LimitApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210B7B482B4018D800D4105D /* LimitApi.swift */; };
 		211E566B2B449B81007CE8EF /* AppleSDGothicNeoT.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 211E56622B449B81007CE8EF /* AppleSDGothicNeoT.ttf */; };
 		211E566C2B449B81007CE8EF /* AppleSDGothicNeoEB.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 211E56632B449B81007CE8EF /* AppleSDGothicNeoEB.ttf */; };
 		211E566D2B449B81007CE8EF /* AppleSDGothicNeoL.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 211E56642B449B81007CE8EF /* AppleSDGothicNeoL.ttf */; };
@@ -33,6 +32,7 @@
 		214CC4832B3C4782003B74EB /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214CC4822B3C4782003B74EB /* ContentView.swift */; };
 		214CC4852B3C4784003B74EB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 214CC4842B3C4784003B74EB /* Assets.xcassets */; };
 		214CC4882B3C4784003B74EB /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 214CC4872B3C4784003B74EB /* Preview Assets.xcassets */; };
+		215C7D802B45254800D217DA /* GoalGroupApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 215C7D7F2B45254800D217DA /* GoalGroupApi.swift */; };
 		2167F4D02B44B7040025F842 /* notiTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2167F4CF2B44B7040025F842 /* notiTest.swift */; };
 		2169E7D92B3D750C00A8DC07 /* DeviceActivity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2169E7D82B3D750C00A8DC07 /* DeviceActivity.framework */; };
 		2169E7DC2B3D750C00A8DC07 /* DeviceActivityMonitorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2169E7DB2B3D750C00A8DC07 /* DeviceActivityMonitorExtension.swift */; };
@@ -160,7 +160,6 @@
 		210B7B412B400E4000D4105D /* MainTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableView.swift; sourceTree = "<group>"; };
 		210B7B442B40176900D4105D /* APICaller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APICaller.swift; sourceTree = "<group>"; };
 		210B7B462B4018CF00D4105D /* ActionApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionApi.swift; sourceTree = "<group>"; };
-		210B7B482B4018D800D4105D /* LimitApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LimitApi.swift; sourceTree = "<group>"; };
 		211E56622B449B81007CE8EF /* AppleSDGothicNeoT.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = AppleSDGothicNeoT.ttf; path = "../../../../Apple 산돌고딕 Neo/AppleSDGothicNeoT.ttf"; sourceTree = "<group>"; };
 		211E56632B449B81007CE8EF /* AppleSDGothicNeoEB.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = AppleSDGothicNeoEB.ttf; path = "../../../../Apple 산돌고딕 Neo/AppleSDGothicNeoEB.ttf"; sourceTree = "<group>"; };
 		211E56642B449B81007CE8EF /* AppleSDGothicNeoL.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = AppleSDGothicNeoL.ttf; path = "../../../../Apple 산돌고딕 Neo/AppleSDGothicNeoL.ttf"; sourceTree = "<group>"; };
@@ -175,6 +174,7 @@
 		214CC4822B3C4782003B74EB /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		214CC4842B3C4784003B74EB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		214CC4872B3C4784003B74EB /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		215C7D7F2B45254800D217DA /* GoalGroupApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalGroupApi.swift; sourceTree = "<group>"; };
 		2167F4CF2B44B7040025F842 /* notiTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = notiTest.swift; sourceTree = "<group>"; };
 		2169E7D22B3D74D300A8DC07 /* Sabotage.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Sabotage.entitlements; sourceTree = "<group>"; };
 		2169E7D72B3D750C00A8DC07 /* DeviceActivityMonitor.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = DeviceActivityMonitor.appex; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -296,7 +296,7 @@
 			isa = PBXGroup;
 			children = (
 				210B7B442B40176900D4105D /* APICaller.swift */,
-				210B7B482B4018D800D4105D /* LimitApi.swift */,
+				215C7D7F2B45254800D217DA /* GoalGroupApi.swift */,
 				210B7B462B4018CF00D4105D /* ActionApi.swift */,
 				21E4587B2B41F22D00AFC7F4 /* DeviceID.swift */,
 			);
@@ -858,7 +858,6 @@
 				21741A0A2B41699E0062B0D7 /* shared.xcconfig in Sources */,
 				21741A1E2B417D520062B0D7 /* MonitoringView.swift in Sources */,
 				210B7B472B4018CF00D4105D /* ActionApi.swift in Sources */,
-				210B7B492B4018D800D4105D /* LimitApi.swift in Sources */,
 				8852C0692B3C4B1300219714 /* ActionItemController.swift in Sources */,
 				8800F0A72B421A25005CB6D2 /* FontSystem.swift in Sources */,
 				2169E8222B3D778600A8DC07 /* FamilyControlManager.swift in Sources */,
@@ -877,6 +876,7 @@
 				2169E8392B3DD42C00A8DC07 /* AppStorageManager.swift in Sources */,
 				21741A0B2B416A250062B0D7 /* DeviceActivityMonitorExtension.swift in Sources */,
 				2D1BD4D12B42A28F00EE8374 /* ProfileTableViewCell.swift in Sources */,
+				215C7D802B45254800D217DA /* GoalGroupApi.swift in Sources */,
 				210B7B452B40176900D4105D /* APICaller.swift in Sources */,
 				88ABDAB22B3EA3BD0011682E /* PieChart.swift in Sources */,
 				8852C05D2B3C491600219714 /* ProfileVC.swift in Sources */,

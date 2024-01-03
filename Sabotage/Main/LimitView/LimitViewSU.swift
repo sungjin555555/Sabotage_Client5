@@ -314,6 +314,7 @@ extension ScheduleView {
                 if isInputValid {
                     let finalTotal = selectedGoalHours * 60 * 60 + selectedGoalMinutes * 60
 //                    scheduleVM.saveSchedule(selectedApps: tempSelection, totalLimitTime: finalTotal)
+                    let nudgeTotal = selectedNudgeHours * 60 * 60 + selectedNudgeMinutes
                     
 //                    scheduleVM.finalGoalTime = finalTotal
 //                    print("goalTime = \(scheduleVM.finalGoalTime)")
@@ -322,7 +323,20 @@ extension ScheduleView {
                     print("tempSelection = \(tempSelection)")
                     print("selectedNudge = \(selectedNudgeHours):\(selectedNudgeMinutes)")
                     print("selectedGoalHours = \(selectedGoalHours):\(selectedGoalMinutes)")
-                    // 추가 로직
+                    print("🔥 appList = \(tempSelection)")
+                    // Assuming 'ApplicationToken' conforms to 'CustomStringConvertible' or has a method to return a string
+                    let appNames = tempSelection.applicationTokens.map { token in
+                        
+                        // Replace 'tokenDescription' with the actual property or method that provides a string representation
+                        return String(token.hashValue)
+                    }
+                    print("🔥 🔥 🔥  \(appNames) 🔥 🔥 🔥 ")
+                    // Now, 'appNames' is an array of strings that you can send to your server
+//                    goalPostRequest(title: groupName, apps: appNames, timeBudget: finalTotal)
+
+//                    let appNames = tempSelection.applicationTokens.map { $0. }
+//                    print("🙌🏻 appNames = \(appNames)")
+//                    goalPostRequest(title: groupName, apps: <#T##[String]#>, timeBudget: finalTotal, nudgeInterval: nudgeTotal)
                 }
             }
             .padding()
@@ -397,3 +411,4 @@ struct ScheduleView_Previews: PreviewProvider {
             .environmentObject(ScheduleVM())
     }
 }
+
