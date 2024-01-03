@@ -9,6 +9,9 @@ import Foundation
 
 import UIKit
 
+
+
+
 var limitData: LimitDummyDataType? //초기값도 모르기 때문에 옵셔널 ? 붙여준다.
 
 let urlLink = "http://119.202.103.118:8080/api/" // 서버 주소

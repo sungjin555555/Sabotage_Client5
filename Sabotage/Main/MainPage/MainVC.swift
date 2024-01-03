@@ -18,7 +18,7 @@ protocol LimitItemDelegate: AnyObject {
 }
 
 class MainVC: UIViewController, LimitItemDelegate{
-
+    //    var actionss: ActionTop?
     var segmentedControl = UISegmentedControl()
     
     // MARK: - ".custom"으로 설정해야 이미지를 가진 버튼 만들기 가능
@@ -29,9 +29,9 @@ class MainVC: UIViewController, LimitItemDelegate{
     var tabBar = UITabBar()
     
     var pieChartViewController: PieChart!
-//    var firstButton = UIButton(type: .system)
-//    var secondButton = UIButton(type: .system)
-//    var thirdButton = UIButton(type: .system)
+    //    var firstButton = UIButton(type: .system)
+    //    var secondButton = UIButton(type: .system)
+    //    var thirdButton = UIButton(type: .system)
     
     var limitTableView: UITableView!
     var actionTableView: UITableView!
@@ -57,15 +57,15 @@ class MainVC: UIViewController, LimitItemDelegate{
     func updateActionTableView(with actionData: [ActionData]) {
         // actionData를 받은 후 actionItems에 추가합니다.
         for data in actionData {
-            let newActionItem = ActionDummyDataType(title: data.category, description: data.content)
+            let newActionItem = ActionDummyDataType(category: data.category, content: data.content)
             actionItems.append(newActionItem)
         }
-
+        
         // TableView 업데이트
         actionTableView.reloadData()
     }
-
-
+    
+    
     func toggleUI() {
         
         actionTogglebuttonTapped.contentMode = .scaleAspectFit
@@ -89,10 +89,10 @@ class MainVC: UIViewController, LimitItemDelegate{
         rightButton.addTarget(self, action: #selector(rightButtonTapped), for: .touchUpInside)
         rightButton.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(rightButton)
-         
+        
         leftButton.addTarget(self, action: #selector(leftButtonTapped), for: .touchUpInside)
         rightButton.addTarget(self, action: #selector(rightButtonTapped), for: .touchUpInside)
-
+        
     }
     
     func toggleConstraintUI() {
@@ -102,14 +102,14 @@ class MainVC: UIViewController, LimitItemDelegate{
             
             actionTogglebuttonTapped.widthAnchor.constraint(equalToConstant: view.frame.width + 0),
             actionTogglebuttonTapped.heightAnchor.constraint(equalToConstant: 60),
-
+            
             limitTogglebuttonTapped.topAnchor.constraint(equalTo: pieChartBG.bottomAnchor, constant: -10),
             limitTogglebuttonTapped.centerXAnchor.constraint(equalTo: view.centerXAnchor), // Center horizontally
             
             limitTogglebuttonTapped.widthAnchor.constraint(equalToConstant: view.frame.width + 0),
             limitTogglebuttonTapped.heightAnchor.constraint(equalToConstant: 60),
-        ])
-
+                                    ])
+        
         NSLayoutConstraint.activate([
             leftButton.topAnchor.constraint(equalTo: pieChartBG.bottomAnchor, constant: -10),
             leftButton.leadingAnchor.constraint(equalTo: actionTogglebuttonTapped.leadingAnchor, constant: 0),
@@ -150,7 +150,7 @@ class MainVC: UIViewController, LimitItemDelegate{
             toggleCondition()
         }
     }
-
+    
     // actionTogglebuttonTapped 버튼을 눌렀을 때 실행되는 메서드
     @objc func rightButtonTapped() {
         if limitTogglebuttonTapped.isHidden {
@@ -164,24 +164,24 @@ class MainVC: UIViewController, LimitItemDelegate{
         addChild(pieChartViewController)
         view.addSubview(pieChartViewController.view)
         pieChartViewController.didMove(toParent: self)
-            
-            // Buttons
-//            firstButton.setTitle("First", for: .normal)
-//            secondButton.setTitle("Second", for: .normal)
-//            thirdButton.setTitle("Third", for: .normal)
-//
-//            firstButton.addTarget(self, action: #selector(firstButtonTapped), for: .touchUpInside)
-//            secondButton.addTarget(self, action: #selector(secondButtonTapped), for: .touchUpInside)
-//            thirdButton.addTarget(self, action: #selector(thirdButtonTapped), for: .touchUpInside)
-//
-//            [firstButton, secondButton, thirdButton].forEach {
-//                view.addSubview($0)
-//                $0.translatesAutoresizingMaskIntoConstraints = false
-//            }
-            
-            // Set constraints for the PieChart view and buttons using SnapKit
+        
+        // Buttons
+        //            firstButton.setTitle("First", for: .normal)
+        //            secondButton.setTitle("Second", for: .normal)
+        //            thirdButton.setTitle("Third", for: .normal)
+        //
+        //            firstButton.addTarget(self, action: #selector(firstButtonTapped), for: .touchUpInside)
+        //            secondButton.addTarget(self, action: #selector(secondButtonTapped), for: .touchUpInside)
+        //            thirdButton.addTarget(self, action: #selector(thirdButtonTapped), for: .touchUpInside)
+        //
+        //            [firstButton, secondButton, thirdButton].forEach {
+        //                view.addSubview($0)
+        //                $0.translatesAutoresizingMaskIntoConstraints = false
+        //            }
+        
+        // Set constraints for the PieChart view and buttons using SnapKit
         pieChartViewController.view.translatesAutoresizingMaskIntoConstraints = false
-
+        
         NSLayoutConstraint.activate([
             pieChartViewController.view.topAnchor.constraint(equalTo: today.bottomAnchor, constant: 15),
             pieChartViewController.view.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 60),
@@ -190,23 +190,23 @@ class MainVC: UIViewController, LimitItemDelegate{
             // 제약 조건이 필요한 경우 아래와 같이 해당 높이에 대한 제약을 추가하세요.
             // pieChartViewController.view.heightAnchor.constraint(equalToConstant: 160)
         ])
-            
-//            firstButton.snp.makeConstraints {
-//                $0.top.equalTo(pieChartViewController.view.snp.bottom).offset(-50)
-//                $0.leading.equalToSuperview().offset(80)
-//            }
-//
-//            secondButton.snp.makeConstraints {
-//                $0.top.equalTo(pieChartViewController.view.snp.bottom).offset(-50)
-//                $0.centerX.equalToSuperview()
-//            }
-//
-//            thirdButton.snp.makeConstraints {
-//                $0.top.equalTo(pieChartViewController.view.snp.bottom).offset(-50)
-//                $0.trailing.equalToSuperview().offset(-80)
-//            }
-        }
-
+        
+        //            firstButton.snp.makeConstraints {
+        //                $0.top.equalTo(pieChartViewController.view.snp.bottom).offset(-50)
+        //                $0.leading.equalToSuperview().offset(80)
+        //            }
+        //
+        //            secondButton.snp.makeConstraints {
+        //                $0.top.equalTo(pieChartViewController.view.snp.bottom).offset(-50)
+        //                $0.centerX.equalToSuperview()
+        //            }
+        //
+        //            thirdButton.snp.makeConstraints {
+        //                $0.top.equalTo(pieChartViewController.view.snp.bottom).offset(-50)
+        //                $0.trailing.equalToSuperview().offset(-80)
+        //            }
+    }
+    
     func pieChartViewUI() {
         logoImageView.contentMode = .scaleAspectFit // 로고 이미지의 크기를 유지하면서 비율을 맞춤
         view.addSubview(logoImageView)
@@ -258,7 +258,7 @@ class MainVC: UIViewController, LimitItemDelegate{
         ranking2App.translatesAutoresizingMaskIntoConstraints = false
         ranking3App.translatesAutoresizingMaskIntoConstraints = false
         forMoreAnalysis.translatesAutoresizingMaskIntoConstraints = false
-
+        
         NSLayoutConstraint.activate([
             logoImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20.95), // 상단에 여백을 줄 수 있도록 조정
             logoImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 25.15), // 좌측에 여백을 줄 수 있도록 조정
@@ -269,7 +269,7 @@ class MainVC: UIViewController, LimitItemDelegate{
             logoText.leadingAnchor.constraint(equalTo: logoImageView.leadingAnchor, constant: 45), // 좌측에 여백을 줄 수 있도록 조정
             logoText.widthAnchor.constraint(equalToConstant: 63), // 이미지의 가로 크기 조정
             logoText.heightAnchor.constraint(equalToConstant: 20), // 이미지의 세로 크기 조정
-
+            
             pieChartBG.topAnchor.constraint(equalTo: logoImageView.bottomAnchor, constant: 16),
             pieChartBG.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
             pieChartBG.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
@@ -298,11 +298,11 @@ class MainVC: UIViewController, LimitItemDelegate{
             
             forMoreAnalysis.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 290), // 상단에 여백을 줄 수 있도록 조정
             forMoreAnalysis.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-//            forMoreAnalysis.leadingAnchor.constraint(equalTo: logoImageView.leadingAnchor, constant: 45),
+            //            forMoreAnalysis.leadingAnchor.constraint(equalTo: logoImageView.leadingAnchor, constant: 45),
             forMoreAnalysis.widthAnchor.constraint(equalToConstant: 80),
             forMoreAnalysis.heightAnchor.constraint(equalToConstant: 30),
         ])
-
+        
     }
     
     @objc func forMoreAnalysisTapped() {
@@ -314,33 +314,33 @@ class MainVC: UIViewController, LimitItemDelegate{
     // MARK: tableView 관련 코드
     
     var actionItems: [ActionDummyDataType] = [
-        ActionDummyDataType(title: "액션 1", description: "액션 1에 대한 설명입니다."),
-        ActionDummyDataType(title: "액션 2", description: "액션 1에 대한 설명입니다.")
+        ActionDummyDataType(category: "액션 1", content: "액션 1에 대한 설명입니다."),
+        ActionDummyDataType(category: "액션 2", content: "액션 1에 대한 설명입니다.")
     ]
     var limitItems: [LimitDummyDataType] = [
         LimitDummyDataType(title: "제한그룹 1", description: "제한그룹 1임다"),
         LimitDummyDataType(title: "제한그룹 2", description: "제한그룹 2임다"),
         LimitDummyDataType(title: "제한그룹 3", description: "제한그룹 3임다")
     ]
-
+    
     // tableview data
     // LimitItemDelegate 메서드 구현
     func addNewLimitItem(_ itemName: String) {
         // LimitItemDelegate 메서드 구현
         let newLimitItem = LimitDummyDataType(title: itemName, description: "새로운 항목 설명")
         limitItems.append(newLimitItem)
-
+        
         // TableView 업데이트
         limitTableView.reloadData()
-
+        
         // Calculate total height of all cells in the limitTableView
         let totalTableViewHeight = limitTableView.contentSize.height
-
+        
         // Set the content inset to accommodate the limitButton
         let bottomInset = view.bounds.height - totalTableViewHeight
         limitTableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: bottomInset, right: 0)
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -351,6 +351,11 @@ class MainVC: UIViewController, LimitItemDelegate{
         toggleUI()
         toggleConstraintUI()
         piechartUI()
+        
+        // MARK: - getActionData
+        getActionData()
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadCollectionView), name: .addNotification, object: nil)
+       
         
         // MARK: tableView 관련 코드
         actionTableView = UITableView(frame: .zero, style: .plain)
@@ -367,7 +372,7 @@ class MainVC: UIViewController, LimitItemDelegate{
         
         actionTableView.separatorStyle = .none
         limitTableView.separatorStyle = .none
-
+        
         // Auto Layout을 위한 설정
         actionTableView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
@@ -387,43 +392,43 @@ class MainVC: UIViewController, LimitItemDelegate{
         ])
         configureTableView(actionTableView, cellClass: ActionTableViewCell.self, identifier: "ActionCustomCell")
         configureTableView(limitTableView, cellClass: LimitTableViewCell.self, identifier: "LimitCustomCell")
-                
+        
         // 초기에는 actionTableView만 보이도록 설정
         actionTableView.isHidden = false
         limitTableView.isHidden = true
         
         // 이전 화면으로 돌아가는 "< Back" 버튼 숨기기
         navigationItem.hidesBackButton = true
-
+        
         let backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil) // title 부분 수정
         backBarButtonItem.tintColor = .black
         self.navigationItem.backBarButtonItem = backBarButtonItem
         
         // MARK: - 디자인때 필요할 것 같아서 남겨뒀움
-
         
-//        var actionButton = UIButton(type: .system)
+        
+        //        var actionButton = UIButton(type: .system)
         actionButton.setImage(UIImage(named: "main_actionButton.png"), for: .normal)
         actionButton.contentMode = .scaleAspectFit
         actionButton.addTarget(self, action: #selector(actionButtonTapped), for: .touchUpInside)
         view.addSubview(actionButton)
         actionButton.translatesAutoresizingMaskIntoConstraints = false
         actionButton.isHidden = false
-
+        
         // actionTableView의 푸터 뷰로 actionButton을 설정
         // MARK: - 이거 안 되면 푸터 뷰 대신에 UITableViewCell 안에 버튼을 추가하는 방식 사용 -> UITableViewCell을 커스텀하여 버튼을 셀 안에 추가해야 함.
-//        actionTableView.tableFooterView = actionButton
-//
-//        NSLayoutConstraint.activate([
-//            actionButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-//            actionButton.topAnchor.constraint(equalTo: actionTableView.bottomAnchor, constant: 180),
-//            actionButton.widthAnchor.constraint(equalToConstant: 390), // 이미지 크기에 맞게 조절
-//            actionButton.heightAnchor.constraint(equalToConstant: 120) // 이미지 크기에 맞게 조절]
-//        ])
+        //        actionTableView.tableFooterView = actionButton
+        //
+        //        NSLayoutConstraint.activate([
+        //            actionButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+        //            actionButton.topAnchor.constraint(equalTo: actionTableView.bottomAnchor, constant: 180),
+        //            actionButton.widthAnchor.constraint(equalToConstant: 390), // 이미지 크기에 맞게 조절
+        //            actionButton.heightAnchor.constraint(equalToConstant: 120) // 이미지 크기에 맞게 조절]
+        //        ])
         
         // actionTableView의 푸터 뷰로 actionButton을 설정
         actionTableView.tableFooterView = actionButton
-
+        
         // 버튼을 마지막 셀 아래에 위치하도록 Auto Layout을 사용하여 조정
         NSLayoutConstraint.activate([
             actionButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
@@ -432,12 +437,12 @@ class MainVC: UIViewController, LimitItemDelegate{
             actionButton.heightAnchor.constraint(equalToConstant: 80) // 버튼의 높이 조정
             
         ])
-
+        
         let actiontotalTableViewHeight = actionTableView.contentSize.height + actionButton.bounds.height
-
+        
         // Set the content inset to accommodate the `limitButton`
-//        let bottomInset = view.bounds.height - totalTableViewHeight
-//        print("bottomInset = ", bottomInset)
+        //        let bottomInset = view.bounds.height - totalTableViewHeight
+        //        print("bottomInset = ", bottomInset)
         actionTableView.contentInset = UIEdgeInsets(top: 00, left: 0, bottom: actiontotalTableViewHeight, right: 0)
         
         limitButton.setImage(UIImage(named: "main_limitButton.png"), for: .normal)
@@ -456,14 +461,14 @@ class MainVC: UIViewController, LimitItemDelegate{
         limitTableView.tableFooterView = limitButton
         
         let totalTableViewHeight = limitTableView.contentSize.height + limitButton.bounds.height
-
+        
         // Set the content inset to accommodate the `limitButton`
-//        let bottomInset = view.bounds.height - totalTableViewHeight
-//        print("bottomInset = ", bottomInset)
+        //        let bottomInset = view.bounds.height - totalTableViewHeight
+        //        print("bottomInset = ", bottomInset)
         limitTableView.contentInset = UIEdgeInsets(top: 00, left: 0, bottom: totalTableViewHeight, right: 0)
     }
-
-
+    
+    
     private func configureTableView(_ tableView: UITableView, cellClass: UITableViewCell.Type, identifier: String) {
         view.addSubview(tableView)
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -476,52 +481,104 @@ class MainVC: UIViewController, LimitItemDelegate{
         
         tableView.dataSource = self
         tableView.delegate = self
-//        tableView.backgroundColor = UIColor.red // 원하는 색상으로 변경
+        //        tableView.backgroundColor = UIColor.red // 원하는 색상으로 변경
         
         if tableView == actionTableView {
-//            tableView.backgroundColor = UIColor.orange // ActionTableView의 배경색을 orange로 변경
+            //            tableView.backgroundColor = UIColor.orange // ActionTableView의 배경색을 orange로 변경
             tableView.backgroundColor = .base50
         } else if tableView == limitTableView {
             tableView.backgroundColor = .base50
-//            tableView.backgroundColor = UIColor.brown // LimitTableView의 배경색을 brown으로 변경
+            //            tableView.backgroundColor = UIColor.brown // LimitTableView의 배경색을 brown으로 변경
         }
-
+        
         tableView.register(cellClass, forCellReuseIdentifier: identifier)
     }
-
-//    @objc func firstButtonTapped() {
-//        pieChartViewController.firstAppUI()
-//    }
-//
-//    @objc func secondButtonTapped() {
-//        pieChartViewController.secondAppUI()
-//    }
-//
-//    @objc func thirdButtonTapped() {
-//        pieChartViewController.thirdAppUI()
-//    }
-
+    
+    //    @objc func firstButtonTapped() {
+    //        pieChartViewController.firstAppUI()
+    //    }
+    //
+    //    @objc func secondButtonTapped() {
+    //        pieChartViewController.secondAppUI()
+    //    }
+    //
+    //    @objc func thirdButtonTapped() {
+    //        pieChartViewController.thirdAppUI()
+    //    }
+    
+    func getActionData() {  // MARK: - "completion: @escaping ActionDataCompletion" 파라미터 추가
+        if let url = URL(string: "\(urlLink)actionItem/\(userId)/all") {
+            let session = URLSession(configuration: .default)
+            let task = session.dataTask(with: url) { data, response, error in
+                if let error = error {
+                    print("🚨 Error: \(error.localizedDescription)")
+                    return
+                }
+                // JSON data를 가져온다. optional 풀어줘야 함
+                if let JSONdata = data {
+                    let dataString = String(data: JSONdata, encoding: .utf8) //얘도 확인을 위한 코드임
+                    print(dataString!)
+                    // JSONDecoder 사용하기
+                    let decoder = JSONDecoder() // initialize
+                    do {
+                        let decodeData = try decoder.decode(ActionItemData.self, from: JSONdata)
+                        
+                        DispatchQueue.main.async {
+                            self.actionItems = decodeData.data.map {
+                                ActionDummyDataType(category: $0.category, content: $0.content)
+                            }
+                            self.actionTableView.reloadData()
+                            // self.ActionItemData = decodeData
+                            // self.collectionView.reloadData()
+                            //                        completion(decodeData) // MARK: - // 성공 시 가져온 데이터 전달
+                            print("🤢 decodeData", decodeData)
+                            let categories = decodeData.data.map { $0.category }
+                            print("🎃", categories)
+                            let contents = decodeData.data.map { $0.content }
+                            print("🎃", contents)
+                            print(ActionItemData.self)
+                        }
+                        
+                    } catch {
+                        print("🚨 JSON decoding error: \(error)")
+                    }
+                }
+            }
+            task.resume()
+        }
+    }
+    
     
     @objc func actionButtonTapped() {
+        print()
         let actionItemController = ActionItemController()
-//        actionItemController.delegate = self // Set MainVC as the delegate for ActionItemController
+        //        actionItemController.delegate = self // Set MainVC as the delegate for ActionItemController
         navigationController?.pushViewController(actionItemController, animated: true)
         
         // MARK: ram - test code
-//        let monitoringView = MonitoringView()
-//        let hostingController = UIHostingController(rootView: monitoringView)
-//        navigationController?.pushViewController(hostingController, animated: true)
-
-//        //MARK: 서윤 - saveactionitem 확인
-//        let saveActionItemController = BeforeAnalysisVC()
-//        navigationController?.pushViewController(saveActionItemController, animated: true)
+        //        let monitoringView = MonitoringView()
+        //        let hostingController = UIHostingController(rootView: monitoringView)
+        //        navigationController?.pushViewController(hostingController, animated: true)
+        
+        //        //MARK: 서윤 - saveactionitem 확인
+        //        let saveActionItemController = BeforeAnalysisVC()
+        //        navigationController?.pushViewController(saveActionItemController, animated: true)
     }
-
+    
     @objc func limitButtonTapped() {
         // MARK: ram - test code
-         print("addButtonTapped")
-         let scheduleView = ScheduleView()
-         let hostingController = UIHostingController(rootView: scheduleView)
-         navigationController?.pushViewController(hostingController, animated: true)
+        print("addButtonTapped")
+        let scheduleView = ScheduleView()
+        let hostingController = UIHostingController(rootView: scheduleView)
+        navigationController?.pushViewController(hostingController, animated: true)
+    }
+    @objc func reloadCollectionView() {
+        DispatchQueue.main.async {
+            self.getActionData()
+            self.actionTableView.reloadData()
+        }
+    }
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
 }
