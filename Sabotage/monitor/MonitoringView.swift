@@ -1,14 +1,6 @@
-//
-//  MonitoringView.swift
-//  Sabotage
-//
-//  Created by 김하람 on 12/31/23.
-//
-
 import DeviceActivity
 import SwiftUI
 
-// MARK: - Device Activity Report 내용을 보여주는 뷰
 struct MonitoringView: View {
     @EnvironmentObject var scheduleVM: ScheduleVM
     
@@ -21,15 +13,14 @@ struct MonitoringView: View {
             ) ?? DateInterval()
         )
     )
+
+    @State private var selectedDate: Date = Date() // Added this line
     
     var body: some View {
         VStack {
-//            Text("Device Activity Report")
-//                .font(.title)
-//                .padding()
-//            
             DeviceActivityReport(context, filter: filter)
-                .frame(height: 300)
+                .frame(width: 150, height: 200)
+                .background(Color.gray) // Changed to Color.gray (assuming .base200 is a custom color)
                 .onAppear {
                     filter = DeviceActivityFilter(
                         segment: .daily(
@@ -39,14 +30,21 @@ struct MonitoringView: View {
                         ),
                         users: .all,
                         devices: .init([.iPhone]),
-                        // MARK: - ram 우리가 제한한 앱만 보여줌
                         applications: scheduleVM.selection.applicationTokens,
                         categories: scheduleVM.selection.categoryTokens
                     )
+                    
+                    // Console에 값을 출력합니다.
+                    print("🐥 Current Filter: \(filter)")
+                    print("🍀Current Context: \(context)")
                 }
-            //            .frame(height: 300)
+            DatePicker("Select Date", selection: $selectedDate, displayedComponents: .date)
+                .padding()
+                .onChange(of: selectedDate) { newValue in
+                    print("🦢Selected Date: \(newValue)")
+                    // You can perform actions or notify Main.swift here
+                }
         }
-        
     }
 }
 

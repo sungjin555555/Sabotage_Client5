@@ -55,11 +55,6 @@ class SaveActionItemController: UIViewController, UITextFieldDelegate {
         textField.translatesAutoresizingMaskIntoConstraints = false
         return textField
     }()
-    // 외부에서 텍스트를 전달받아 content에 할당하는 함수
-    func receiveTextFromExternalSource(text: String) {
-        content = text // 외부에서 받은 텍스트를 content에 할당
-        inputField.text = content // content를 textField의 placeholder로 설정
-    }
     
     // MARK: UI
     func setUI() {
@@ -67,10 +62,11 @@ class SaveActionItemController: UIViewController, UITextFieldDelegate {
         closeButton.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(closeButton)
 
-        
         Title.contentMode = .center
         Title.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(Title)
+        
+        // MARK: - 외부 데이터 받기 -> selectedActionItem?.category
         
         if let category = selectedActionItem?.category {
             let categoryImageName: String
@@ -175,6 +171,7 @@ class SaveActionItemController: UIViewController, UITextFieldDelegate {
         setUI()
         setConstraint()
         
+        // MARK: - 외부 데이터 ->selectedActionItem?.content
         inputField.text = selectedActionItem?.content
         
         print("Selected card: \(selectedCard)")
@@ -242,6 +239,7 @@ class SaveActionItemController: UIViewController, UITextFieldDelegate {
     }
     
     @objc func saveButtonChangedTapped() {
+        
         
         navigationController?.popToRootViewController(animated: true)
     }
