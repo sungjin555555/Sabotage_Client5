@@ -318,6 +318,8 @@ class MainVC: UIViewController, LimitItemDelegate{
         getLimitData()
         NotificationCenter.default.addObserver(self, selector: #selector(reloadCollectionView), name: .addLimitNotification, object: nil)
         
+        // MARK: - EjectionPostRequest
+        EjectionPostRequest()
         
         // MARK: tableView 관련 코드
         actionTableView = UITableView(frame: .zero, style: .plain)
