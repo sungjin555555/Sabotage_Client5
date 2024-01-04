@@ -66,15 +66,15 @@
 		21741A1B2B417CCB0062B0D7 /* DeviceActivityMonitor.appex in Resources */ = {isa = PBXBuildFile; fileRef = 2169E7D72B3D750C00A8DC07 /* DeviceActivityMonitor.appex */; };
 		21741A1E2B417D520062B0D7 /* MonitoringView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21741A1D2B417D520062B0D7 /* MonitoringView.swift */; };
 		21750E062B4159BA004E9A04 /* LimitViewSU.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21750E052B4159BA004E9A04 /* LimitViewSU.swift */; };
-		2184A6C72B45F7EE00008073 /* AppleSDGothicNeoUL.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2184A6BE2B45F7EE00008073 /* AppleSDGothicNeoUL.ttf */; };
-		2184A6C82B45F7EE00008073 /* AppleSDGothicNeoB.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2184A6BF2B45F7EE00008073 /* AppleSDGothicNeoB.ttf */; };
-		2184A6C92B45F7EE00008073 /* AppleSDGothicNeoL.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2184A6C02B45F7EE00008073 /* AppleSDGothicNeoL.ttf */; };
-		2184A6CA2B45F7EE00008073 /* AppleSDGothicNeoH.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2184A6C12B45F7EE00008073 /* AppleSDGothicNeoH.ttf */; };
-		2184A6CB2B45F7EE00008073 /* AppleSDGothicNeoEB.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2184A6C22B45F7EE00008073 /* AppleSDGothicNeoEB.ttf */; };
-		2184A6CC2B45F7EE00008073 /* AppleSDGothicNeoT.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2184A6C32B45F7EE00008073 /* AppleSDGothicNeoT.ttf */; };
-		2184A6CD2B45F7EE00008073 /* AppleSDGothicNeoM.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2184A6C42B45F7EE00008073 /* AppleSDGothicNeoM.ttf */; };
-		2184A6CE2B45F7EE00008073 /* AppleSDGothicNeoR.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2184A6C52B45F7EE00008073 /* AppleSDGothicNeoR.ttf */; };
-		2184A6CF2B45F7EE00008073 /* AppleSDGothicNeoSB.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2184A6C62B45F7EE00008073 /* AppleSDGothicNeoSB.ttf */; };
+		2184A6D92B466A8500008073 /* AppleSDGothicNeoT.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2184A6D02B466A8400008073 /* AppleSDGothicNeoT.ttf */; };
+		2184A6DA2B466A8500008073 /* AppleSDGothicNeoUL.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2184A6D12B466A8400008073 /* AppleSDGothicNeoUL.ttf */; };
+		2184A6DB2B466A8500008073 /* AppleSDGothicNeoSB.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2184A6D22B466A8400008073 /* AppleSDGothicNeoSB.ttf */; };
+		2184A6DC2B466A8500008073 /* AppleSDGothicNeoEB.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2184A6D32B466A8400008073 /* AppleSDGothicNeoEB.ttf */; };
+		2184A6DD2B466A8500008073 /* AppleSDGothicNeoH.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2184A6D42B466A8500008073 /* AppleSDGothicNeoH.ttf */; };
+		2184A6DE2B466A8500008073 /* AppleSDGothicNeoL.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2184A6D52B466A8500008073 /* AppleSDGothicNeoL.ttf */; };
+		2184A6DF2B466A8500008073 /* AppleSDGothicNeoB.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2184A6D62B466A8500008073 /* AppleSDGothicNeoB.ttf */; };
+		2184A6E02B466A8500008073 /* AppleSDGothicNeoM.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2184A6D72B466A8500008073 /* AppleSDGothicNeoM.ttf */; };
+		2184A6E12B466A8500008073 /* AppleSDGothicNeoR.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2184A6D82B466A8500008073 /* AppleSDGothicNeoR.ttf */; };
 		21E458782B41984300AFC7F4 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 21E458772B41984300AFC7F4 /* Colors.xcassets */; };
 		21E4587C2B41F22D00AFC7F4 /* DeviceID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21E4587B2B41F22D00AFC7F4 /* DeviceID.swift */; };
 		21E4587F2B42007800AFC7F4 /* Buttons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21E4587E2B42007800AFC7F4 /* Buttons.swift */; };
@@ -208,15 +208,15 @@
 		21741A092B41699E0062B0D7 /* shared.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = shared.xcconfig; sourceTree = "<group>"; };
 		21741A1D2B417D520062B0D7 /* MonitoringView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonitoringView.swift; sourceTree = "<group>"; };
 		21750E052B4159BA004E9A04 /* LimitViewSU.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LimitViewSU.swift; sourceTree = "<group>"; };
-		2184A6BE2B45F7EE00008073 /* AppleSDGothicNeoUL.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = AppleSDGothicNeoUL.ttf; path = "../../../../Apple 산돌고딕 Neo/AppleSDGothicNeoUL.ttf"; sourceTree = "<group>"; };
-		2184A6BF2B45F7EE00008073 /* AppleSDGothicNeoB.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = AppleSDGothicNeoB.ttf; path = "../../../../Apple 산돌고딕 Neo/AppleSDGothicNeoB.ttf"; sourceTree = "<group>"; };
-		2184A6C02B45F7EE00008073 /* AppleSDGothicNeoL.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = AppleSDGothicNeoL.ttf; path = "../../../../Apple 산돌고딕 Neo/AppleSDGothicNeoL.ttf"; sourceTree = "<group>"; };
-		2184A6C12B45F7EE00008073 /* AppleSDGothicNeoH.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = AppleSDGothicNeoH.ttf; path = "../../../../Apple 산돌고딕 Neo/AppleSDGothicNeoH.ttf"; sourceTree = "<group>"; };
-		2184A6C22B45F7EE00008073 /* AppleSDGothicNeoEB.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = AppleSDGothicNeoEB.ttf; path = "../../../../Apple 산돌고딕 Neo/AppleSDGothicNeoEB.ttf"; sourceTree = "<group>"; };
-		2184A6C32B45F7EE00008073 /* AppleSDGothicNeoT.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = AppleSDGothicNeoT.ttf; path = "../../../../Apple 산돌고딕 Neo/AppleSDGothicNeoT.ttf"; sourceTree = "<group>"; };
-		2184A6C42B45F7EE00008073 /* AppleSDGothicNeoM.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = AppleSDGothicNeoM.ttf; path = "../../../../Apple 산돌고딕 Neo/AppleSDGothicNeoM.ttf"; sourceTree = "<group>"; };
-		2184A6C52B45F7EE00008073 /* AppleSDGothicNeoR.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = AppleSDGothicNeoR.ttf; path = "../../../../Apple 산돌고딕 Neo/AppleSDGothicNeoR.ttf"; sourceTree = "<group>"; };
-		2184A6C62B45F7EE00008073 /* AppleSDGothicNeoSB.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = AppleSDGothicNeoSB.ttf; path = "../../../../Apple 산돌고딕 Neo/AppleSDGothicNeoSB.ttf"; sourceTree = "<group>"; };
+		2184A6D02B466A8400008073 /* AppleSDGothicNeoT.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = AppleSDGothicNeoT.ttf; path = "../../../../../Apple 산돌고딕 Neo/AppleSDGothicNeoT.ttf"; sourceTree = "<group>"; };
+		2184A6D12B466A8400008073 /* AppleSDGothicNeoUL.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = AppleSDGothicNeoUL.ttf; path = "../../../../../Apple 산돌고딕 Neo/AppleSDGothicNeoUL.ttf"; sourceTree = "<group>"; };
+		2184A6D22B466A8400008073 /* AppleSDGothicNeoSB.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = AppleSDGothicNeoSB.ttf; path = "../../../../../Apple 산돌고딕 Neo/AppleSDGothicNeoSB.ttf"; sourceTree = "<group>"; };
+		2184A6D32B466A8400008073 /* AppleSDGothicNeoEB.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = AppleSDGothicNeoEB.ttf; path = "../../../../../Apple 산돌고딕 Neo/AppleSDGothicNeoEB.ttf"; sourceTree = "<group>"; };
+		2184A6D42B466A8500008073 /* AppleSDGothicNeoH.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = AppleSDGothicNeoH.ttf; path = "../../../../../Apple 산돌고딕 Neo/AppleSDGothicNeoH.ttf"; sourceTree = "<group>"; };
+		2184A6D52B466A8500008073 /* AppleSDGothicNeoL.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = AppleSDGothicNeoL.ttf; path = "../../../../../Apple 산돌고딕 Neo/AppleSDGothicNeoL.ttf"; sourceTree = "<group>"; };
+		2184A6D62B466A8500008073 /* AppleSDGothicNeoB.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = AppleSDGothicNeoB.ttf; path = "../../../../../Apple 산돌고딕 Neo/AppleSDGothicNeoB.ttf"; sourceTree = "<group>"; };
+		2184A6D72B466A8500008073 /* AppleSDGothicNeoM.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = AppleSDGothicNeoM.ttf; path = "../../../../../Apple 산돌고딕 Neo/AppleSDGothicNeoM.ttf"; sourceTree = "<group>"; };
+		2184A6D82B466A8500008073 /* AppleSDGothicNeoR.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = AppleSDGothicNeoR.ttf; path = "../../../../../Apple 산돌고딕 Neo/AppleSDGothicNeoR.ttf"; sourceTree = "<group>"; };
 		21E458772B41984300AFC7F4 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		21E4587B2B41F22D00AFC7F4 /* DeviceID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceID.swift; sourceTree = "<group>"; };
 		21E4587E2B42007800AFC7F4 /* Buttons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Buttons.swift; sourceTree = "<group>"; };
@@ -516,15 +516,15 @@
 		883D8E052B42A68B003DD8C5 /* Font */ = {
 			isa = PBXGroup;
 			children = (
-				2184A6BF2B45F7EE00008073 /* AppleSDGothicNeoB.ttf */,
-				2184A6C22B45F7EE00008073 /* AppleSDGothicNeoEB.ttf */,
-				2184A6C12B45F7EE00008073 /* AppleSDGothicNeoH.ttf */,
-				2184A6C02B45F7EE00008073 /* AppleSDGothicNeoL.ttf */,
-				2184A6C42B45F7EE00008073 /* AppleSDGothicNeoM.ttf */,
-				2184A6C52B45F7EE00008073 /* AppleSDGothicNeoR.ttf */,
-				2184A6C62B45F7EE00008073 /* AppleSDGothicNeoSB.ttf */,
-				2184A6C32B45F7EE00008073 /* AppleSDGothicNeoT.ttf */,
-				2184A6BE2B45F7EE00008073 /* AppleSDGothicNeoUL.ttf */,
+				2184A6D62B466A8500008073 /* AppleSDGothicNeoB.ttf */,
+				2184A6D32B466A8400008073 /* AppleSDGothicNeoEB.ttf */,
+				2184A6D42B466A8500008073 /* AppleSDGothicNeoH.ttf */,
+				2184A6D52B466A8500008073 /* AppleSDGothicNeoL.ttf */,
+				2184A6D72B466A8500008073 /* AppleSDGothicNeoM.ttf */,
+				2184A6D82B466A8500008073 /* AppleSDGothicNeoR.ttf */,
+				2184A6D22B466A8400008073 /* AppleSDGothicNeoSB.ttf */,
+				2184A6D02B466A8400008073 /* AppleSDGothicNeoT.ttf */,
+				2184A6D12B466A8400008073 /* AppleSDGothicNeoUL.ttf */,
 			);
 			path = Font;
 			sourceTree = "<group>";
@@ -788,19 +788,19 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2184A6CC2B45F7EE00008073 /* AppleSDGothicNeoT.ttf in Resources */,
+				2184A6DB2B466A8500008073 /* AppleSDGothicNeoSB.ttf in Resources */,
+				2184A6DA2B466A8500008073 /* AppleSDGothicNeoUL.ttf in Resources */,
+				2184A6DC2B466A8500008073 /* AppleSDGothicNeoEB.ttf in Resources */,
+				2184A6D92B466A8500008073 /* AppleSDGothicNeoT.ttf in Resources */,
 				214CC4882B3C4784003B74EB /* Preview Assets.xcassets in Resources */,
+				2184A6DD2B466A8500008073 /* AppleSDGothicNeoH.ttf in Resources */,
+				2184A6DE2B466A8500008073 /* AppleSDGothicNeoL.ttf in Resources */,
+				2184A6E12B466A8500008073 /* AppleSDGothicNeoR.ttf in Resources */,
 				21E458782B41984300AFC7F4 /* Colors.xcassets in Resources */,
-				2184A6CA2B45F7EE00008073 /* AppleSDGothicNeoH.ttf in Resources */,
-				2184A6C82B45F7EE00008073 /* AppleSDGothicNeoB.ttf in Resources */,
-				2184A6CB2B45F7EE00008073 /* AppleSDGothicNeoEB.ttf in Resources */,
 				214CC4852B3C4784003B74EB /* Assets.xcassets in Resources */,
-				2184A6C92B45F7EE00008073 /* AppleSDGothicNeoL.ttf in Resources */,
-				2184A6CE2B45F7EE00008073 /* AppleSDGothicNeoR.ttf in Resources */,
-				2184A6CF2B45F7EE00008073 /* AppleSDGothicNeoSB.ttf in Resources */,
 				21741A1B2B417CCB0062B0D7 /* DeviceActivityMonitor.appex in Resources */,
-				2184A6C72B45F7EE00008073 /* AppleSDGothicNeoUL.ttf in Resources */,
-				2184A6CD2B45F7EE00008073 /* AppleSDGothicNeoM.ttf in Resources */,
+				2184A6DF2B466A8500008073 /* AppleSDGothicNeoB.ttf in Resources */,
+				2184A6E02B466A8500008073 /* AppleSDGothicNeoM.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
