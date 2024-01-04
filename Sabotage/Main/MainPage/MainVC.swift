@@ -499,7 +499,7 @@ class MainVC: UIViewController, LimitItemDelegate{
                             self.limitItems = decodeData.data.map {
                                 LimitDummyDataType(title: $0.title, timeBudget: $0.timeBudget)
                             }
-                            self.actionTableView.reloadData()
+                            self.limitTableView.reloadData()
                             print("🤢 decodeData", decodeData)
                             let title = decodeData.data.map { $0.title }
                             print("🎃", title)
