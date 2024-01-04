@@ -278,8 +278,7 @@ class MainVC: UIViewController, LimitItemDelegate{
     ]
     var limitItems: [LimitDummyDataType] = [
         LimitDummyDataType(title: "제한그룹 1", timeBudget: 1),
-        LimitDummyDataType(title: "제한그룹 2", timeBudget: 1),
-        LimitDummyDataType(title: "제한그룹 3", timeBudget: 1)
+        LimitDummyDataType(title: "제한그룹 2", timeBudget: 1)
     ]
     
     // tableview data
@@ -351,7 +350,7 @@ class MainVC: UIViewController, LimitItemDelegate{
         // Auto Layout을 위한 설정
         limitTableView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            limitTableView.topAnchor.constraint(equalTo: view.bottomAnchor, constant: -500), // UITableview 영역 (가장 최신으로 반영)
+            limitTableView.topAnchor.constraint(equalTo: view.bottomAnchor, constant: -400), // UITableview 영역 (가장 최신으로 반영)
             limitTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             limitTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             limitTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
@@ -399,7 +398,7 @@ class MainVC: UIViewController, LimitItemDelegate{
         limitButton.isHidden = true
         NSLayoutConstraint.activate([
             limitButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            limitButton.topAnchor.constraint(equalTo: limitTableView.bottomAnchor, constant: 450),
+            limitButton.topAnchor.constraint(equalTo: limitTableView.bottomAnchor, constant: 150),
             limitButton.widthAnchor.constraint(equalToConstant: 350), // Adjust the width and height based on your image size
             limitButton.heightAnchor.constraint(equalToConstant: 100) // Adjust the width and height based on your image size
         ])
