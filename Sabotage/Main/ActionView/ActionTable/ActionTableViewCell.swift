@@ -8,7 +8,7 @@ class ActionTableViewCell: UITableViewCell {
     
     let cellBackgroundView: UIView = {
         let view = UIView()
-        view.backgroundColor = .base300
+        view.backgroundColor = .white
         view.layer.cornerRadius = 20
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
@@ -83,10 +83,10 @@ class ActionTableViewCell: UITableViewCell {
             categoryType.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 55),
             categoryType.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 120),
             
-            categoryImage.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 30),
+            categoryImage.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 23),
             categoryImage.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 50),
-            categoryImage.widthAnchor.constraint(equalToConstant: 40), // Adjust the image size as needed
-            categoryImage.heightAnchor.constraint(equalToConstant: 40) // Adjust the image size as needed
+            categoryImage.widthAnchor.constraint(equalToConstant: 50), // Adjust the image size as needed
+            categoryImage.heightAnchor.constraint(equalToConstant: 50) // Adjust the image size as needed
         ])
     }
 }

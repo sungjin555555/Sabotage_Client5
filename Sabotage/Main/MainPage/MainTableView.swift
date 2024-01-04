@@ -50,11 +50,21 @@ extension MainVC: UITableViewDataSource, UITableViewDelegate {
         if tableView == actionTableView {
             // ActionTableView에서 셀을 선택한 경우 동작 정의
             print("ActionTableView의 \(indexPath.row) 번째 셀 선택됨")
-        } else if tableView == limitTableView {
-            // LimitTableView에서 셀을 선택한 경우 동작 정의
-            print("LimitTableView의 \(indexPath.row) 번째 셀 선택됨")
+            
+            // 선택한 셀의 정보 가져오기
+            let selectedActionItem = actionItems[indexPath.row]
+            
+            // 전환될 뷰 컨트롤러 생성
+            let saveActionItemController = SaveActionItemController()
+            
+            // 전달할 데이터 설정
+            saveActionItemController.selectedActionItem = selectedActionItem
+            
+            // 뷰 컨트롤러 전환
+            navigationController?.pushViewController(saveActionItemController, animated: true)
         }
     }
+
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if tableView == actionTableView {

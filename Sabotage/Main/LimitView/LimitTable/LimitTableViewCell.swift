@@ -6,7 +6,7 @@ class LimitTableViewCell: UITableViewCell {
     
     let cellBackgroundView: UIView = {
         let view = UIView()
-        view.backgroundColor = .base200
+        view.backgroundColor = .white
         view.layer.cornerRadius = 20
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
