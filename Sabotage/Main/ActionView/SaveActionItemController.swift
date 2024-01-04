@@ -26,12 +26,26 @@ class SaveActionItemController: UIViewController, UITextFieldDelegate {
     let inputItem = UIImageView(image: UIImage(named: "addaction_inputitem.png"))
     var content: String = "" // MARK: 외부에서 받을 content
     
+    static let buttonText = "저장하기" // Declare text as a static property
+
     let saveButton: UIButton = {
         let button = UIButton()
-        button.setImage(UIImage(named: "saveButton.png"), for: .normal)
+        button.setTitle(SaveActionItemController.buttonText, for: .normal) // Use the static property here
+        button.setTitleColor(.base50, for: .normal)
+        button.setBackgroundImage(UIImage(named: "saveButton.png"), for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
+
+    let saveButtonChanged: UIButton = {
+        let button = UIButton()
+        button.setTitle(SaveActionItemController.buttonText, for: .normal) // Use the static property here
+        button.setTitleColor(.base500, for: .normal)
+        button.setBackgroundImage(UIImage(named: "saveButtonChanged.png"), for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+
     let deleteButton = UIImageView(image: UIImage(named: "deleteButton.png"))
     
     let inputField: UITextField = {
@@ -92,6 +106,7 @@ class SaveActionItemController: UIViewController, UITextFieldDelegate {
         view.addSubview(inputField)
         
         view.addSubview(saveButton)
+        view.addSubview(saveButtonChanged)
         
         deleteButton.contentMode = .scaleAspectFit
         deleteButton.translatesAutoresizingMaskIntoConstraints = false
@@ -132,6 +147,11 @@ class SaveActionItemController: UIViewController, UITextFieldDelegate {
             saveButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -80),
             saveButton.heightAnchor.constraint(equalToConstant: 70),
             
+            saveButtonChanged.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            saveButtonChanged.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            saveButtonChanged.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -80),
+            saveButtonChanged.heightAnchor.constraint(equalToConstant: 70),
+            
             deleteButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -60),
 //            deleteButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             deleteButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
@@ -150,6 +170,8 @@ class SaveActionItemController: UIViewController, UITextFieldDelegate {
             print("Selected Action Item: \(selectedActionItem)")
         }
         
+        saveButtonChanged.isHidden = true
+        
         setUI()
         setConstraint()
         
@@ -157,8 +179,8 @@ class SaveActionItemController: UIViewController, UITextFieldDelegate {
         
         print("Selected card: \(selectedCard)")
         
-        saveButton.addTarget(self, action: #selector(saveButtonTapped), for: .touchUpInside)
-        view.addSubview(saveButton)
+        saveButtonChanged.addTarget(self, action: #selector(saveButtonChangedTapped), for: .touchUpInside)
+        view.addSubview(saveButtonChanged)
         
         let tapGestureDelete = UITapGestureRecognizer(target: self, action: #selector(deleteButtonTapped))
         deleteButton.addGestureRecognizer(tapGestureDelete)
@@ -219,28 +241,31 @@ class SaveActionItemController: UIViewController, UITextFieldDelegate {
         navigationController?.popViewController(animated: true)
     }
     
-    @objc func saveButtonTapped() {
+    @objc func saveButtonChangedTapped() {
         
         navigationController?.popToRootViewController(animated: true)
     }
 
-    @objc func deleteButtonTapped() {
-        let alert = UIAlertController(title: "정말 삭제하시겠어요?", message: "삭제하면 다시 불러올 수 없어요", preferredStyle: .alert)
-
-        // 취소 버튼
-        alert.addAction(UIAlertAction(title: "취소", style: .cancel, handler: nil))
-        // 삭제 버튼
-        alert.addAction(UIAlertAction(title: "삭제", style: .destructive, handler: { _ in
-            // 삭제 작업 수행
-        }))
-        present(alert, animated: true, completion: nil)
-    }
+//    @objc func deleteButtonTapped() {
+//        let alert = UIAlertController(title: "정말 삭제하시겠어요?", message: "삭제하면 다시 불러올 수 없어요", preferredStyle: .alert)
+//
+//        // 취소 버튼
+//        alert.addAction(UIAlertAction(title: "취소", style: .cancel, handler: nil))
+//        // 삭제 버튼
+//        alert.addAction(UIAlertAction(title: "삭제", style: .destructive, handler: { _ in
+//            // 삭제 작업 수행
+//        }))
+//        present(alert, animated: true, completion: nil)
+//    }
     // 저장하기 
     @objc func textFieldDidChange(_ textField: UITextField) {
         if let text = textField.text, let originalContent = selectedActionItem?.content, text != originalContent {
-            saveButton.setImage(UIImage(named: "saveButtonChanged.png"), for: .normal)
+//            saveButton.setImage(UIImage(named: "saveButtonChanged.png"), for: .normal)
+            saveButton.isHidden = true
+            saveButtonChanged.isHidden = false
         } else {
-            saveButton.setImage(UIImage(named: "saveButton.png"), for: .normal)
+//            saveButton.setImage(UIImage(named: "saveButton.png"), for: .normal)
+//            saveButtonChanged.isHidden = false
         }
     }
 

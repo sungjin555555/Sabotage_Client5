@@ -23,22 +23,29 @@ struct MonitoringView: View {
     )
     
     var body: some View {
-        DeviceActivityReport(context, filter: filter)
-            .onAppear {
-                filter = DeviceActivityFilter(
-                    segment: .daily(
-                        during: Calendar.current.dateInterval(
-                            of: .day, for: .now
-                        ) ?? DateInterval()
-                    ),
-                    users: .all,
-                    devices: .init([.iPhone]),
-                    // MARK: - ram 우리가 제한한 앱만 보여줌
-                    applications: scheduleVM.selection.applicationTokens,
-                    categories: scheduleVM.selection.categoryTokens
-                )
-            }
-//            .frame(height: 300)
+        VStack {
+//            Text("Device Activity Report")
+//                .font(.title)
+//                .padding()
+//            
+            DeviceActivityReport(context, filter: filter)
+                .frame(height: 300)
+                .onAppear {
+                    filter = DeviceActivityFilter(
+                        segment: .daily(
+                            during: Calendar.current.dateInterval(
+                                of: .day, for: .now
+                            ) ?? DateInterval()
+                        ),
+                        users: .all,
+                        devices: .init([.iPhone]),
+                        // MARK: - ram 우리가 제한한 앱만 보여줌
+                        applications: scheduleVM.selection.applicationTokens,
+                        categories: scheduleVM.selection.categoryTokens
+                    )
+                }
+            //            .frame(height: 300)
+        }
         
     }
 }

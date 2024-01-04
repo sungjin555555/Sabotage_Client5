@@ -7,10 +7,10 @@ import SwiftUI
 import SnapKit
 import Then
 
-struct ActionData {
-    let category: String
-    let content: String
-}
+//struct ActionData {
+//    let category: String
+//    let content: String
+//}
 
 protocol LimitItemDelegate: AnyObject {
     func addNewLimitItem(_ itemName: String)
@@ -50,16 +50,17 @@ class MainVC: UIViewController, LimitItemDelegate{
     let leftButton = UIButton(type: .system)
     let rightButton = UIButton(type: .system)
     
-    func updateActionTableView(with actionData: [ActionData]) {
-        // actionData를 받은 후 actionItems에 추가합니다.
-        for data in actionData {
-            let newActionItem = ActionDummyDataType(category: data.category, content: data.content)
-            actionItems.append(newActionItem)
-        }
-        
-        // TableView 업데이트
-        actionTableView.reloadData()
-    }
+//    func updateActionTableView(with actionData: [ActionData]) {
+//        // actionData를 받은 후 actionItems에 추가합니다.
+//        for data in actionData {
+//            let newActionItem = ActionDummyDataType(category: data.category, content: data.content)
+//            actionItems.append(newActionItem)
+//        }
+//        
+//        // TableView 업데이트
+//        actionTableView.reloadData()
+//    }
+    
     func toggleUI() {
         
         actionTogglebuttonTapped.contentMode = .scaleAspectFit
@@ -169,6 +170,27 @@ class MainVC: UIViewController, LimitItemDelegate{
         ])
     }
     
+    func top3Apps() {
+        let scheduleVM = ScheduleVM() // 이 부분은 ScheduleVM의 인스턴스를 만드는 부분입니다. 여기서 필요에 따라 적절한 초기화나 설정을 해주세요.
+
+        let monitoringView = MonitoringView().environmentObject(scheduleVM)
+        let hostingController = UIHostingController(rootView: monitoringView)
+        addChild(hostingController)
+        pieChartBG.addSubview(hostingController.view)
+
+        // Set constraints for the HostingController's view using Auto Layout or other layout methods
+        hostingController.view.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            hostingController.view.topAnchor.constraint(equalTo: pieChartBG.topAnchor, constant: 30),
+            hostingController.view.leadingAnchor.constraint(equalTo: pieChartBG.centerXAnchor, constant: 10),
+            hostingController.view.trailingAnchor.constraint(equalTo: pieChartBG.trailingAnchor, constant: -30),
+            hostingController.view.bottomAnchor.constraint(equalTo: pieChartBG.bottomAnchor, constant: -130)
+        ])
+        hostingController.didMove(toParent: self)
+    }
+
+
+    
     func pieChartViewUI() {
         logoImageView.contentMode = .scaleAspectFit // 로고 이미지의 크기를 유지하면서 비율을 맞춤
         view.addSubview(logoImageView)
@@ -207,6 +229,8 @@ class MainVC: UIViewController, LimitItemDelegate{
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(forMoreAnalysisTapped))
         forMoreAnalysis.isUserInteractionEnabled = true
         forMoreAnalysis.addGestureRecognizer(tapGesture)
+        
+        top3Apps()
         
     }
     
@@ -458,7 +482,7 @@ class MainVC: UIViewController, LimitItemDelegate{
         tableView.register(cellClass, forCellReuseIdentifier: identifier)
     }
 
-    func getActionData() {  // MARK: - "completion: @escaping ActionDataCompletion" 파라미터 추가
+    func getActionData() {
         if let url = URL(string: "\(urlLink)actionItem/\(userId)/all") {
             let session = URLSession(configuration: .default)
             let task = session.dataTask(with: url) { data, response, error in
@@ -537,13 +561,20 @@ class MainVC: UIViewController, LimitItemDelegate{
     
     @objc func actionButtonTapped() {
 
-        let actionItemController =  ActionItemController() // 잠깐 test
-        navigationController?.pushViewController(actionItemController, animated: true)
+//        let actionItemController =  ActionItemController() // 잠깐 test
+//        navigationController?.pushViewController(actionItemController, animated: true)
+        
+        // MARK: 성진 - TotalActivityView
+//
+//        let totalActivityView = TotalActivityView(/*activityReport:*/ /* pass your ActivityReport here */)
+//        let hostingController = UIHostingController(rootView: totalActivityView)
+//        navigationController?.pushViewController(hostingController, animated: true)
+////        }
         
         // MARK: ram - test code
-        //        let monitoringView = MonitoringView()
-        //        let hostingController = UIHostingController(rootView: monitoringView)
-        //        navigationController?.pushViewController(hostingController, animated: true)
+                let monitoringView = MonitoringView()
+                let hostingController = UIHostingController(rootView: monitoringView)
+                navigationController?.pushViewController(hostingController, animated: true)
         
         //        //MARK: 서윤 - saveactionitem 확인
         //        let saveActionItemController = BeforeAnalysisVC()
