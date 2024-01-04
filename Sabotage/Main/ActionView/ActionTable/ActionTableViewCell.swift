@@ -1,8 +1,9 @@
 import UIKit
 
 class ActionTableViewCell: UITableViewCell {
-    
-    var categoryType: UILabel!
+
+    var categoryLabel: UILabel!
+
     var contentLabel: UILabel!
     var categoryImage: UIImageView! // Include the UIImageView for category images
     
@@ -72,6 +73,7 @@ class ActionTableViewCell: UITableViewCell {
         categoryImage.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
+
             cellBackgroundView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 0),
             cellBackgroundView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
             cellBackgroundView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
@@ -88,5 +90,12 @@ class ActionTableViewCell: UITableViewCell {
             categoryImage.widthAnchor.constraint(equalToConstant: 50), // Adjust the image size as needed
             categoryImage.heightAnchor.constraint(equalToConstant: 50) // Adjust the image size as needed
         ])
+
+        func configure(with category: String, content: String) {
+            // Configure cell with data
+            categoryLabel.text = category
+            contentLabel.text = content
+        }
+
     }
 }

@@ -92,6 +92,7 @@ struct TotalActivityReport: DeviceActivityReportScene {
                     //                }
                     func scheduleNotification_each0(appName: String) {
                         if notificationSentForApps["\(appName)1"] != true {
+                     
                             let content = UNMutableNotificationContent()
                             content.title = "✅ 1분 전임"
                             content.body = "You have used \(appName) for 10 minutes."
@@ -106,6 +107,7 @@ struct TotalActivityReport: DeviceActivityReportScene {
                     }
                     func scheduleNotification_each1(appName: String) {
                         if notificationSentForApps["\(appName)2"] != true {
+                            
                             let content = UNMutableNotificationContent()
                             content.title = "🔥 끝"
                             content.body = "You have used \(appName) for 10 minutes."
@@ -120,6 +122,7 @@ struct TotalActivityReport: DeviceActivityReportScene {
                         
                     }
                     func scheduleNotification_each2(appName: String) {
+                  
                         if notificationSentForApps["\(appName)3"] != true {
                             let content = UNMutableNotificationContent()
                             content.title = "🚨🚨🚨 초과 🚨🚨🚨"

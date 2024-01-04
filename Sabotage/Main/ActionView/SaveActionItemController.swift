@@ -5,19 +5,19 @@
 ////  Created by 오성진 on 12/27/23.
 ////
 //  AddActionItemController.swift
-//  Sabotage
-//
-//  Created by 오성진 on 12/27/23.
-//
+
 
 import UIKit
 import SnapKit
 
 class SaveActionItemController: UIViewController, UITextFieldDelegate {
-    
+
+    var textField: UITextField = UITextField()
+    var selectedButtonName: String = "" // 선택된 버튼의 이름을 저장하는 변수
     var selectedCard: Int = 0
+
     var selectedActionItem: ActionDummyDataType?
-    
+
     // MARK: 변수
     //    let backButton = UIButton(type: .system)
     let closeButton = UIImageView(image: UIImage(named: "closeButton.png"))
@@ -223,8 +223,18 @@ class SaveActionItemController: UIViewController, UITextFieldDelegate {
         
         navigationController?.popToRootViewController(animated: true)
     }
-    
-    
+
+    @objc func deleteButtonTapped() {
+        let alert = UIAlertController(title: "정말 삭제하시겠어요?", message: "삭제하면 다시 불러올 수 없어요", preferredStyle: .alert)
+
+        // 취소 버튼
+        alert.addAction(UIAlertAction(title: "취소", style: .cancel, handler: nil))
+        // 삭제 버튼
+        alert.addAction(UIAlertAction(title: "삭제", style: .destructive, handler: { _ in
+            // 삭제 작업 수행
+        }))
+        present(alert, animated: true, completion: nil)
+    }
     // 저장하기 
     @objc func textFieldDidChange(_ textField: UITextField) {
         if let text = textField.text, let originalContent = selectedActionItem?.content, text != originalContent {

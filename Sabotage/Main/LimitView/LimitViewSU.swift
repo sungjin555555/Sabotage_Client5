@@ -42,7 +42,6 @@ struct ScheduleView: View {
         NavigationView {
             VStack {
                 setupListView().background(Color.base50)
-//                setButtons()
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .toolbar { savePlanButtonView() }
@@ -53,9 +52,9 @@ struct ScheduleView: View {
                 isPresented: $scheduleVM.isFamilyActivitySectionActive,
                 selection: $tempSelection
             )
-            .alert("저장 되었습니다.", isPresented: $scheduleVM.isSaveAlertActive) {
-                Button("OK", role: .cancel) {}
-            }
+//            .alert("저장 되었습니다.", isPresented: $scheduleVM.isSaveAlertActive) {
+//                Button("OK", role: .cancel) {}
+//            }
         }
         .onAppear {
             tempSelection = scheduleVM.selection
@@ -70,7 +69,12 @@ extension ScheduleView {
             let BUTTON_LABEL = "저장"
             
             Button(action: {
+                let finalTotal = selectedGoalHours * 60 * 60 + selectedGoalMinutes * 60
+                let nudgeTotal = selectedNudgeHours * 60 * 60 + selectedNudgeMinutes
+                
+                //                $scheduleVM.isSaveAlertActive
                 scheduleVM.saveSchedule(selectedApps: tempSelection)
+                goalPostRequest(title: groupName, timeBudget: finalTotal, nudgeInterval: nudgeTotal)
             }) {
                 Text(BUTTON_LABEL).foregroundColor(isInputValid ? Color.primary700 : Color.base200).font(.headline)
             }
@@ -84,26 +88,27 @@ extension ScheduleView {
             setUPAppSectionView()
             setUpGoalTimeView(selectedTime: $selectedGoalTime, isPickerPresented: $isGoalPickerPresented)
             setUpNudgeTimeView(selectedTime: $selectedNudgeTime, isPickerPresented: $isNudgePickerPresented)
-            setButtons().listRowInsets(EdgeInsets()).padding(0).listRowBackground(Color.clear)
+            setSaveButton().listRowInsets(EdgeInsets()).padding(1).listRowBackground(Color.clear)
+            setDeleteButton().listRowInsets(EdgeInsets()).padding(1).listRowBackground(Color.clear)
         }.background(Color.base50)
             .scrollContentBackground(.hidden)
-        .listStyle(.insetGrouped)
-        .padding(.horizontal, 5).fullScreenCover(isPresented: $isGoalPickerPresented) {
-            VStack {
-                DatePicker(
-                    "시간 선택",
-                    selection: $selectedGoalTime,
-                    displayedComponents: [.hourAndMinute]
-                )
-                .datePickerStyle(WheelDatePickerStyle())
-                .labelsHidden()
-                
-                Button("완료") {
-                    isGoalPickerPresented = false
+            .listStyle(.insetGrouped)
+            .padding(.horizontal, 5).fullScreenCover(isPresented: $isGoalPickerPresented) {
+                VStack {
+                    DatePicker(
+                        "시간 선택",
+                        selection: $selectedGoalTime,
+                        displayedComponents: [.hourAndMinute]
+                    )
+                    .datePickerStyle(WheelDatePickerStyle())
+                    .labelsHidden()
+                    
+                    Button("완료") {
+                        isGoalPickerPresented = false
+                    }
+                    .padding()
                 }
-                .padding()
             }
-        }
     }
     private func setUpGroupTextField() -> some View {
         
@@ -174,7 +179,7 @@ extension ScheduleView {
                         }
                     }
                     .frame(maxWidth: .infinity, alignment: .leading) // VStack을 뷰의 왼쪽 가장자리로 정렬
-
+                    
                 }
             }
         }
@@ -236,8 +241,6 @@ extension ScheduleView {
                         .padding()
                         .background(Color.white)
                         .cornerRadius(10)
-//                        Image("GreenFrame") .resizable()
-//                            .scaledToFit()
                     }
                 }
             }
@@ -305,28 +308,16 @@ extension ScheduleView {
         }
     }
     private var isInputValid: Bool {
-            !groupName.isEmpty && // 그룹 이름이 비어있지 않고
-            (selectedNudgeHours != 0 || selectedNudgeMinutes != 0) && // Nudge 시간이 0이 아니며
-            (selectedGoalHours != 0 || selectedGoalMinutes != 0) // Goal 시간이 0이 아닌지 확인
-            // 여기에 추가적인 조건들을 넣을 수 있습니다.
-        }
-    private func setButtons() -> some View{
-        return VStack{
+        !groupName.isEmpty && // 그룹 이름이 비어있지 않고
+        (selectedNudgeHours != 0 || selectedNudgeMinutes != 0) && // Nudge 시간이 0이 아니며
+        (selectedGoalHours != 0 || selectedGoalMinutes != 0) // Goal 시간이 0이 아닌지 확인
+        // 여기에 추가적인 조건들을 넣을 수 있습니다.
+    }
+    private func setSaveButton() -> some View {
+        return VStack {
+            // '저장하기' 버튼
             Button("저장하기") {
-                if isInputValid {
-                    let finalTotal = selectedGoalHours * 60 * 60 + selectedGoalMinutes * 60
-//                    scheduleVM.saveSchedule(selectedApps: tempSelection, totalLimitTime: finalTotal)
-                    let nudgeTotal = selectedNudgeHours * 60 * 60 + selectedNudgeMinutes
-                    
-//                    scheduleVM.finalGoalTime = finalTotal
-//                    print("goalTime = \(scheduleVM.finalGoalTime)")
-                    scheduleVM.saveSchedule(selectedApps: tempSelection)
-                    print("finalTotal = \(finalTotal)")
-                    print("selectedNudge = \(selectedNudgeHours):\(selectedNudgeMinutes)")
-                    print("selectedGoalHours = \(selectedGoalHours):\(selectedGoalMinutes)")
-
-                    goalPostRequest(title: groupName, timeBudget: finalTotal, nudgeInterval: nudgeTotal)
-                }
+                saveAction()
             }
             .padding()
             .frame(maxWidth: .infinity)
@@ -336,37 +327,57 @@ extension ScheduleView {
             .foregroundColor(isInputValid ? Color.black : Color.baseWhite)
             .cornerRadius(20)
             .padding(.vertical, 0)
-            // 두 번째 버튼
+        }
+    }
+    private func setDeleteButton() -> some View {
+        return VStack {
+            // '저장하기' 버튼
             Button("삭제하기") {
-                //함수
+                deleteAction()
             }
             .padding()
             .frame(maxWidth: .infinity)
+            .frame(height: 56)
             .background(Color.clear)
-            .foregroundColor(Color.func500)
-            .cornerRadius(20)
             .font(.headline)
-            .padding(.horizontal, 20)
+            .foregroundColor(.func500)
+        }
+    }
+    
+    private func saveAction() {
+        if isInputValid {
+            let finalTotal = selectedGoalHours * 60 * 60 + selectedGoalMinutes * 60
+//            scheduleVM.saveSchedule(selectedApps: tempSelection, totalLimitTime: finalTotal)
+//                    scheduleVM.finalGoalTime = finalTotal
+//                    print("goalTime = \(scheduleVM.finalGoalTime)")
+            let nudgeTotal = selectedNudgeHours * 60 * 60 + selectedNudgeMinutes
             
-        }
-        .padding(.vertical, 10)
-    }
-    private func setDeleteButton() -> some View{
-        return VStack {
-            Button("삭제하기") {
-                // '삭제하기' 버튼의 액션을 여기에 작성
+
+            scheduleVM.saveSchedule(selectedApps: tempSelection)
+            print("finalTotal = \(finalTotal)")
+            print("selectedNudge = \(selectedNudgeHours):\(selectedNudgeMinutes)")
+            print("selectedGoalHours = \(selectedGoalHours):\(selectedGoalMinutes)")
+            
+            goalPostRequest(title: groupName, timeBudget: finalTotal, nudgeInterval: nudgeTotal)
+            
+            NavigationView {
+                NavigationLink(destination: MainVCWrapper()) {
+                    Text("MainVC로 이동")
+                }
             }
-            .frame(maxWidth: .infinity)
-            .foregroundColor(Color.func500)
-            .font(.headline)
-            .padding(.bottom, 25)
-            .frame(height: 40)
+            //                    presentationMode.wrappedValue.dismiss()
+            //                    let mainVC = MainVC()
+            //                    navigationController?.pushViewController(mainVC, animated: true)
         }
-        .listRowBackground(Color.clear)
+        print("✅ 하단 저장 버튼 tapped !")
     }
+    
+    private func deleteAction() {
+        // '삭제하기' 버튼의 액션을 여기에 작성
+        print("❌ 하단 삭제 버튼 tapped !")
+    }
+    
 }
-
-
 // MARK: - Methods
 extension ScheduleView {
     
@@ -378,22 +389,6 @@ extension ScheduleView {
     
 }
 
-// MARK: - 기존 시간 설정 코드
-//private func setUpTimeSectionView() -> some View {
-//        let TIME_LABEL_LIST = ["시작 시간", "종료 시간"]
-//        let times = [$scheduleVM.scheduleStartTime, $scheduleVM.scheduleEndTime]
-//
-//        return Section(
-//            header: Text(ScheduleSectionInfo.time.header),
-//            footer: Text(ScheduleSectionInfo.time.footer)) {
-//                ForEach(0..<TIME_LABEL_LIST.count, id: \.self) { index in
-//                    DatePicker(selection: times[index], displayedComponents: .hourAndMinute) {
-//                        Text(TIME_LABEL_LIST[index])
-//                    }
-//                }
-//            }
-//    }
-
 struct ScheduleView_Previews: PreviewProvider {
     static var previews: some View {
         ScheduleView()
@@ -401,3 +396,13 @@ struct ScheduleView_Previews: PreviewProvider {
     }
 }
 
+
+struct MainVCWrapper: UIViewControllerRepresentable {
+    func makeUIViewController(context: Context) -> MainVC {
+        MainVC() // MainVC 인스턴스 생성
+    }
+
+    func updateUIViewController(_ uiViewController: MainVC, context: Context) {
+        // MainVC 업데이트 로직 (필요한 경우)
+    }
+}
