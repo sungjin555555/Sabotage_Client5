@@ -11,4 +11,5 @@ struct LimitDummyDataType: Codable {
     var id: Int
     var title: String
     var timeBudget: Int
+    var nudgeInterval: Int
 }

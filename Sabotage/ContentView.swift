@@ -1,8 +1,10 @@
-//ContentView
+////
+//  ContentView.swift
+//  Sabotage
+//
+//  Created by 박서윤 on 2024/01/04.
+//
 
-
-
-//ContentView
 
 import UIKit
 import SwiftUI
@@ -67,5 +69,71 @@ public struct MainVCRepresentable: UIViewControllerRepresentable {
     public func updateUIViewController(_ uiViewController: UITabBarController, context: Context) {
         uiViewController.selectedIndex = viewModel.selectedTab
     }
-}
 
+    public func makeCoordinator() -> Coordinator {
+        Coordinator(self)
+    }
+
+    public class Coordinator: NSObject, UITabBarControllerDelegate {
+        var parent: MainVCRepresentable
+
+        init(_ parent: MainVCRepresentable) {
+            self.parent = parent
+        }
+
+        public func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
+            if let index = tabBarController.viewControllers?.firstIndex(of: viewController) {
+                parent.selectedTab = index
+                updateTabBarItems(tabBarController: tabBarController) // 탭이 선택될 때마다 이미지 업데이트
+            }
+            return true
+        }
+
+        func updateTabBarItems(tabBarController: UITabBarController) {
+            if let viewControllers = tabBarController.viewControllers {
+                for (index, viewController) in viewControllers.enumerated() {
+                    var imageName = ""
+                    switch parent.selectedTab {
+                        case 0: // MainVC
+                            switch index {
+                                case 0:
+                                    imageName = "main1"
+                                case 1:
+                                    imageName = "analysis2"
+                                case 2:
+                                    imageName = "profile2"
+                                default:
+                                    break
+                            }
+                        case 1: // AnalysisVC
+                            switch index {
+                                case 0:
+                                    imageName = "main2"
+                                case 1:
+                                    imageName = "analysis1"
+                                case 2:
+                                    imageName = "profile1"
+                                default:
+                                    break
+                            }
+                        case 2: // ProfileVC
+                            switch index {
+                                case 0:
+                                    imageName = "main2"
+                                case 1:
+                                    imageName = "analysis2"
+                                case 2:
+                                    imageName = "profile1"
+                                default:
+                                    break
+                            }
+                        default:
+                            break
+                    }
+                    viewController.tabBarItem.image = UIImage(named: "\(imageName).png")?.withRenderingMode(.alwaysOriginal)
+                }
+            }
+        }
+
+    }
+}

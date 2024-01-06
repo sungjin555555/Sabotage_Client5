@@ -75,7 +75,8 @@ struct LimitItemData : Codable {
 }
 
 struct LimitDataList : Codable {
-    let id : Int
+    let id: Int
     let title: String
     let timeBudget: Int
+    let nudgeInterval: Int
 }

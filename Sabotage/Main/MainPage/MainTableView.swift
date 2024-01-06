@@ -9,6 +9,7 @@ import Foundation
 import UIKit
 import SnapKit
 import Then
+import SwiftUI
 
 extension MainVC: UITableViewDataSource, UITableViewDelegate {
     
@@ -57,8 +58,27 @@ extension MainVC: UITableViewDataSource, UITableViewDelegate {
             
             // 뷰 컨트롤러 전환
             navigationController?.pushViewController(saveActionItemController, animated: true)
+        } else if tableView == limitTableView {
+            // LimitTableView에서 셀을 선택한 경우 동작 정의
+            print("LimitTableView의 \(indexPath.row) 번째 셀 선택됨")
+            
+            // 선택한 셀에 해당하는 LimitDummyDataType 데이터 가져오기
+            let selectedLimitItem = limitItems[indexPath.row]
+            
+            // SwiftUI 뷰를 UIKit에 호스팅하고 선택한 데이터를 전달
+            let scheduleView = ScheduleView()
+            let hostingController = UIHostingController(rootView: scheduleView)
+            navigationController?.pushViewController(hostingController, animated: true)
+            
+//
+//            // SwiftUI를 UIKit에 호스팅하는 UIHostingController 생성
+//            let hostingController = UIHostingController(rootView: saveItemVC)
+            
+            // 뷰 컨트롤러 전환
+//            navigationController?.pushViewController(hostingController, animated: true)
         }
     }
+
     
     //    private func configureTableViewFooter() {
     //        let footerView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 44))
@@ -116,13 +136,14 @@ extension MainVC: UITableViewDataSource, UITableViewDelegate {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "LimitCustomCell", for: indexPath) as? LimitTableViewCell else {
                 return UITableViewCell()
             }
-            
+
             // limitItems 배열에서 해당 indexPath의 데이터를 가져옴
             let limitItem = limitItems[indexPath.row]
             // limitItem의 데이터를 셀에 구성
-            
+
             cell.titleLabel.text = limitItem.title
             cell.timeBudget.text = String(limitItem.timeBudget)
+            cell.configure(title: limitItem.title, timeBudget: limitItem.timeBudget)
             
             //            cell.configure(with: limitItem.description, title: limitItem.title) // 'configure' 메서드는 적절히 수정 필요
             

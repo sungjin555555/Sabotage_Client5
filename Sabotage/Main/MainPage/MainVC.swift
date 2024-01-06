@@ -291,15 +291,15 @@ class MainVC: UIViewController, LimitItemDelegate{
         ActionDummyDataType(id: 1, category: "액션 2", content: "액션 1에 대한 설명입니다.")
     ]
     var limitItems: [LimitDummyDataType] = [
-        LimitDummyDataType(id: 0, title: "제한그룹 1", timeBudget: 1),
-        LimitDummyDataType(id: 0, title: "제한그룹 2", timeBudget: 1)
+        LimitDummyDataType(id: 1, title: "제한그룹 1", timeBudget: 1, nudgeInterval: 3),
+        LimitDummyDataType(id: 2, title: "제한그룹 2", timeBudget: 1, nudgeInterval: 4)
     ]
     
     // tableview data
     // LimitItemDelegate 메서드 구현
     func addNewLimitItem(_ itemName: String) {
         // LimitItemDelegate 메서드 구현
-        let newLimitItem = LimitDummyDataType(id: 0, title: itemName, timeBudget: 3)
+        let newLimitItem = LimitDummyDataType(id: 3, title: itemName, timeBudget: 3, nudgeInterval: 4)
         limitItems.append(newLimitItem)
         
         // TableView 업데이트
@@ -412,9 +412,9 @@ class MainVC: UIViewController, LimitItemDelegate{
         let actiontotalTableViewHeight = actionTableView.contentSize.height + actionButton.bounds.height
         actionTableView.contentInset = UIEdgeInsets(top: 00, left: 0, bottom: actiontotalTableViewHeight, right: 0)
         
-        limitButton.setImage(UIImage(named: "main_limitButton.png"), for: .normal)
+        limitButton.setImage(UIImage(named: "groupButton.png"), for: .normal)
         limitButton.contentMode = .scaleAspectFit
-        limitButton.addTarget(self, action: #selector(limitButtonTapped), for: .touchUpInside)
+//        limitButton.addTarget(self, action: #selector(limitButtonTapped), for: .touchUpInside)
         view.addSubview(limitButton)
         limitButton.translatesAutoresizingMaskIntoConstraints = false
         limitButton.isHidden = true
@@ -429,7 +429,7 @@ class MainVC: UIViewController, LimitItemDelegate{
             limitButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             limitButton.topAnchor.constraint(equalTo: limitTableView.bottomAnchor, constant: 150),
             limitButton.widthAnchor.constraint(equalToConstant: 350), // Adjust the width and height based on your image size
-            limitButton.heightAnchor.constraint(equalToConstant: 100) // Adjust the width and height based on your image size
+            limitButton.heightAnchor.constraint(equalToConstant: 70) // Adjust the width and height based on your image size
             
         ])
         
@@ -521,15 +521,16 @@ class MainVC: UIViewController, LimitItemDelegate{
                 // JSON data를 가져온다. optional 풀어줘야 함
                 if let JSONdata = data {
                     let dataString = String(data: JSONdata, encoding: .utf8) //얘도 확인을 위한 코드임
-                    print("dddd", dataString!)
+                    print("🔆", dataString!)
                     // JSONDecoder 사용하기
                     let decoder = JSONDecoder() // initialize
                     do {
                         let decodeData = try decoder.decode(LimitItemData.self, from: JSONdata)
-                        
+                        print("⚽️", decodeData)
                         DispatchQueue.main.async {
+                            
                             self.limitItems = decodeData.data.map {
-                                LimitDummyDataType(id: $0.id, title: $0.title, timeBudget: $0.timeBudget)
+                                LimitDummyDataType(id: $0.id, title: $0.title, timeBudget: $0.timeBudget, nudgeInterval: $0.nudgeInterval)
                             }
                             self.limitTableView.reloadData()
                             print("🤢 decodeData", decodeData)
@@ -547,6 +548,7 @@ class MainVC: UIViewController, LimitItemDelegate{
             }
             task.resume()
         }
+        
     }
     
     @objc func actionButtonTapped() {

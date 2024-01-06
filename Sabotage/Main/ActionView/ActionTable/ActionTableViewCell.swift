@@ -3,6 +3,9 @@ import UIKit
 class ActionTableViewCell: UITableViewCell {
     var categoryType: UILabel!
     var categoryLabel: UILabel!
+    var nextButton: UIButton!
+
+    // Inside the setupCell() method
 
     var contentLabel: UILabel!
     var categoryImage: UIImageView! // Include the UIImageView for category images
@@ -72,6 +75,12 @@ class ActionTableViewCell: UITableViewCell {
         contentView.addSubview(categoryImage)
         categoryImage.translatesAutoresizingMaskIntoConstraints = false
         
+        nextButton = UIButton()
+        nextButton.setImage(UIImage(named: "cellnextButton.png"), for: .normal)
+        
+        contentView.addSubview(nextButton)
+        nextButton.translatesAutoresizingMaskIntoConstraints = false
+        
         NSLayoutConstraint.activate([
 
             cellBackgroundView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 0),
@@ -88,7 +97,12 @@ class ActionTableViewCell: UITableViewCell {
             categoryImage.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 23),
             categoryImage.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 50),
             categoryImage.widthAnchor.constraint(equalToConstant: 50), // Adjust the image size as needed
-            categoryImage.heightAnchor.constraint(equalToConstant: 50) // Adjust the image size as needed
+            categoryImage.heightAnchor.constraint(equalToConstant: 50), // Adjust the image size as needed
+            
+            nextButton.centerYAnchor.constraint(equalTo: contentView.centerYAnchor, constant: -10),
+            nextButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -50),
+            nextButton.widthAnchor.constraint(equalToConstant: 13), // Adjust the button size as needed
+            nextButton.heightAnchor.constraint(equalToConstant: 20)
         ])
 
         func configure(with category: String, content: String) {

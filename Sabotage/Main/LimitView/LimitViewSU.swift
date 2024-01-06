@@ -1,4 +1,7 @@
-//
+//LimitViewSU
+
+
+
 //  ScheduleView.swift
 //  Sabotage
 //
@@ -28,6 +31,19 @@ struct ScheduleView: View {
     @State private var isNudgePickerPresented = false
     @State private var isNudgeTimePickerShown = false
     
+    @State private var isAlertPresented = false
+    var selectedLimitItem: LimitDummyDataType
+    
+    init(selectedLimitItem: LimitDummyDataType) {
+        self.selectedLimitItem = selectedLimitItem
+        self._groupName = State(initialValue: selectedLimitItem.title)
+        self._selectedGoalHours = State(initialValue: selectedLimitItem.timeBudget / 3600)
+        self._selectedGoalMinutes = State(initialValue: (selectedLimitItem.timeBudget % 3600) / 60)
+        self._selectedNudgeHours = State(initialValue: selectedLimitItem.nudgeInterval / 3600)
+        self._selectedNudgeMinutes = State(initialValue: (selectedLimitItem.nudgeInterval % 3600) / 60)
+    }
+
+
     
     @State private var selectedGoalHours = 0
     @State private var selectedGoalMinutes = 0
@@ -66,7 +82,6 @@ struct ScheduleView: View {
 extension ScheduleView {
     private func savePlanButtonView() -> ToolbarItemGroup<some View> {
         ToolbarItemGroup(placement: .navigationBarTrailing) {
-            let BUTTON_LABEL = "저장"
             
             Button(action: {
                 let finalTotal = selectedGoalHours * 60 * 60 + selectedGoalMinutes * 60
@@ -76,7 +91,7 @@ extension ScheduleView {
                 scheduleVM.saveSchedule(selectedApps: tempSelection)
                 goalPostRequest(title: groupName, timeBudget: finalTotal, nudgeInterval: nudgeTotal)
             }) {
-                Text(BUTTON_LABEL).foregroundColor(isInputValid ? Color.primary700 : Color.base200).font(.headline)
+                
             }
             .padding(.trailing, 8) // 오른쪽에 패딩 추가
         }
@@ -318,6 +333,7 @@ extension ScheduleView {
             // '저장하기' 버튼
             Button("저장하기") {
                 saveAction()
+//                isAlertPresented = true
             }
             .padding()
             .frame(maxWidth: .infinity)
@@ -327,13 +343,19 @@ extension ScheduleView {
             .foregroundColor(isInputValid ? Color.black : Color.baseWhite)
             .cornerRadius(20)
             .padding(.vertical, 0)
+            .alert(isPresented: $isAlertPresented) {
+                Alert(
+                    title: Text("반영 되었습니다."),
+                    dismissButton: .default(Text("확인"))
+                )
+            }
         }
     }
     private func setDeleteButton() -> some View {
         return VStack {
-            // '저장하기' 버튼
             Button("삭제하기") {
                 deleteAction()
+//                isAlertPresented = true
             }
             .padding()
             .frame(maxWidth: .infinity)
@@ -341,6 +363,14 @@ extension ScheduleView {
             .background(Color.clear)
             .font(.headline)
             .foregroundColor(.func500)
+            .alert(isPresented: $isAlertPresented) {
+                Alert(
+                    title: Text("삭제 되었습니다."),
+                    primaryButton: .default(Text("확인")),
+                    secondaryButton: .cancel(Text("취소"))
+                )
+            }
+
         }
     }
     
@@ -350,6 +380,9 @@ extension ScheduleView {
 //            scheduleVM.saveSchedule(selectedApps: tempSelection, totalLimitTime: finalTotal)
 //                    scheduleVM.finalGoalTime = finalTotal
 //                    print("goalTime = \(scheduleVM.finalGoalTime)")
+            // finalTotal 값을 UserDefaults에 저장
+            UserDefaults.standard.set(finalTotal, forKey: "FinalTotalKey")
+
             let nudgeTotal = selectedNudgeHours * 60 * 60 + selectedNudgeMinutes
             
 
@@ -373,7 +406,7 @@ extension ScheduleView {
     }
     
     private func deleteAction() {
-        // '삭제하기' 버튼의 액션을 여기에 작성
+//        GroupdeleteRequest(id: selectedLimitItem.id, title: groupName, timeBudget: finalTotal, nudgeInterval: nudgeTotal)
         print("❌ 하단 삭제 버튼 tapped !")
     }
     
@@ -389,12 +422,12 @@ extension ScheduleView {
     
 }
 
-struct ScheduleView_Previews: PreviewProvider {
-    static var previews: some View {
-        ScheduleView()
-            .environmentObject(ScheduleVM())
-    }
-}
+//struct ScheduleView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        ScheduleView()
+//            .environmentObject(ScheduleVM())
+//    }
+//}
 
 
 struct MainVCWrapper: UIViewControllerRepresentable {
